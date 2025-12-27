@@ -1,0 +1,4 @@
+Timestamp,Claim,Verdict,Confidence,Total Input Tokens,Total Output Tokens,Prover Cost,Debunker Cost,Judge Cost,Total Cost,Revenue,Profit,Margin %,Execution Time (s)
+2025-12-27T05:51:09.905673,Bitcoin was invented in 2009,Verified,0.95,4850,370,0.000826,0.000465,0.0029,0.004191,0.05,0.045809,91.62,8.5
+2025-12-27T05:51:09.906338,The sky is blue,Verified,0.98,3350,250,0.000551,0.000302,0.0021,0.002952,0.05,0.047048,94.1,6.2
+2025-12-27T05:51:09.906796,Will it rain tomorrow in New York?,Uncertain,0.65,6100,480,0.0,0.0,0.0037,0.0037,0.05,0.0463,92.6,12.3

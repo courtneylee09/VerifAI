@@ -7,6 +7,7 @@ from anthropic import Anthropic
 from config.settings import (
     ANTHROPIC_API_KEY, JUDGE_MODEL, JUDGE_MAX_TOKENS
 )
+from src.utils.token_tracker import token_tracker
 
 logger = logging.getLogger(__name__)
 
@@ -98,6 +99,13 @@ Respond in JSON format with these exact fields:
                 {"role": "user", "content": prompt}
             ]
         )
+
+            # Track token usage
+            token_tracker.set_judge_tokens(
+                model=JUDGE_MODEL,
+                input_tokens=response.usage.input_tokens,
+                output_tokens=response.usage.output_tokens
+            )
 
         response_text = response.content[0].text
         try:

@@ -11,6 +11,8 @@ from src.services.search import search_and_retrieve_sources, calculate_source_we
 from src.agents.prover import run_prover_agent
 from src.agents.debunker import run_debunker_agent
 from src.agents.judge import run_judge_agent
+from performance_log import PerformanceLogger
+from src.utils.token_tracker import token_tracker
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +35,9 @@ async def verify_claim_logic(claim: str) -> dict:
     """
     start_time = time.perf_counter()
     logger.info("verify.start claim=%s", claim)
+
+        # Reset token tracking for this request
+        token_tracker.reset()
 
     try:
         # Detect if this is a prediction or factual claim
@@ -124,6 +129,23 @@ async def verify_claim_logic(claim: str) -> dict:
             duration_ms,
             manual_review,
         )
+
+            # Log performance metrics
+            execution_time = time.perf_counter() - start_time
+            try:
+                    tokens = token_tracker.get_all()
+                PerformanceLogger.log_request(
+                    claim=claim,
+                    verdict=verdict,
+                    confidence_score=confidence,
+                        prover_tokens=tokens['prover'],
+                        debunker_tokens=tokens['debunker'],
+                        judge_tokens=tokens['judge'],
+                    search_count=len(sources),
+                    execution_time=execution_time
+                )
+            except Exception as log_error:
+                logger.warning("performance_log.failed err=%s", log_error)
 
         return {
             "verdict": verdict,

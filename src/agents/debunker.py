@@ -9,6 +9,7 @@ from config.settings import (
     DEBUNKER_MODEL, GEMINI_FALLBACK_MODEL, DEBUNKER_TEMPERATURE,
     DEBUNKER_MAX_TOKENS, DEBUNKER_SYSTEM_PROMPT
 )
+from src.utils.token_tracker import token_tracker
 
 logger = logging.getLogger(__name__)
 
@@ -69,6 +70,14 @@ Return 2-3 sentences arguing AGAINST the claim or noting weaknesses in the evide
             temperature=DEBUNKER_TEMPERATURE,
             max_tokens=DEBUNKER_MAX_TOKENS
         )
+
+            # Track token usage
+            token_tracker.set_debunker_tokens(
+                model=DEBUNKER_MODEL,
+                input_tokens=response.usage.prompt_tokens,
+                output_tokens=response.usage.completion_tokens
+            )
+
         return response.choices[0].message.content.strip()
     except Exception as e:
         logger.warning("debunker.deepinfra.failed err=%s", str(e)[:200])
@@ -80,6 +89,14 @@ Return 2-3 sentences arguing AGAINST the claim or noting weaknesses in the evide
                 contents=prompt,
                 config=types.GenerateContentConfig(temperature=DEBUNKER_TEMPERATURE)
             )
+
+                # Track Gemini usage (no cost, but track for analytics)
+                token_tracker.set_debunker_tokens(
+                    model=GEMINI_FALLBACK_MODEL,
+                    input_tokens=response.usage_metadata.prompt_token_count if hasattr(response, 'usage_metadata') else 0,
+                    output_tokens=response.usage_metadata.candidates_token_count if hasattr(response, 'usage_metadata') else 0
+                )
+
             return response.text.strip()
         except Exception as gemini_error:
             logger.error("debunker.gemini.failed err=%s", gemini_error)
