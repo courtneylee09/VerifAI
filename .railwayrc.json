@@ -1,0 +1,6 @@
+{
+  "railway": {
+    "projectId": "your-railway-project-id",
+    "environmentId": "production"
+  }
+}

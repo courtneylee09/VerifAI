@@ -1,0 +1,33 @@
+# Railway Service Configuration for VerifAI agent-x402
+# This file helps Railway properly deploy and configure your app
+
+name: "VerifAI agent-x402"
+description: "Paid AI verification service with x402 payment protocol"
+
+# Service type
+provider: "railway"
+image: "python:3.11-slim"
+
+# Build configuration
+build:
+  provider: "railway"
+  preset: "python"
+  requirements: "requirements.txt"
+
+# Environment
+environment:
+  PYTHONUNBUFFERED: "1"
+
+# Port configuration
+port: 8001
+
+# Resource limits (Hobbyist plan)
+resources:
+  memory: "512Mi"
+  cpu: "500m"
+
+# Healthcheck
+healthCheck:
+  path: "/health"
+  interval: 30
+  timeout: 10

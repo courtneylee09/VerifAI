@@ -1,0 +1,23 @@
+{
+  "name": "VerifAI agent-x402",
+  "description": "High-confidence fact-checking for any claim using multi-agent consensus.",
+  "version": "1.0.0",
+  "author": "YourName/YourCompany",
+  "capabilities": ["fact-checking", "news-verification", "claim-validation"],
+  "pricing": {
+    "amount": "0.05",
+    "asset": "USDC",
+    "network": "base-sepolia",
+    "unit": "per_request"
+  },
+  "endpoints": {
+    "verify": {
+      "path": "/verify",
+      "method": "GET",
+      "parameters": {
+        "claim": "string"
+      }
+    }
+  },
+  "payment_address": "0x3615af0cE7c8e525B9a9C6cE281e195442596559"
+}
