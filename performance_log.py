@@ -100,7 +100,8 @@ class PerformanceLogger:
         debunker_tokens: Optional[Dict[str, int]] = None,
         judge_tokens: Optional[Dict[str, int]] = None,
         search_count: int = 0,
-        execution_time: float = 0.0
+        execution_time: float = 0.0,
+        was_refunded: bool = False  # NEW: Track refund decisions
     ):
         """Log a verification request with costs and revenue."""
         
@@ -144,9 +145,9 @@ class PerformanceLogger:
             total_tokens["output"] += judge_tokens.get("output", 0)
         
         total_cost = sum(costs.values())
-        revenue = USDC_REVENUE_PER_REQUEST
+        revenue = USDC_REVENUE_PER_REQUEST if not was_refunded else 0.0  # No revenue if refunded
         profit = revenue - total_cost
-        margin = (profit / revenue * 100) if revenue > 0 else 0
+        margin = (profit / revenue * 100) if revenue > 0 else -100  # Negative margin if refunded
         
         # Check if this was an inconclusive verdict (for discount analysis)
         is_inconclusive = verdict.lower() in ["inconclusive", "uncertain"]
@@ -157,6 +158,7 @@ class PerformanceLogger:
             "verdict": verdict,
             "confidence_score": confidence_score,
             "is_inconclusive": is_inconclusive,  # Flag for discount consideration
+            "was_refunded": was_refunded,  # NEW: Track actual refund decisions
             "tokens": {
                 "total_input": total_tokens["input"],
                 "total_output": total_tokens["output"],
@@ -237,6 +239,13 @@ class PerformanceLogger:
         inconclusive_avg_cost = inconclusive_total_cost / inconclusive_count if inconclusive_count > 0 else 0.0
         inconclusive_pct = (inconclusive_count / len(logs) * 100) if len(logs) > 0 else 0.0
         
+        # NEW: Calculate refund-specific stats
+        refunded_logs = [log for log in logs if log.get("was_refunded", False)]
+        refund_count = len(refunded_logs)
+        refund_rate = (refund_count / len(logs) * 100) if len(logs) > 0 else 0.0
+        refund_total_cost = sum(log["economics"]["total_cost_usd"] for log in refunded_logs)
+        refund_avg_cost = refund_total_cost / refund_count if refund_count > 0 else 0.0
+        
         total_tokens_input = sum(log["tokens"]["total_input"] for log in logs)
         total_tokens_output = sum(log["tokens"]["total_output"] for log in logs)
         
@@ -247,6 +256,13 @@ class PerformanceLogger:
             "total_profit_usd": round(total_profit, 4),
             "avg_profit_per_request": round(avg_profit, 6),
             "avg_margin_pct": round(avg_margin, 2),
+            "refund_stats": {
+                "count": refund_count,
+                "refund_rate_pct": round(refund_rate, 2),
+                "total_cost_usd": round(refund_total_cost, 4),
+                "avg_cost_usd": round(refund_avg_cost, 6),
+                "alert": "⚠️ REFUND RATE EXCEEDS 15% THRESHOLD!" if refund_rate > 15 else None
+            },
             "inconclusive_stats": {
                 "count": inconclusive_count,
                 "total_cost_usd": round(inconclusive_total_cost, 4),
@@ -285,6 +301,16 @@ class PerformanceLogger:
         print(f"   Profit Margin:         {summary['avg_margin_pct']:.2f}%")
         print(f"\n📈 PER REQUEST:")
         print(f"   Avg Profit:            ${summary['avg_profit_per_request']:.6f}")
+        
+        # NEW: Refund rate tracking
+        refund_stats = summary.get('refund_stats', {})
+        if refund_stats.get('count', 0) > 0:
+            print(f"\n💸 AUTOMATIC REFUNDS (Confidence < 0.40):")
+            print(f"   Count:                 {refund_stats['count']} ({refund_stats['refund_rate_pct']:.1f}% of requests)")
+            print(f"   Total Cost (absorbed): ${refund_stats['total_cost_usd']:.4f}")
+            print(f"   Avg Cost per Refund:   ${refund_stats['avg_cost_usd']:.6f}")
+            if refund_stats.get('alert'):
+                print(f"\n   {refund_stats['alert']}")
         
         # Inconclusive verdict analysis
         inc_stats = summary.get('inconclusive_stats', {})

@@ -78,12 +78,21 @@ ORIGINAL SOURCES:
 {context}
 
 TASK:
-1. Weigh both arguments against the raw sources.
-2. Check for contradictions between sources.
-3. Wikipedia sources should be weighted at 0.5x (half weight) compared to other sources at 1.0x.
-4. Provide a 'verdict': "Verified", "Unverified", or "Inconclusive".
-5. Provide a 'confidence_score' between 0.0 and 1.0.
-6. Summarize your reasoning in one sentence.
+1. **CRITICAL FIRST CHECK**: Detect if the claim contains NORMATIVE/PHILOSOPHICAL language:
+   - Value judgments: "inherently evil", "morally wrong", "should/shouldn't", "good/bad", "right/wrong"
+   - Subjective assessments: "beautiful", "best", "worthy", "deserves"
+   - Philosophical constructs: "justice", "freedom", "evil", "virtue" (when used as absolute moral categories)
+   
+   If detected: Set verdict to "Inconclusive" and confidence_score < 0.40 (this triggers automatic refund to protect brand integrity).
+   
+   Reasoning: VerifAI is a "Truth Settlement Layer" for FACTUAL claims. Philosophical/moral debates lack empirical consensus and cannot be objectively verified. Charging customers for subjective opinions would harm long-term trust.
+
+2. For FACTUAL claims: Weigh both arguments against the raw sources.
+3. Check for contradictions between sources.
+4. Wikipedia sources should be weighted at 0.5x (half weight) compared to other sources at 1.0x.
+5. Provide a 'verdict': "Verified", "Unverified", or "Inconclusive".
+6. Provide a 'confidence_score' between 0.0 and 1.0.
+7. Summarize your reasoning in one sentence.
 
 Respond in JSON format with these exact fields:
 {{

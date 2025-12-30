@@ -102,6 +102,12 @@ PREDICTION_KEYWORDS = [
 # HITL (Human-in-the-Loop) Configuration
 # ============================================================================
 CONFIDENCE_THRESHOLD_FOR_MANUAL_REVIEW = 0.65  # Confidence below this triggers manual review
+CONFIDENCE_FLOOR_FOR_REFUND = 0.40  # Below this = automatic refund (inconclusive)
+
+# ============================================================================
+# Economics & Refund Configuration
+# ============================================================================
+MAX_ACCEPTABLE_REFUND_RATE = 0.15  # Alert if >15% of requests are refunded
 
 # ============================================================================
 # Logging Configuration

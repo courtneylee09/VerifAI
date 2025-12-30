@@ -5,7 +5,8 @@ import time
 
 from config.settings import (
     EXA_SEARCH_TIMEOUT_SECONDS, DEBATE_TIMEOUT_SECONDS,
-    PREDICTION_KEYWORDS, CONFIDENCE_THRESHOLD_FOR_MANUAL_REVIEW
+    PREDICTION_KEYWORDS, CONFIDENCE_THRESHOLD_FOR_MANUAL_REVIEW,
+    CONFIDENCE_FLOOR_FOR_REFUND
 )
 from src.services.search import search_and_retrieve_sources, calculate_source_weights
 from src.agents.prover import run_prover_agent
@@ -117,10 +118,18 @@ async def verify_claim_logic(claim: str) -> dict:
         confidence = result.get("confidence_score", 0.0)
         summary = result.get("summary", "Analysis complete")
 
-        # HITL threshold: if confidence is low, force Inconclusive and flag manual_review
+        # Decision matrix for automatic refunds based on confidence:
+        # < 0.40: Inconclusive (AI cannot find answer) → Full refund
+        # 0.40-0.65: Low confidence (AI found answer but uncertain) → Standard settlement
+        # > 0.65: High confidence → Standard settlement
+        should_refund = confidence < CONFIDENCE_FLOOR_FOR_REFUND
+        
+        # HITL threshold: if confidence is low, flag manual_review
         if confidence < CONFIDENCE_THRESHOLD_FOR_MANUAL_REVIEW:
             manual_review = True
-            verdict = "Inconclusive" if not is_prediction else "Uncertain"
+            # Distinguish between "Inconclusive" (can't find answer) vs just low confidence
+            if should_refund:
+                verdict = "Inconclusive" if not is_prediction else "Uncertain"
 
         # Track verdict for cost analysis (especially for inconclusive results)
         token_tracker.set_verdict(verdict)
@@ -146,7 +155,8 @@ async def verify_claim_logic(claim: str) -> dict:
                 debunker_tokens=tokens['debunker'],
                 judge_tokens=tokens['judge'],
                 search_count=len(sources),
-                execution_time=execution_time
+                execution_time=execution_time,
+                was_refunded=should_refund  # Track refund decisions
             )
         except Exception as log_error:
             logger.warning("performance_log.failed err=%s", log_error)
@@ -162,10 +172,12 @@ async def verify_claim_logic(claim: str) -> dict:
                 "prover": prover_argument,
                 "debunker": debunker_argument
             },
-            "manual_review": manual_review
+            "manual_review": manual_review,
+            "payment_status": "refunded_due_to_uncertainty" if should_refund else "settled"
         }
     except Exception as e:
         logger.exception("verify.failed err=%s", e)
+        # System error = automatic refund
         return {
             "verdict": "Error",
             "confidence_score": 0.0,
@@ -173,5 +185,6 @@ async def verify_claim_logic(claim: str) -> dict:
             "summary": "Unable to verify claim due to service error.",
             "audit_trail": f"Error: {str(e)}",
             "claim_type": "unknown",
-            "manual_review": True
+            "manual_review": True,
+            "payment_status": "refunded_due_to_system_error"
         }
