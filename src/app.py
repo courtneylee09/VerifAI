@@ -50,13 +50,28 @@ app.add_middleware(
 # Middleware Registration
 # ============================================================================
 
+# Fix HTTPS scheme for Railway - MUST run before x402
+@app.middleware("http")
+async def fix_https_scheme(request, call_next):
+    """
+    Railway uses X-Forwarded-Proto to indicate HTTPS.
+    This fixes the scheme so x402 generates correct HTTPS URLs.
+    """
+    forwarded_proto = request.headers.get("x-forwarded-proto", "").lower()
+    if forwarded_proto == "https":
+        request.scope["scheme"] = "https"
+    
+    response = await call_next(request)
+    return response
+
+
 # Rate limiting and request logging
 @app.middleware("http")
 async def add_rate_limit_and_log(request, call_next):
     return await rate_limit_and_log(request, call_next)
 
 
-# x402 Payment wall - Hardcode HTTPS resource URL for Railway
+# x402 Payment wall - Let x402 auto-detect resource URL (now with HTTPS)
 # This tells the internet: 'You must pay 0.05 USDC on Base Sepolia to see the result'
 if HAS_X402:
     app.middleware("http")(
@@ -64,8 +79,8 @@ if HAS_X402:
             price=X402_PRICE,
             pay_to_address=MERCHANT_WALLET_ADDRESS,
             network=X402_NETWORK,
-            description=X402_DESCRIPTION,
-            resource=f"{SERVICE_BASE_URL}/verify"  # Force HTTPS URL
+            description=X402_DESCRIPTION
+            # No resource parameter - let x402 auto-detect full URL with query params
         )
     )
 else:
