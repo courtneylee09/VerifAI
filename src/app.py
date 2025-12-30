@@ -65,7 +65,7 @@ if HAS_X402:
             pay_to_address=MERCHANT_WALLET_ADDRESS,
             network=X402_NETWORK,
             description=X402_DESCRIPTION,
-            base_url=SERVICE_BASE_URL  # Force HTTPS URLs in payment responses
+            resource=SERVICE_BASE_URL  # Force HTTPS URLs in payment responses
         )
     )
 else:
