@@ -1,7 +1,8 @@
 ================================================================================
-VerifAI PROJECT SUMMARY - Ready for Next Steps
+VerifAI PROJECT SUMMARY - Phase 1 Active
 ================================================================================
 Date: December 30, 2025
+Status: PRODUCTION READY - Accepting Payments on Base Sepolia
 
 ================================================================================
 PROJECT OVERVIEW
@@ -12,6 +13,10 @@ fact-check claims in real-time. Users pay $0.05 USDC on Base Sepolia via
 the x402 payment protocol to verify claims.
 
 Public URL: https://verifai-production.up.railway.app
+Merchant Wallet: 0x3615af0cE7c8e525B9a9C6cE281e195442596559
+
+Recent Milestone: First successful paid verification completed Dec 30, 2025
+Transaction: 0x2d2326bf36051e2968729c7055af45ad4238d2a03bf01b40bb8096c961dacf78
 
 
 ================================================================================
@@ -85,17 +90,29 @@ WHAT WE'VE BUILT
 CURRENT DEPLOYMENT STATUS
 ================================================================================
 
-Service Status: ✅ LIVE & PUBLIC
+Service Status: ✅ LIVE & ACCEPTING PAYMENTS
 
 URL: https://verifai-production.up.railway.app
 Deployment: Railway (auto-deploy from Git)
-Recent Deploy: Dec 30 (metrics endpoints added)
+Latest Deploy: Dec 30, 2025 (all systems operational)
 
 Endpoints:
 - /verify?claim=... - Claim verification (x402 payment required)
+- / - Service info and x402 manifest
 - /health - Health check
 - /metrics/economics - Profit summary (PUBLIC)
 - /metrics/logs?limit=N - Recent logs (PUBLIC)
+
+Payment Flow Status: ✅ WORKING
+- HTTPS resource URLs: Fixed (--forwarded-allow-ips in Procfile)
+- CORS headers: Configured for wallet compatibility
+- Content negotiation: JSON (default), HTML, plain text
+- Async performance: Fixed with asyncio.to_thread() for Claude API
+
+Recent Production Tests:
+✅ Jesus claim: "Inconclusive" verdict, 0.55 confidence, 14.58s, $0.0035 cost
+✅ Payment test: Completed via Coinbase Wallet (tx: 0x2d2326bf...)
+✅ AI unemployment prediction: "Uncertain" verdict, 0.55 confidence (stress test)
 
 Test Command:
 python test_paid_verify.py "Bitcoin was invented in 2009"
@@ -148,12 +165,23 @@ NEXT STEPS / OPPORTUNITIES
 ================================================================================
 
 PHASE 1: Optimize Economics (CURRENT - Stay Here 2-3 Months)
-   CRITICAL: Run 1,000+ "dirty" requests on Sepolia before moving to mainnet
+   STATUS: ✅ INFRASTRUCTURE READY - Now collecting real-world data
+   
+   Goals:
+   - Run 1,000+ "dirty" requests on Sepolia to find edge cases
    - Monitor live requests via /metrics/economics
    - Identify high-token claims (expensive) & agent failure modes
    - Find edge cases where agents struggle or hallucinate
    - Optimize prompts to reduce token usage
    - Observe real-world dispute handling
+   
+   Current Progress:
+   ✅ Payment flow working (first successful tx: 0x2d2326bf...)
+   ✅ Metrics endpoints live for monitoring
+   ✅ Stress tests created for challenging claims
+   ✅ Deployment tracking system operational
+   ⏳ Need: 1,000+ production requests for data
+   
    GATE TO PHASE 2: Achieve <$0.003 avg LLM cost per request
 
 PHASE 2: Productize the Debate (Parallel with Phase 1)
