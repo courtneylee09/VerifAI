@@ -1,6 +1,7 @@
 """VerifAI agent-x402 FastAPI application with x402 payment wall."""
 import os
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 try:
     from x402.fastapi.middleware import require_payment
     HAS_X402 = True
@@ -28,6 +29,18 @@ app = FastAPI(
     title="VerifAI agent-x402",
     description="Paid AI verification service using x402 payment protocol with multi-agent debate",
     version="1.0.0"
+)
+
+# ============================================================================
+# CORS Configuration (for x402 wallet compatibility)
+# ============================================================================
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins for x402 wallet compatibility
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers including X-PAYMENT
+    expose_headers=["X-PAYMENT", "X-402-Version"],  # Expose x402 headers to clients
 )
 
 # ============================================================================
