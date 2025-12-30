@@ -119,9 +119,11 @@ async def verify(request: Request, claim: str):
     
     This endpoint requires x402 payment before execution.
     Supports content negotiation via Accept header:
-    - application/json (default): Machine-readable JSON
+    - application/json (default): Machine-readable JSON - RECOMMENDED for M2M
     - text/html: Human-readable HTML page
     - text/plain: Simple text format
+    
+    For machine-to-machine integration, omit Accept header or use application/json.
     
     Args:
         request: FastAPI request object (for Accept header)
@@ -138,8 +140,14 @@ async def verify(request: Request, claim: str):
     # Check what format the client wants (content negotiation)
     accept_header = request.headers.get("accept", "application/json").lower()
     
-    # Return format based on Accept header
-    if "text/html" in accept_header:
+    # For M2M: if no Accept header or */* or application/json -> return JSON
+    # This is the most common pattern in production APIs
+    if not accept_header or accept_header == "*/*" or "application/json" in accept_header:
+        # Default: Return JSON (best for machines)
+        return result
+    
+    # Human-friendly formats (optional)
+    elif "text/html" in accept_header:
         # Return HTML for browsers/humans
         from fastapi.responses import HTMLResponse
         html_content = f"""
@@ -222,9 +230,15 @@ Cost: ${result['total_cost_usd']:.4f}
 """
         return PlainTextResponse(content=text_content)
     
+    # If they request something we don't support, return JSON with a hint
     else:
-        # Default: Return JSON (best for machines)
-        return result
+        from fastapi.responses import JSONResponse
+        return JSONResponse(
+            content=result,
+            headers={
+                "X-Supported-Formats": "application/json, text/html, text/plain"
+            }
+        )
 
 
 @app.get("/health")
