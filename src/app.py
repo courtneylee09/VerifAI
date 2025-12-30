@@ -1,7 +1,16 @@
 """VerifAI agent-x402 FastAPI application with x402 payment wall."""
 import os
 from fastapi import FastAPI
-from x402.fastapi.middleware import require_payment
+try:
+    from x402.fastapi.middleware import require_payment
+    HAS_X402 = True
+except ImportError:
+    HAS_X402 = False
+    # Fallback: dummy middleware that logs but doesn't block
+    async def require_payment(*args, **kwargs):
+        async def middleware(request, call_next):
+            return await call_next(request)
+        return middleware
 
 from config.settings import (
     X402_PRICE, X402_NETWORK, X402_DESCRIPTION,
@@ -34,14 +43,17 @@ async def add_rate_limit_and_log(request, call_next):
 # x402 Payment wall (applied second)
 # This tells the internet: 'You must pay 0.05 USDC on Base Sepolia to see the result'
 # x402 expects the price WITHOUT decimals applied - it handles USDC decimals internally
-app.middleware("http")(
-    require_payment(
-        price=X402_PRICE,  # Amount in USDC (x402 handles decimal conversion)
-        pay_to_address=MERCHANT_WALLET_ADDRESS,
-        network=X402_NETWORK,
-        description=X402_DESCRIPTION
+if HAS_X402:
+    app.middleware("http")(
+        require_payment(
+            price=X402_PRICE,  # Amount in USDC (x402 handles decimal conversion)
+            pay_to_address=MERCHANT_WALLET_ADDRESS,
+            network=X402_NETWORK,
+            description=X402_DESCRIPTION
+        )
     )
-)
+else:
+    logger.warning("x402 module not available - payment middleware disabled")
 
 # ============================================================================
 # Endpoints
