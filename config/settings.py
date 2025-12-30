@@ -14,6 +14,7 @@ EXA_API_KEY = os.getenv("EXA_API_KEY")
 DEEPINFRA_API_KEY = os.getenv("DEEPINFRA_API_KEY")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 MERCHANT_WALLET_ADDRESS = os.getenv("MERCHANT_WALLET_ADDRESS")
 
 # ============================================================================
@@ -75,10 +76,15 @@ RATE_LIMIT_WINDOW_SECONDS = 60
 # AI Model Configuration
 # ============================================================================
 DEEPINFRA_BASE_URL = "https://api.deepinfra.com/v1/openai"
+OPENAI_BASE_URL = "https://api.openai.com/v1"
+
 PROVER_MODEL = "meta-llama/Llama-3.3-70B-Instruct-Turbo"
 DEBUNKER_MODEL = "deepseek-ai/DeepSeek-V3"
 JUDGE_MODEL = "claude-3-5-haiku-20241022"
-GEMINI_FALLBACK_MODEL = "gemini-2.0-flash-exp"
+
+# Fallback models - MUST be different to ensure debate diversity
+PROVER_FALLBACK_MODEL = "gemini-2.0-flash-exp"  # Fast, free
+DEBUNKER_FALLBACK_MODEL = "gpt-4o-mini"  # OpenAI, cheap, ensures diversity vs Gemini
 
 # ============================================================================
 # Timeout Configuration (Circuit Breaker Pattern)

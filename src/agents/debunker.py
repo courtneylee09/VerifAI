@@ -5,8 +5,8 @@ from google import genai
 from google.genai import types
 
 from config.settings import (
-    DEEPINFRA_API_KEY, GEMINI_API_KEY, DEEPINFRA_BASE_URL,
-    DEBUNKER_MODEL, GEMINI_FALLBACK_MODEL, DEBUNKER_TEMPERATURE,
+    DEEPINFRA_API_KEY, OPENAI_API_KEY, OPENAI_BASE_URL,
+    DEBUNKER_MODEL, DEBUNKER_FALLBACK_MODEL, DEBUNKER_TEMPERATURE,
     DEBUNKER_MAX_TOKENS, DEBUNKER_SYSTEM_PROMPT
 )
 from src.utils.token_tracker import token_tracker
@@ -19,7 +19,11 @@ deepinfra_client = AsyncOpenAI(
     base_url=DEEPINFRA_BASE_URL,
     max_retries=0
 )
-gemini_client = genai.Client(api_key=GEMINI_API_KEY)
+openai_client = AsyncOpenAI(
+    api_key=OPENAI_API_KEY,
+    base_url=OPENAI_BASE_URL,
+    max_retries=0
+)
 
 
 async def run_debunker_agent(claim: str, data_points: list[str], is_prediction: bool = False) -> str:
@@ -82,22 +86,26 @@ Return 2-3 sentences arguing AGAINST the claim or noting weaknesses in the evide
     except Exception as e:
         logger.warning("debunker.deepinfra.failed err=%s", str(e)[:200])
 
-        # Fallback to Gemini
+        # Fallback to OpenAI GPT-4o-mini
         try:
-            response = gemini_client.models.generate_content(
-                model=GEMINI_FALLBACK_MODEL,
-                contents=prompt,
-                config=types.GenerateContentConfig(temperature=DEBUNKER_TEMPERATURE)
+            response = await openai_client.chat.completions.create(
+                model=DEBUNKER_FALLBACK_MODEL,
+                messages=[
+                    {"role": "system", "content": DEBUNKER_SYSTEM_PROMPT},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=DEBUNKER_TEMPERATURE,
+                max_tokens=DEBUNKER_MAX_TOKENS
             )
 
-            # Track Gemini usage (no cost, but track for analytics)
+            # Track OpenAI usage
             token_tracker.set_debunker_tokens(
-                model=GEMINI_FALLBACK_MODEL,
-                input_tokens=response.usage_metadata.prompt_token_count if hasattr(response, 'usage_metadata') else 0,
-                output_tokens=response.usage_metadata.candidates_token_count if hasattr(response, 'usage_metadata') else 0
+                model=DEBUNKER_FALLBACK_MODEL,
+                input_tokens=response.usage.prompt_tokens,
+                output_tokens=response.usage.completion_tokens
             )
 
-            return response.text.strip()
-        except Exception as gemini_error:
-            logger.error("debunker.gemini.failed err=%s", gemini_error)
+            return response.choices[0].message.content.strip()
+        except Exception as openai_error:
+            logger.error("debunker.openai.failed err=%s", openai_error)
             return "Unable to generate debunker argument."

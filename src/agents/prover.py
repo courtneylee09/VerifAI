@@ -6,7 +6,7 @@ from google.genai import types
 
 from config.settings import (
     DEEPINFRA_API_KEY, GEMINI_API_KEY, DEEPINFRA_BASE_URL,
-    PROVER_MODEL, GEMINI_FALLBACK_MODEL, PROVER_TEMPERATURE,
+    PROVER_MODEL, PROVER_FALLBACK_MODEL, PROVER_TEMPERATURE,
     PROVER_MAX_TOKENS, PROVER_SYSTEM_PROMPT
 )
 from src.utils.token_tracker import token_tracker
@@ -84,14 +84,14 @@ Return 2-3 sentences arguing FOR the claim."""
         # Fallback to Gemini
         try:
             response = gemini_client.models.generate_content(
-                model=GEMINI_FALLBACK_MODEL,
+                model=PROVER_FALLBACK_MODEL,
                 contents=prompt,
                 config=types.GenerateContentConfig(temperature=PROVER_TEMPERATURE)
             )
 
             # Track Gemini usage (no cost, but track for analytics)
             token_tracker.set_prover_tokens(
-                model=GEMINI_FALLBACK_MODEL,
+                model=PROVER_FALLBACK_MODEL,
                 input_tokens=response.usage_metadata.prompt_token_count if hasattr(response, 'usage_metadata') else 0,
                 output_tokens=response.usage_metadata.candidates_token_count if hasattr(response, 'usage_metadata') else 0
             )
