@@ -9,6 +9,7 @@ from config.settings import (
 )
 from src.middleware import setup_logging, rate_limit_and_log
 from src.services import verify_claim_logic
+from performance_log import PerformanceLogger
 
 # Setup logging
 logger = setup_logging()
@@ -68,6 +69,70 @@ async def verify(claim: str):
 async def health():
     """Health check endpoint."""
     return {"status": "healthy", "service": "VerifAI agent-x402"}
+
+
+@app.get("/metrics/economics")
+async def metrics_economics():
+    """
+    Public economics endpoint: Shows profit summary and earnings.
+    
+    Returns aggregate statistics on:
+    - Total requests served
+    - Revenue earned (USDC)
+    - LLM costs
+    - Net profit and margin
+    - Token usage
+    """
+    try:
+        summary = PerformanceLogger.get_summary()
+        return {
+            "status": "ok",
+            "metrics": summary
+        }
+    except Exception as e:
+        logger.error("metrics.economics.failed err=%s", e)
+        return {
+            "status": "error",
+            "error": str(e),
+            "metrics": {
+                "total_requests": 0,
+                "total_revenue_usd": 0.0,
+                "total_cost_usd": 0.0,
+                "total_profit_usd": 0.0
+            }
+        }
+
+
+@app.get("/metrics/logs")
+async def metrics_logs(limit: int = 10):
+    """
+    Public logs endpoint: Returns recent verification requests with economics.
+    
+    Args:
+        limit: Number of recent logs to return (default 10, max 100)
+        
+    Returns:
+        List of recent verification requests with token usage and profit data
+    """
+    limit = min(limit, 100)  # Cap at 100
+    try:
+        logs = PerformanceLogger.read_logs()
+        recent = logs[-limit:] if len(logs) > limit else logs
+        
+        return {
+            "status": "ok",
+            "count": len(recent),
+            "total_logged": len(logs),
+            "logs": recent
+        }
+    except Exception as e:
+        logger.error("metrics.logs.failed err=%s", e)
+        return {
+            "status": "error",
+            "error": str(e),
+            "count": 0,
+            "logs": []
+        }
 
 
 if __name__ == "__main__":
