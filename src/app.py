@@ -1,4 +1,6 @@
-"""VerifAI agent-x402 FastAPI application with x402 payment wall."""
+"""VerifAI agent-x402 FastAPI application with x402 payment wall.
+Version: 1.0.1 - CORS enabled for wallet compatibility
+"""
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
