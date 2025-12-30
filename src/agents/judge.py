@@ -2,6 +2,7 @@
 import json
 import re
 import logging
+import asyncio
 from anthropic import Anthropic
 
 from config.settings import (
@@ -92,12 +93,15 @@ Respond in JSON format with these exact fields:
 }}"""
 
     try:
-        response = claude_client.messages.create(
-            model=JUDGE_MODEL,
-            max_tokens=JUDGE_MAX_TOKENS,
-            messages=[
-                {"role": "user", "content": prompt}
-            ]
+        # Run synchronous Anthropic call in thread pool to avoid blocking
+        response = await asyncio.to_thread(
+            lambda: claude_client.messages.create(
+                model=JUDGE_MODEL,
+                max_tokens=JUDGE_MAX_TOKENS,
+                messages=[
+                    {"role": "user", "content": prompt}
+                ]
+            )
         )
 
         # Track token usage
