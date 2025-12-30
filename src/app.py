@@ -5,7 +5,6 @@ import os
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from starlette.middleware.trustedhost import ProxyHeadersMiddleware
 try:
     from x402.fastapi.middleware import require_payment
     HAS_X402 = True
@@ -48,16 +47,6 @@ app.add_middleware(
 )
 
 # ============================================================================
-# Proxy Headers Middleware (for Railway HTTPS detection)
-# ============================================================================
-# Railway uses X-Forwarded-Proto to indicate HTTPS
-# This middleware must be added BEFORE x402 to ensure correct URL generation
-app.add_middleware(
-    ProxyHeadersMiddleware,
-    trusted_hosts=["*"]  # Trust all hosts since Railway doesn't have fixed IPs
-)
-
-# ============================================================================
 # Middleware Registration
 # ============================================================================
 
@@ -67,7 +56,7 @@ async def add_rate_limit_and_log(request, call_next):
     return await rate_limit_and_log(request, call_next)
 
 
-# x402 Payment wall (registered last, so runs first in the chain)
+# x402 Payment wall - Hardcode HTTPS resource URL for Railway
 # This tells the internet: 'You must pay 0.05 USDC on Base Sepolia to see the result'
 if HAS_X402:
     app.middleware("http")(
@@ -75,7 +64,8 @@ if HAS_X402:
             price=X402_PRICE,
             pay_to_address=MERCHANT_WALLET_ADDRESS,
             network=X402_NETWORK,
-            description=X402_DESCRIPTION
+            description=X402_DESCRIPTION,
+            resource=f"{SERVICE_BASE_URL}/verify"  # Force HTTPS URL
         )
     )
 else:
