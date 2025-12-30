@@ -381,8 +381,10 @@ class VerifAIStressTester:
             batch = claims[batch_num:batch_num + self.batch_size]
             await self.run_batch(batch, batch_num // self.batch_size + 1, batch_num)
             
-            # Small delay between batches to avoid overwhelming the system
-            await asyncio.sleep(0.5)
+            # Delay between batches to respect Exa's 5 req/sec rate limit
+            # With batch_size=5, need 1 second delay. With batch_size=10, need 2 seconds
+            delay = max(1.0, self.batch_size / 5.0)
+            await asyncio.sleep(delay)
         
         self.end_time = time.time()
         
@@ -546,7 +548,7 @@ class VerifAIStressTester:
 async def main():
     parser = argparse.ArgumentParser(description="VerifAI Comprehensive Stress Test")
     parser.add_argument("--requests", type=int, default=1000, help="Total number of requests (default: 1000)")
-    parser.add_argument("--batch-size", type=int, default=10, help="Requests per batch (default: 10)")
+    parser.add_argument("--batch-size", type=int, default=5, help="Requests per batch (default: 5 to respect Exa rate limit)")
     parser.add_argument("--quick-test", action="store_true", help="Run quick test with 100 requests")
     
     args = parser.parse_args()
@@ -554,7 +556,7 @@ async def main():
     # Quick test mode
     if args.quick_test:
         args.requests = 100
-        args.batch_size = 10
+        args.batch_size = 5
         print(">> Running QUICK TEST mode (100 requests)\n")
     
     # Create and run stress tester

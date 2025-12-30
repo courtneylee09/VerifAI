@@ -14,6 +14,7 @@ from src.agents.debunker import run_debunker_agent
 from src.agents.judge import run_judge_agent
 from performance_log import PerformanceLogger
 from src.utils.token_tracker import token_tracker
+from src.utils.philosophical_filter import is_philosophical_claim, get_philosophical_response
 
 logger = logging.getLogger(__name__)
 
@@ -40,8 +41,35 @@ async def verify_claim_logic(claim: str) -> dict:
 
     # Reset token tracking for this request
     token_tracker.reset()
+    manual_review = False
 
     try:
+        # STEP 0: Philosophical Claim Pre-Filter
+        # Catches normative/value judgments before expensive multi-agent debate
+        is_philosophical, filter_reason = is_philosophical_claim(claim)
+        if is_philosophical:
+            logger.info("verify.pre_filtered reason=%s", filter_reason)
+            response = get_philosophical_response(claim, filter_reason)
+            
+            # Log performance (zero LLM costs since we skipped debate)
+            execution_time = time.perf_counter() - start_time
+            try:
+                PerformanceLogger.log_request(
+                    claim=claim,
+                    verdict=response["verdict"],
+                    confidence_score=response["confidence_score"],
+                    prover_tokens={"input": 0, "output": 0, "model": "N/A"},
+                    debunker_tokens={"input": 0, "output": 0, "model": "N/A"},
+                    judge_tokens={"input": 0, "output": 0, "model": "N/A"},
+                    search_count=0,
+                    execution_time=execution_time,
+                    was_refunded=True  # Always refund philosophical claims
+                )
+            except Exception as log_error:
+                logger.warning("performance_log.failed err=%s", log_error)
+            
+            return response
+        
         # Detect if this is a prediction or factual claim
         is_prediction = any(keyword in claim.lower() for keyword in PREDICTION_KEYWORDS)
         logger.info("claim.type=%s", "prediction" if is_prediction else "factual")
