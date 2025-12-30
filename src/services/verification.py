@@ -33,6 +33,7 @@ async def verify_claim_logic(claim: str) -> dict:
     Returns:
         Dictionary with verification result including verdict, confidence_score, citations, and metadata
     """
+    # Verification logic for VerifAI agent-x402 service
     start_time = time.perf_counter()
     logger.info("verify.start claim=%s", claim)
 
