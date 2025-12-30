@@ -2,8 +2,9 @@
 Version: 1.0.1 - CORS enabled for wallet compatibility
 """
 import os
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 try:
     from x402.fastapi.middleware import require_payment
     HAS_X402 = True
@@ -49,14 +50,23 @@ app.add_middleware(
 # Middleware Registration
 # ============================================================================
 
-# Fix Railway proxy headers (Railway uses HTTP internally but HTTPS externally)
+# Fix Railway proxy headers - Register FIRST so it executes BEFORE x402
 @app.middleware("http")
-async def fix_proxy_headers(request, call_next):
-    """Ensure x402 detects HTTPS correctly from Railway's proxy headers."""
-    # Railway sets X-Forwarded-Proto to 'https' for external requests
-    if request.headers.get("x-forwarded-proto") == "https":
+async def fix_https_scheme(request, call_next):
+    """
+    Fix HTTPS scheme detection for Railway.
+    Railway uses X-Forwarded-Proto, but FastAPI doesn't automatically trust it.
+    This MUST run before x402 to ensure correct URL generation.
+    """
+    # Check proxy headers
+    forwarded_proto = request.headers.get("x-forwarded-proto", "").lower()
+    
+    # Force HTTPS if coming through Railway's HTTPS proxy
+    if forwarded_proto == "https":
         request.scope["scheme"] = "https"
+    
     return await call_next(request)
+
 
 # Rate limiting and request logging
 @app.middleware("http")
@@ -64,17 +74,15 @@ async def add_rate_limit_and_log(request, call_next):
     return await rate_limit_and_log(request, call_next)
 
 
-# x402 Payment wall
+# x402 Payment wall (registered last, so runs first in the chain)
 # This tells the internet: 'You must pay 0.05 USDC on Base Sepolia to see the result'
-# x402 expects the price WITHOUT decimals applied - it handles USDC decimals internally
 if HAS_X402:
     app.middleware("http")(
         require_payment(
-            price=X402_PRICE,  # Amount in USDC (x402 handles decimal conversion)
+            price=X402_PRICE,
             pay_to_address=MERCHANT_WALLET_ADDRESS,
             network=X402_NETWORK,
             description=X402_DESCRIPTION
-            # Let x402 auto-detect resource URL from request (will use HTTPS from proxy headers)
         )
     )
 else:
