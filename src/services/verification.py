@@ -36,8 +36,8 @@ async def verify_claim_logic(claim: str) -> dict:
     start_time = time.perf_counter()
     logger.info("verify.start claim=%s", claim)
 
-        # Reset token tracking for this request
-        token_tracker.reset()
+    # Reset token tracking for this request
+    token_tracker.reset()
 
     try:
         # Detect if this is a prediction or factual claim
