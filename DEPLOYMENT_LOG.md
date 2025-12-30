@@ -5,10 +5,29 @@ Track all deployments, what changed, what worked, and what broke. Use this to qu
 
 ---
 
-## Current Status: 🔧 FIXING HTTPS URLs
+## Current Status: ✅ WORKING - PAYMENT SUCCESSFUL
 
-**Last Known Working State:** Local testing works, Jesus claim returns "Inconclusive" verdict
-**Current Issue:** x402 returning HTTP URLs instead of HTTPS, causing mixed content errors in Coinbase Wallet
+**Last Successful Payment:** 2024-12-30 - Jesus claim verification
+**Transaction Hash:** 0x2d2326bf36051e2968729c7055af45ad4238d2a03bf01b40bb8096c961dacf78
+**Network:** Base Sepolia
+**Status:** HTTPS fixed, payment flow working end-to-end
+
+---
+
+## Deployment History (Newest First)
+
+### 2024-12-30 20:50 - Commit 029c5ea ✅ SUCCESS
+**Change:** Add forwarded-allow-ips to Procfile  
+**Files Modified:** `Procfile`  
+**What Changed:**
+- Added `--forwarded-allow-ips='*'` flag to gunicorn/uvicorn command
+- This tells Uvicorn to trust X-Forwarded-Proto headers from Railway proxy
+
+**Result:** HTTPS FIXED! Payment successful!  
+**Test Result:** `Resource URL: https://verifai-production.up.railway.app/verify?claim=test`  
+**Payment Test:** Transaction hash 0x2d2326bf36051e2968729c7055af45ad4238d2a03bf01b40bb8096c961dacf78  
+**Root Cause:** Uvicorn wasn't trusting Railway's proxy headers by default  
+**Lesson:** For Railway deployments, MUST use `--forwarded-allow-ips='*'` in Procfile
 
 ---
 
