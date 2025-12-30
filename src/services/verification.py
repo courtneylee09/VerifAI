@@ -130,22 +130,22 @@ async def verify_claim_logic(claim: str) -> dict:
             manual_review,
         )
 
-            # Log performance metrics
-            execution_time = time.perf_counter() - start_time
-            try:
-                    tokens = token_tracker.get_all()
-                PerformanceLogger.log_request(
-                    claim=claim,
-                    verdict=verdict,
-                    confidence_score=confidence,
-                        prover_tokens=tokens['prover'],
-                        debunker_tokens=tokens['debunker'],
-                        judge_tokens=tokens['judge'],
-                    search_count=len(sources),
-                    execution_time=execution_time
-                )
-            except Exception as log_error:
-                logger.warning("performance_log.failed err=%s", log_error)
+        # Log performance metrics
+        execution_time = time.perf_counter() - start_time
+        try:
+            tokens = token_tracker.get_all()
+            PerformanceLogger.log_request(
+                claim=claim,
+                verdict=verdict,
+                confidence_score=confidence,
+                prover_tokens=tokens['prover'],
+                debunker_tokens=tokens['debunker'],
+                judge_tokens=tokens['judge'],
+                search_count=len(sources),
+                execution_time=execution_time
+            )
+        except Exception as log_error:
+            logger.warning("performance_log.failed err=%s", log_error)
 
         return {
             "verdict": verdict,
