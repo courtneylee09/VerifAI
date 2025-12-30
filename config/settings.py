@@ -22,7 +22,16 @@ MERCHANT_WALLET_ADDRESS = os.getenv("MERCHANT_WALLET_ADDRESS")
 X402_PRICE = "0.05"  # USDC per verification
 X402_NETWORK = "base-sepolia"
 X402_DESCRIPTION = "VerifAI agent-x402 Verification Check"
-X402_MIME_TYPE = "application/json"  # Response format
+
+# Default MIME type (clients can override with Accept header)
+X402_MIME_TYPE = "application/json"  # Default to JSON for machines
+
+# Supported output formats (via Accept header content negotiation)
+SUPPORTED_FORMATS = {
+    "application/json": "Machine-readable JSON with full data",
+    "text/html": "Human-readable HTML page with formatting",
+    "text/plain": "Simple plain text format"
+}
 
 # Output schema - tells machines what JSON structure to expect
 X402_OUTPUT_SCHEMA = {
@@ -49,7 +58,8 @@ X402_OUTPUT_SCHEMA = {
         "execution_time_seconds": {"type": "number"},
         "total_cost_usd": {"type": "number"}
     },
-    "required": ["claim", "verdict", "confidence", "reasoning"]
+    "required": ["claim", "verdict", "confidence", "reasoning"],
+    "note": "Use Accept header to request different formats: application/json (default), text/html, or text/plain"
 }
 
 # Base URL for production (Railway uses HTTPS)

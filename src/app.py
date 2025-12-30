@@ -113,21 +113,118 @@ async def root():
 
 
 @app.get("/verify")
-async def verify(claim: str):
+async def verify(request: Request, claim: str):
     """
     Verify a claim using multi-agent debate.
     
     This endpoint requires x402 payment before execution.
+    Supports content negotiation via Accept header:
+    - application/json (default): Machine-readable JSON
+    - text/html: Human-readable HTML page
+    - text/plain: Simple text format
     
     Args:
+        request: FastAPI request object (for Accept header)
         claim: The claim to verify
         
     Returns:
-        Verification result with verdict, confidence_score, citations, and debate details
+        Verification result in requested format
     """
     logger.info("endpoint.verify.called claim=%s", claim)
+    
+    # Get verification result
     result = await verify_claim_logic(claim)
-    return result
+    
+    # Check what format the client wants (content negotiation)
+    accept_header = request.headers.get("accept", "application/json").lower()
+    
+    # Return format based on Accept header
+    if "text/html" in accept_header:
+        # Return HTML for browsers/humans
+        from fastapi.responses import HTMLResponse
+        html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>VerifAI Result: {claim}</title>
+            <style>
+                body {{ font-family: system-ui, -apple-system, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }}
+                .verdict {{ font-size: 2em; font-weight: bold; margin: 20px 0; }}
+                .true {{ color: #16a34a; }}
+                .false {{ color: #dc2626; }}
+                .inconclusive {{ color: #ea580c; }}
+                .confidence {{ font-size: 1.2em; color: #6b7280; }}
+                .section {{ margin: 30px 0; padding: 20px; background: #f9fafb; border-radius: 8px; }}
+                .sources {{ list-style: none; padding: 0; }}
+                .sources li {{ margin: 10px 0; }}
+                .sources a {{ color: #2563eb; }}
+            </style>
+        </head>
+        <body>
+            <h1>VerifAI Verification Result</h1>
+            <p><strong>Claim:</strong> {claim}</p>
+            <div class="verdict {result['verdict'].lower()}">{result['verdict']}</div>
+            <div class="confidence">Confidence: {result['confidence']:.0%}</div>
+            
+            <div class="section">
+                <h2>Judge's Reasoning</h2>
+                <p>{result['reasoning']}</p>
+            </div>
+            
+            <div class="section">
+                <h2>Supporting Arguments (Prover)</h2>
+                <p>{result['prover_argument']}</p>
+            </div>
+            
+            <div class="section">
+                <h2>Counter-Arguments (Debunker)</h2>
+                <p>{result['debunker_argument']}</p>
+            </div>
+            
+            <div class="section">
+                <h2>Sources</h2>
+                <ul class="sources">
+                    {"".join(f'<li><a href="{s["url"]}" target="_blank">{s["title"]}</a><br><small>{s["snippet"][:200]}...</small></li>' for s in result['sources'])}
+                </ul>
+            </div>
+            
+            <p style="color: #9ca3af; font-size: 0.9em;">
+                Execution time: {result['execution_time_seconds']:.2f}s | Cost: ${result['total_cost_usd']:.4f}
+            </p>
+        </body>
+        </html>
+        """
+        return HTMLResponse(content=html_content)
+    
+    elif "text/plain" in accept_header:
+        # Return plain text for simple parsing
+        from fastapi.responses import PlainTextResponse
+        text_content = f"""VERIFAI VERIFICATION RESULT
+        
+Claim: {claim}
+Verdict: {result['verdict']}
+Confidence: {result['confidence']:.0%}
+
+REASONING:
+{result['reasoning']}
+
+SUPPORTING ARGUMENTS:
+{result['prover_argument']}
+
+COUNTER-ARGUMENTS:
+{result['debunker_argument']}
+
+SOURCES:
+{chr(10).join(f"- {s['title']}: {s['url']}" for s in result['sources'])}
+
+Execution time: {result['execution_time_seconds']:.2f}s
+Cost: ${result['total_cost_usd']:.4f}
+"""
+        return PlainTextResponse(content=text_content)
+    
+    else:
+        # Default: Return JSON (best for machines)
+        return result
 
 
 @app.get("/health")
