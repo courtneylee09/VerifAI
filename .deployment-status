@@ -1,0 +1,21 @@
+# Current Deployment Status
+# This file tracks the current state for quick assessment
+
+LAST_COMMIT=89b005e
+COMMIT_MESSAGE="Fix: Hardcode HTTPS resource URL in x402 middleware"
+STATUS=TESTING
+DEPLOYED_AT=2024-12-30 20:35
+EXPECTED_FIX=HTTPS resource URLs
+
+# Last Known Good Commit
+LAST_GOOD_COMMIT=300f3fe
+LAST_GOOD_MESSAGE="Fix indentation errors"
+LAST_GOOD_STATUS=App starts, local testing works
+
+# Current Issue
+ISSUE=x402 returning HTTP instead of HTTPS URLs
+BLOCKING=Coinbase Wallet payment flow (mixed content error)
+
+# Test Command
+TEST_CMD=python -c "import requests; r = requests.get('https://verifai-production.up.railway.app/verify?claim=test'); print(r.json()['accepts'][0]['resource'])"
+EXPECTED_RESULT=https://verifai-production.up.railway.app/verify?claim=test

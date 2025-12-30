@@ -1,0 +1,573 @@
+2025-12-30T18:59:23.000000000Z [inf]  Starting Container
+2025-12-30T18:59:24.840855777Z [err]  [2025-12-30 18:59:24 +0000] [1] [INFO] Starting gunicorn 23.0.0
+2025-12-30T18:59:24.840862395Z [err]  [2025-12-30 18:59:24 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+2025-12-30T18:59:24.840866730Z [err]  [2025-12-30 18:59:24 +0000] [1] [INFO] Using worker: uvicorn.workers.UvicornWorker
+2025-12-30T18:59:24.840870963Z [err]  [2025-12-30 18:59:24 +0000] [2] [INFO] Booting worker with pid: 2
+2025-12-30T18:59:25.257449085Z [err]    File "/app/src/app.py", line 20, in <module>
+2025-12-30T18:59:25.257456199Z [err]      from src.services import verify_claim_logic
+2025-12-30T18:59:25.257460917Z [err]    File "/app/src/services/__init__.py", line 3, in <module>
+2025-12-30T18:59:25.257464897Z [err]      from src.services.verification import verify_claim_logic
+2025-12-30T18:59:25.257469364Z [err]    File "/app/src/services/verification.py", line 40
+2025-12-30T18:59:25.257473678Z [err]      token_tracker.reset()
+2025-12-30T18:59:25.257477753Z [err]  IndentationError: unexpected indent
+2025-12-30T18:59:25.257481866Z [err]  [2025-12-30 18:59:25 +0000] [2] [INFO] Worker exiting (pid: 2)
+2025-12-30T18:59:25.257575636Z [err]  [2025-12-30 18:59:25 +0000] [2] [ERROR] Exception in worker process
+2025-12-30T18:59:25.257580696Z [err]  Traceback (most recent call last):
+2025-12-30T18:59:25.257585008Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+2025-12-30T18:59:25.257589056Z [err]      worker.init_process()
+2025-12-30T18:59:25.257592956Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:25.257596856Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 135, in init_process
+2025-12-30T18:59:25.257601418Z [err]      self.load_wsgi()
+2025-12-30T18:59:25.257605386Z [err]      ~~~~~~~~~~~~~~^^
+2025-12-30T18:59:25.257609344Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+2025-12-30T18:59:25.257613510Z [err]      self.wsgi = self.app.wsgi()
+2025-12-30T18:59:25.257618103Z [err]                  ~~~~~~~~~~~~~^^
+2025-12-30T18:59:25.257621880Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 66, in wsgi
+2025-12-30T18:59:25.257626066Z [err]      self.callable = self.load()
+2025-12-30T18:59:25.257634901Z [err]                      ~~~~~~~~~^^
+2025-12-30T18:59:25.257639363Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+2025-12-30T18:59:25.257643453Z [err]      return self.load_wsgiapp()
+2025-12-30T18:59:25.257647310Z [err]             ~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:25.257652381Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+2025-12-30T18:59:25.257656091Z [err]      return util.import_app(self.app_uri)
+2025-12-30T18:59:25.257662633Z [err]             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+2025-12-30T18:59:25.257670508Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/util.py", line 370, in import_app
+2025-12-30T18:59:25.257677348Z [err]      mod = importlib.import_module(module)
+2025-12-30T18:59:25.257684912Z [err]    File "/mise/installs/python/3.13.11/lib/python3.13/importlib/__init__.py", line 88, in import_module
+2025-12-30T18:59:25.257691640Z [err]      return _bootstrap._gcd_import(name[level:], package, level)
+2025-12-30T18:59:25.257698814Z [err]             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-12-30T18:59:25.257705748Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:25.257712644Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:25.257720890Z [err]    File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+2025-12-30T18:59:25.257728025Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:25.257734704Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:25.257739286Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:25.257742821Z [err]    File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+2025-12-30T18:59:25.257746461Z [err]    File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+2025-12-30T18:59:25.257750357Z [err]    File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+2025-12-30T18:59:25.257755754Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:25.257759261Z [err]    File "/app/src/__init__.py", line 2, in <module>
+2025-12-30T18:59:25.257763152Z [err]      from src.app import app
+2025-12-30T18:59:25.364017672Z [err]  [2025-12-30 18:59:25 +0000] [1] [ERROR] Worker (pid:2) exited with code 3
+2025-12-30T18:59:25.364025728Z [err]  [2025-12-30 18:59:25 +0000] [1] [ERROR] Shutting down: Master
+2025-12-30T18:59:25.364032568Z [err]  [2025-12-30 18:59:25 +0000] [1] [ERROR] Reason: Worker failed to boot.
+2025-12-30T18:59:26.316487683Z [err]  [2025-12-30 18:59:26 +0000] [2] [INFO] Booting worker with pid: 2
+2025-12-30T18:59:26.316556930Z [err]  [2025-12-30 18:59:26 +0000] [1] [INFO] Starting gunicorn 23.0.0
+2025-12-30T18:59:26.316561430Z [err]  [2025-12-30 18:59:26 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+2025-12-30T18:59:26.316565319Z [err]  [2025-12-30 18:59:26 +0000] [1] [INFO] Using worker: uvicorn.workers.UvicornWorker
+2025-12-30T18:59:27.186815475Z [err]  [2025-12-30 18:59:27 +0000] [2] [ERROR] Exception in worker process
+2025-12-30T18:59:27.186826088Z [err]  Traceback (most recent call last):
+2025-12-30T18:59:27.186831522Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+2025-12-30T18:59:27.186836042Z [err]      worker.init_process()
+2025-12-30T18:59:27.186840168Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:27.186844682Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 135, in init_process
+2025-12-30T18:59:27.186849858Z [err]      self.load_wsgi()
+2025-12-30T18:59:27.186852192Z [err]      from src.services.verification import verify_claim_logic
+2025-12-30T18:59:27.186855088Z [err]      ~~~~~~~~~~~~~~^^
+2025-12-30T18:59:27.186859881Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+2025-12-30T18:59:27.186865372Z [err]    File "/app/src/services/verification.py", line 40
+2025-12-30T18:59:27.186865405Z [err]      self.wsgi = self.app.wsgi()
+2025-12-30T18:59:27.186869967Z [err]                  ~~~~~~~~~~~~~^^
+2025-12-30T18:59:27.186875539Z [err]      token_tracker.reset()
+2025-12-30T18:59:27.186876027Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 66, in wsgi
+2025-12-30T18:59:27.186881412Z [err]      self.callable = self.load()
+2025-12-30T18:59:27.186885155Z [err]  IndentationError: unexpected indent
+2025-12-30T18:59:27.186886889Z [err]                      ~~~~~~~~~^^
+2025-12-30T18:59:27.186892349Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+2025-12-30T18:59:27.186894905Z [err]  [2025-12-30 18:59:27 +0000] [2] [INFO] Worker exiting (pid: 2)
+2025-12-30T18:59:27.186897219Z [err]      return self.load_wsgiapp()
+2025-12-30T18:59:27.186901101Z [err]             ~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:27.186905798Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+2025-12-30T18:59:27.186909513Z [err]      return util.import_app(self.app_uri)
+2025-12-30T18:59:27.186913339Z [err]             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+2025-12-30T18:59:27.186917499Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/util.py", line 370, in import_app
+2025-12-30T18:59:27.186921127Z [err]      mod = importlib.import_module(module)
+2025-12-30T18:59:27.186925982Z [err]    File "/mise/installs/python/3.13.11/lib/python3.13/importlib/__init__.py", line 88, in import_module
+2025-12-30T18:59:27.186929772Z [err]      return _bootstrap._gcd_import(name[level:], package, level)
+2025-12-30T18:59:27.186934235Z [err]             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-12-30T18:59:27.186938108Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:27.186942492Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:27.186946390Z [err]    File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+2025-12-30T18:59:27.186950292Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:27.186953899Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:27.186957908Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:27.186961694Z [err]    File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+2025-12-30T18:59:27.186965679Z [err]    File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+2025-12-30T18:59:27.186969566Z [err]    File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+2025-12-30T18:59:27.186973185Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:27.186976707Z [err]    File "/app/src/__init__.py", line 2, in <module>
+2025-12-30T18:59:27.186980454Z [err]      from src.app import app
+2025-12-30T18:59:27.186984304Z [err]    File "/app/src/app.py", line 20, in <module>
+2025-12-30T18:59:27.186988781Z [err]      from src.services import verify_claim_logic
+2025-12-30T18:59:27.186992821Z [err]    File "/app/src/services/__init__.py", line 3, in <module>
+2025-12-30T18:59:27.341534791Z [err]  [2025-12-30 18:59:27 +0000] [1] [ERROR] Worker (pid:2) exited with code 3
+2025-12-30T18:59:27.353920029Z [err]  [2025-12-30 18:59:27 +0000] [1] [ERROR] Shutting down: Master
+2025-12-30T18:59:27.353927329Z [err]  [2025-12-30 18:59:27 +0000] [1] [ERROR] Reason: Worker failed to boot.
+2025-12-30T18:59:28.892568382Z [err]  [2025-12-30 18:59:28 +0000] [1] [INFO] Starting gunicorn 23.0.0
+2025-12-30T18:59:28.892581568Z [err]  [2025-12-30 18:59:28 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+2025-12-30T18:59:28.892589226Z [err]  [2025-12-30 18:59:28 +0000] [1] [INFO] Using worker: uvicorn.workers.UvicornWorker
+2025-12-30T18:59:28.892596254Z [err]  [2025-12-30 18:59:28 +0000] [2] [INFO] Booting worker with pid: 2
+2025-12-30T18:59:29.767579816Z [err]  [2025-12-30 18:59:29 +0000] [2] [ERROR] Exception in worker process
+2025-12-30T18:59:29.767588181Z [err]  Traceback (most recent call last):
+2025-12-30T18:59:29.767593711Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+2025-12-30T18:59:29.767599154Z [err]      worker.init_process()
+2025-12-30T18:59:29.767604254Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:29.767609597Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 135, in init_process
+2025-12-30T18:59:29.767615152Z [err]      self.load_wsgi()
+2025-12-30T18:59:29.767620644Z [err]      ~~~~~~~~~~~~~~^^
+2025-12-30T18:59:29.767631822Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+2025-12-30T18:59:29.767637106Z [err]      self.wsgi = self.app.wsgi()
+2025-12-30T18:59:29.767642282Z [err]                  ~~~~~~~~~~~~~^^
+2025-12-30T18:59:29.767647325Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 66, in wsgi
+2025-12-30T18:59:29.767652679Z [err]      self.callable = self.load()
+2025-12-30T18:59:29.767657793Z [err]                      ~~~~~~~~~^^
+2025-12-30T18:59:29.767663282Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+2025-12-30T18:59:29.767668340Z [err]      return self.load_wsgiapp()
+2025-12-30T18:59:29.767673452Z [err]             ~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:29.767679054Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+2025-12-30T18:59:29.767685139Z [err]      return util.import_app(self.app_uri)
+2025-12-30T18:59:29.767690196Z [err]             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+2025-12-30T18:59:29.767695176Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/util.py", line 370, in import_app
+2025-12-30T18:59:29.775822289Z [err]      mod = importlib.import_module(module)
+2025-12-30T18:59:29.775832329Z [err]    File "/mise/installs/python/3.13.11/lib/python3.13/importlib/__init__.py", line 88, in import_module
+2025-12-30T18:59:29.775841322Z [err]      return _bootstrap._gcd_import(name[level:], package, level)
+2025-12-30T18:59:29.775848622Z [err]             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-12-30T18:59:29.775857561Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:29.775864221Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:29.775870956Z [err]    File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+2025-12-30T18:59:29.775877189Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:29.775883686Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:29.775891974Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:29.775900093Z [err]    File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+2025-12-30T18:59:29.775907349Z [err]    File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+2025-12-30T18:59:29.775913720Z [err]    File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+2025-12-30T18:59:29.775920647Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:29.775927142Z [err]    File "/app/src/__init__.py", line 2, in <module>
+2025-12-30T18:59:29.775934504Z [err]      from src.app import app
+2025-12-30T18:59:29.775942640Z [err]    File "/app/src/app.py", line 20, in <module>
+2025-12-30T18:59:29.775949226Z [err]      from src.services import verify_claim_logic
+2025-12-30T18:59:29.775956810Z [err]    File "/app/src/services/__init__.py", line 3, in <module>
+2025-12-30T18:59:29.775965697Z [err]      from src.services.verification import verify_claim_logic
+2025-12-30T18:59:29.775972394Z [err]    File "/app/src/services/verification.py", line 40
+2025-12-30T18:59:29.775980682Z [err]      token_tracker.reset()
+2025-12-30T18:59:29.775987196Z [err]  IndentationError: unexpected indent
+2025-12-30T18:59:29.775995384Z [err]  [2025-12-30 18:59:29 +0000] [2] [INFO] Worker exiting (pid: 2)
+2025-12-30T18:59:30.125002994Z [err]  [2025-12-30 18:59:29 +0000] [1] [ERROR] Worker (pid:2) exited with code 3
+2025-12-30T18:59:30.125008280Z [err]  [2025-12-30 18:59:29 +0000] [1] [ERROR] Shutting down: Master
+2025-12-30T18:59:30.125013341Z [err]  [2025-12-30 18:59:29 +0000] [1] [ERROR] Reason: Worker failed to boot.
+2025-12-30T18:59:31.325378705Z [err]  [2025-12-30 18:59:31 +0000] [1] [INFO] Starting gunicorn 23.0.0
+2025-12-30T18:59:31.325385109Z [err]  [2025-12-30 18:59:31 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+2025-12-30T18:59:31.325390076Z [err]  [2025-12-30 18:59:31 +0000] [1] [INFO] Using worker: uvicorn.workers.UvicornWorker
+2025-12-30T18:59:31.325396007Z [err]  [2025-12-30 18:59:31 +0000] [2] [INFO] Booting worker with pid: 2
+2025-12-30T18:59:32.846915642Z [err]  [2025-12-30 18:59:32 +0000] [2] [ERROR] Exception in worker process
+2025-12-30T18:59:32.846927054Z [err]  Traceback (most recent call last):
+2025-12-30T18:59:32.846935077Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+2025-12-30T18:59:32.846941459Z [err]      worker.init_process()
+2025-12-30T18:59:32.846947111Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:32.846953593Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 135, in init_process
+2025-12-30T18:59:32.846960797Z [err]      self.load_wsgi()
+2025-12-30T18:59:32.846966382Z [err]      ~~~~~~~~~~~~~~^^
+2025-12-30T18:59:32.846971872Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+2025-12-30T18:59:32.846978284Z [err]      self.wsgi = self.app.wsgi()
+2025-12-30T18:59:32.846984117Z [err]                  ~~~~~~~~~~~~~^^
+2025-12-30T18:59:32.846990038Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 66, in wsgi
+2025-12-30T18:59:32.846995879Z [err]      self.callable = self.load()
+2025-12-30T18:59:32.847001484Z [err]                      ~~~~~~~~~^^
+2025-12-30T18:59:32.847008861Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+2025-12-30T18:59:32.847015920Z [err]      return self.load_wsgiapp()
+2025-12-30T18:59:32.847022391Z [err]             ~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:32.847028325Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+2025-12-30T18:59:32.847033878Z [err]      return util.import_app(self.app_uri)
+2025-12-30T18:59:32.847039462Z [err]             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+2025-12-30T18:59:32.847044889Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/util.py", line 370, in import_app
+2025-12-30T18:59:32.847050492Z [err]      mod = importlib.import_module(module)
+2025-12-30T18:59:32.847055761Z [err]    File "/mise/installs/python/3.13.11/lib/python3.13/importlib/__init__.py", line 88, in import_module
+2025-12-30T18:59:32.847061329Z [err]      return _bootstrap._gcd_import(name[level:], package, level)
+2025-12-30T18:59:32.847066207Z [err]             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-12-30T18:59:32.847071285Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:32.847077114Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:32.847083129Z [err]    File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+2025-12-30T18:59:32.847088418Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:32.847093772Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:32.847099543Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:32.847105170Z [err]    File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+2025-12-30T18:59:32.847110670Z [err]    File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+2025-12-30T18:59:32.847116056Z [err]    File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+2025-12-30T18:59:32.847122708Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:32.847128078Z [err]    File "/app/src/__init__.py", line 2, in <module>
+2025-12-30T18:59:32.847133464Z [err]      from src.app import app
+2025-12-30T18:59:32.847139521Z [err]    File "/app/src/app.py", line 20, in <module>
+2025-12-30T18:59:32.847144939Z [err]      from src.services import verify_claim_logic
+2025-12-30T18:59:32.847150191Z [err]    File "/app/src/services/__init__.py", line 3, in <module>
+2025-12-30T18:59:32.847155698Z [err]      from src.services.verification import verify_claim_logic
+2025-12-30T18:59:32.847161408Z [err]    File "/app/src/services/verification.py", line 40
+2025-12-30T18:59:32.847167127Z [err]      token_tracker.reset()
+2025-12-30T18:59:32.847172644Z [err]  IndentationError: unexpected indent
+2025-12-30T18:59:32.847177920Z [err]  [2025-12-30 18:59:32 +0000] [2] [INFO] Worker exiting (pid: 2)
+2025-12-30T18:59:32.847384540Z [err]  [2025-12-30 18:59:32 +0000] [1] [ERROR] Worker (pid:2) exited with code 3
+2025-12-30T18:59:32.847390204Z [err]  [2025-12-30 18:59:32 +0000] [1] [ERROR] Shutting down: Master
+2025-12-30T18:59:32.847395630Z [err]  [2025-12-30 18:59:32 +0000] [1] [ERROR] Reason: Worker failed to boot.
+2025-12-30T18:59:36.610095960Z [err]  [2025-12-30 18:59:36 +0000] [1] [INFO] Starting gunicorn 23.0.0
+2025-12-30T18:59:36.610101293Z [err]  [2025-12-30 18:59:36 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+2025-12-30T18:59:36.610107344Z [err]  [2025-12-30 18:59:36 +0000] [1] [INFO] Using worker: uvicorn.workers.UvicornWorker
+2025-12-30T18:59:36.610112686Z [err]  [2025-12-30 18:59:36 +0000] [2] [INFO] Booting worker with pid: 2
+2025-12-30T18:59:37.555228632Z [err]  [2025-12-30 18:59:37 +0000] [2] [ERROR] Exception in worker process
+2025-12-30T18:59:37.555235084Z [err]  Traceback (most recent call last):
+2025-12-30T18:59:37.555240476Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+2025-12-30T18:59:37.555245832Z [err]      worker.init_process()
+2025-12-30T18:59:37.555251434Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:37.555257618Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 135, in init_process
+2025-12-30T18:59:37.555265811Z [err]      self.load_wsgi()
+2025-12-30T18:59:37.555272515Z [err]      ~~~~~~~~~~~~~~^^
+2025-12-30T18:59:37.555278568Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+2025-12-30T18:59:37.555284658Z [err]      self.wsgi = self.app.wsgi()
+2025-12-30T18:59:37.555290826Z [err]                  ~~~~~~~~~~~~~^^
+2025-12-30T18:59:37.555297451Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 66, in wsgi
+2025-12-30T18:59:37.555303279Z [err]      self.callable = self.load()
+2025-12-30T18:59:37.555308960Z [err]                      ~~~~~~~~~^^
+2025-12-30T18:59:37.555314246Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+2025-12-30T18:59:37.555319572Z [err]      return self.load_wsgiapp()
+2025-12-30T18:59:37.555325304Z [err]             ~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:37.555330934Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+2025-12-30T18:59:37.555341914Z [err]      return util.import_app(self.app_uri)
+2025-12-30T18:59:37.555348257Z [err]             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+2025-12-30T18:59:37.555354000Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/util.py", line 370, in import_app
+2025-12-30T18:59:37.574155961Z [err]      mod = importlib.import_module(module)
+2025-12-30T18:59:37.574168524Z [err]    File "/mise/installs/python/3.13.11/lib/python3.13/importlib/__init__.py", line 88, in import_module
+2025-12-30T18:59:37.574176507Z [err]      return _bootstrap._gcd_import(name[level:], package, level)
+2025-12-30T18:59:37.574185141Z [err]             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-12-30T18:59:37.574191645Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:37.574199451Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:37.574205327Z [err]    File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+2025-12-30T18:59:37.574211640Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:37.574217682Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:37.574224269Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:37.574230517Z [err]    File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+2025-12-30T18:59:37.574237279Z [err]    File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+2025-12-30T18:59:37.574244650Z [err]    File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+2025-12-30T18:59:37.574251044Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:37.574257281Z [err]    File "/app/src/__init__.py", line 2, in <module>
+2025-12-30T18:59:37.574263707Z [err]      from src.app import app
+2025-12-30T18:59:37.574271291Z [err]    File "/app/src/app.py", line 20, in <module>
+2025-12-30T18:59:37.574278628Z [err]      from src.services import verify_claim_logic
+2025-12-30T18:59:37.574284854Z [err]    File "/app/src/services/__init__.py", line 3, in <module>
+2025-12-30T18:59:37.574290913Z [err]      from src.services.verification import verify_claim_logic
+2025-12-30T18:59:37.574298033Z [err]    File "/app/src/services/verification.py", line 40
+2025-12-30T18:59:37.574304226Z [err]      token_tracker.reset()
+2025-12-30T18:59:37.574310468Z [err]  IndentationError: unexpected indent
+2025-12-30T18:59:37.574316717Z [err]  [2025-12-30 18:59:37 +0000] [2] [INFO] Worker exiting (pid: 2)
+2025-12-30T18:59:37.794234326Z [err]  [2025-12-30 18:59:37 +0000] [1] [ERROR] Worker (pid:2) exited with code 3
+2025-12-30T18:59:37.794243624Z [err]  [2025-12-30 18:59:37 +0000] [1] [ERROR] Shutting down: Master
+2025-12-30T18:59:37.794253034Z [err]  [2025-12-30 18:59:37 +0000] [1] [ERROR] Reason: Worker failed to boot.
+2025-12-30T18:59:39.335571317Z [err]  [2025-12-30 18:59:39 +0000] [1] [INFO] Starting gunicorn 23.0.0
+2025-12-30T18:59:39.335577457Z [err]  [2025-12-30 18:59:39 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+2025-12-30T18:59:39.335583179Z [err]  [2025-12-30 18:59:39 +0000] [1] [INFO] Using worker: uvicorn.workers.UvicornWorker
+2025-12-30T18:59:39.335589141Z [err]  [2025-12-30 18:59:39 +0000] [2] [INFO] Booting worker with pid: 2
+2025-12-30T18:59:40.274566906Z [err]  [2025-12-30 18:59:40 +0000] [2] [ERROR] Exception in worker process
+2025-12-30T18:59:40.274575707Z [err]  Traceback (most recent call last):
+2025-12-30T18:59:40.274583876Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+2025-12-30T18:59:40.274590687Z [err]      worker.init_process()
+2025-12-30T18:59:40.274598127Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:40.274604063Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 135, in init_process
+2025-12-30T18:59:40.274610167Z [err]      self.load_wsgi()
+2025-12-30T18:59:40.274616517Z [err]      ~~~~~~~~~~~~~~^^
+2025-12-30T18:59:40.274622700Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+2025-12-30T18:59:40.274628814Z [err]      self.wsgi = self.app.wsgi()
+2025-12-30T18:59:40.274635572Z [err]                  ~~~~~~~~~~~~~^^
+2025-12-30T18:59:40.274641556Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 66, in wsgi
+2025-12-30T18:59:40.274647563Z [err]      self.callable = self.load()
+2025-12-30T18:59:40.274654118Z [err]                      ~~~~~~~~~^^
+2025-12-30T18:59:40.274660294Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+2025-12-30T18:59:40.274666357Z [err]      return self.load_wsgiapp()
+2025-12-30T18:59:40.274672290Z [err]             ~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:40.274678523Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+2025-12-30T18:59:40.274685320Z [err]      return util.import_app(self.app_uri)
+2025-12-30T18:59:40.274691501Z [err]             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+2025-12-30T18:59:40.274699107Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/util.py", line 370, in import_app
+2025-12-30T18:59:40.275957030Z [err]      mod = importlib.import_module(module)
+2025-12-30T18:59:40.275964482Z [err]    File "/mise/installs/python/3.13.11/lib/python3.13/importlib/__init__.py", line 88, in import_module
+2025-12-30T18:59:40.275972677Z [err]      return _bootstrap._gcd_import(name[level:], package, level)
+2025-12-30T18:59:40.275982193Z [err]             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-12-30T18:59:40.275989302Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:40.275996948Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:40.276004616Z [err]    File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+2025-12-30T18:59:40.276011843Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:40.276018707Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:40.276026368Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:40.276034200Z [err]    File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+2025-12-30T18:59:40.276040964Z [err]    File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+2025-12-30T18:59:40.276048327Z [err]    File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+2025-12-30T18:59:40.276056647Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:40.276063768Z [err]    File "/app/src/__init__.py", line 2, in <module>
+2025-12-30T18:59:40.276072171Z [err]      from src.app import app
+2025-12-30T18:59:40.276080505Z [err]    File "/app/src/app.py", line 20, in <module>
+2025-12-30T18:59:40.276087672Z [err]      from src.services import verify_claim_logic
+2025-12-30T18:59:40.276094730Z [err]    File "/app/src/services/__init__.py", line 3, in <module>
+2025-12-30T18:59:40.276968733Z [err]      from src.services.verification import verify_claim_logic
+2025-12-30T18:59:40.276976755Z [err]    File "/app/src/services/verification.py", line 40
+2025-12-30T18:59:40.276983452Z [err]      token_tracker.reset()
+2025-12-30T18:59:40.276990476Z [err]  IndentationError: unexpected indent
+2025-12-30T18:59:40.276998027Z [err]  [2025-12-30 18:59:40 +0000] [2] [INFO] Worker exiting (pid: 2)
+2025-12-30T18:59:40.512363252Z [err]  [2025-12-30 18:59:40 +0000] [1] [ERROR] Worker (pid:2) exited with code 3
+2025-12-30T18:59:40.512370448Z [err]  [2025-12-30 18:59:40 +0000] [1] [ERROR] Shutting down: Master
+2025-12-30T18:59:40.512376198Z [err]  [2025-12-30 18:59:40 +0000] [1] [ERROR] Reason: Worker failed to boot.
+2025-12-30T18:59:41.843446350Z [err]  [2025-12-30 18:59:41 +0000] [1] [INFO] Starting gunicorn 23.0.0
+2025-12-30T18:59:41.843454875Z [err]  [2025-12-30 18:59:41 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+2025-12-30T18:59:41.843461609Z [err]  [2025-12-30 18:59:41 +0000] [1] [INFO] Using worker: uvicorn.workers.UvicornWorker
+2025-12-30T18:59:41.843884078Z [err]  [2025-12-30 18:59:41 +0000] [2] [INFO] Booting worker with pid: 2
+2025-12-30T18:59:42.810541412Z [err]  [2025-12-30 18:59:42 +0000] [2] [ERROR] Exception in worker process
+2025-12-30T18:59:42.810547309Z [err]  Traceback (most recent call last):
+2025-12-30T18:59:42.810553210Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+2025-12-30T18:59:42.810559657Z [err]      worker.init_process()
+2025-12-30T18:59:42.810565335Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:42.810570793Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 135, in init_process
+2025-12-30T18:59:42.810576068Z [err]      self.load_wsgi()
+2025-12-30T18:59:42.810581997Z [err]      ~~~~~~~~~~~~~~^^
+2025-12-30T18:59:42.810587230Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+2025-12-30T18:59:42.810593267Z [err]      self.wsgi = self.app.wsgi()
+2025-12-30T18:59:42.810598400Z [err]                  ~~~~~~~~~~~~~^^
+2025-12-30T18:59:42.810603950Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 66, in wsgi
+2025-12-30T18:59:42.810611078Z [err]      self.callable = self.load()
+2025-12-30T18:59:42.810617011Z [err]                      ~~~~~~~~~^^
+2025-12-30T18:59:42.810622608Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+2025-12-30T18:59:42.810627830Z [err]      return self.load_wsgiapp()
+2025-12-30T18:59:42.810633377Z [err]             ~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:42.810639079Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+2025-12-30T18:59:42.810648131Z [err]      return util.import_app(self.app_uri)
+2025-12-30T18:59:42.810654508Z [err]             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+2025-12-30T18:59:42.810659947Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/util.py", line 370, in import_app
+2025-12-30T18:59:42.812305175Z [err]      mod = importlib.import_module(module)
+2025-12-30T18:59:42.812311278Z [err]    File "/mise/installs/python/3.13.11/lib/python3.13/importlib/__init__.py", line 88, in import_module
+2025-12-30T18:59:42.812318489Z [err]      return _bootstrap._gcd_import(name[level:], package, level)
+2025-12-30T18:59:42.812325484Z [err]             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-12-30T18:59:42.812330697Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:42.812335729Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:42.812340661Z [err]    File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+2025-12-30T18:59:42.812345989Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:42.812350923Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:42.812356778Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:42.812361931Z [err]    File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+2025-12-30T18:59:42.812367150Z [err]    File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+2025-12-30T18:59:42.812372998Z [err]    File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+2025-12-30T18:59:42.812377942Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:42.812382846Z [err]    File "/app/src/__init__.py", line 2, in <module>
+2025-12-30T18:59:42.812387881Z [err]      from src.app import app
+2025-12-30T18:59:42.812399520Z [err]    File "/app/src/app.py", line 20, in <module>
+2025-12-30T18:59:42.812405060Z [err]      from src.services import verify_claim_logic
+2025-12-30T18:59:42.812410197Z [err]    File "/app/src/services/__init__.py", line 3, in <module>
+2025-12-30T18:59:42.812415513Z [err]      from src.services.verification import verify_claim_logic
+2025-12-30T18:59:42.812421146Z [err]    File "/app/src/services/verification.py", line 40
+2025-12-30T18:59:42.812426259Z [err]      token_tracker.reset()
+2025-12-30T18:59:42.812431493Z [err]  IndentationError: unexpected indent
+2025-12-30T18:59:42.812437585Z [err]  [2025-12-30 18:59:42 +0000] [2] [INFO] Worker exiting (pid: 2)
+2025-12-30T18:59:43.216339650Z [err]  [2025-12-30 18:59:43 +0000] [1] [ERROR] Worker (pid:2) exited with code 3
+2025-12-30T18:59:43.216352097Z [err]  [2025-12-30 18:59:43 +0000] [1] [ERROR] Shutting down: Master
+2025-12-30T18:59:43.216358774Z [err]  [2025-12-30 18:59:43 +0000] [1] [ERROR] Reason: Worker failed to boot.
+2025-12-30T18:59:46.557448579Z [err]  [2025-12-30 18:59:46 +0000] [1] [INFO] Starting gunicorn 23.0.0
+2025-12-30T18:59:46.557456572Z [err]  [2025-12-30 18:59:46 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+2025-12-30T18:59:46.557463942Z [err]  [2025-12-30 18:59:46 +0000] [1] [INFO] Using worker: uvicorn.workers.UvicornWorker
+2025-12-30T18:59:46.612530661Z [err]  [2025-12-30 18:59:46 +0000] [2] [INFO] Booting worker with pid: 2
+2025-12-30T18:59:47.546137037Z [err]  [2025-12-30 18:59:47 +0000] [2] [ERROR] Exception in worker process
+2025-12-30T18:59:47.546143902Z [err]  Traceback (most recent call last):
+2025-12-30T18:59:47.546149453Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+2025-12-30T18:59:47.546154590Z [err]      worker.init_process()
+2025-12-30T18:59:47.546159872Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:47.546165505Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 135, in init_process
+2025-12-30T18:59:47.546171220Z [err]      self.load_wsgi()
+2025-12-30T18:59:47.546176378Z [err]      ~~~~~~~~~~~~~~^^
+2025-12-30T18:59:47.546181541Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+2025-12-30T18:59:47.546186638Z [err]      self.wsgi = self.app.wsgi()
+2025-12-30T18:59:47.546192194Z [err]                  ~~~~~~~~~~~~~^^
+2025-12-30T18:59:47.546197373Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 66, in wsgi
+2025-12-30T18:59:47.546202794Z [err]      self.callable = self.load()
+2025-12-30T18:59:47.546209558Z [err]                      ~~~~~~~~~^^
+2025-12-30T18:59:47.546214959Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+2025-12-30T18:59:47.546220348Z [err]      return self.load_wsgiapp()
+2025-12-30T18:59:47.546226463Z [err]             ~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:47.546232519Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+2025-12-30T18:59:47.546238057Z [err]      return util.import_app(self.app_uri)
+2025-12-30T18:59:47.546243452Z [err]             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+2025-12-30T18:59:47.546248792Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/util.py", line 370, in import_app
+2025-12-30T18:59:47.546718260Z [err]      mod = importlib.import_module(module)
+2025-12-30T18:59:47.546725002Z [err]    File "/mise/installs/python/3.13.11/lib/python3.13/importlib/__init__.py", line 88, in import_module
+2025-12-30T18:59:47.546762644Z [err]      return _bootstrap._gcd_import(name[level:], package, level)
+2025-12-30T18:59:47.546768385Z [err]             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-12-30T18:59:47.546776605Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:47.546782477Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:47.546788628Z [err]    File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+2025-12-30T18:59:47.546794338Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:47.546800609Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:47.546806860Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:47.546812566Z [err]    File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+2025-12-30T18:59:47.546818506Z [err]    File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+2025-12-30T18:59:47.546824410Z [err]    File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+2025-12-30T18:59:47.546830119Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:47.546835796Z [err]    File "/app/src/__init__.py", line 2, in <module>
+2025-12-30T18:59:47.546841593Z [err]      from src.app import app
+2025-12-30T18:59:47.546847300Z [err]    File "/app/src/app.py", line 20, in <module>
+2025-12-30T18:59:47.546853223Z [err]      from src.services import verify_claim_logic
+2025-12-30T18:59:47.546859205Z [err]    File "/app/src/services/__init__.py", line 3, in <module>
+2025-12-30T18:59:47.547245829Z [err]      from src.services.verification import verify_claim_logic
+2025-12-30T18:59:47.547252619Z [err]    File "/app/src/services/verification.py", line 40
+2025-12-30T18:59:47.547257922Z [err]      token_tracker.reset()
+2025-12-30T18:59:47.547263455Z [err]  IndentationError: unexpected indent
+2025-12-30T18:59:47.547268702Z [err]  [2025-12-30 18:59:47 +0000] [2] [INFO] Worker exiting (pid: 2)
+2025-12-30T18:59:47.704104752Z [err]  [2025-12-30 18:59:47 +0000] [1] [ERROR] Worker (pid:2) exited with code 3
+2025-12-30T18:59:47.704109678Z [err]  [2025-12-30 18:59:47 +0000] [1] [ERROR] Shutting down: Master
+2025-12-30T18:59:47.704114580Z [err]  [2025-12-30 18:59:47 +0000] [1] [ERROR] Reason: Worker failed to boot.
+2025-12-30T18:59:48.959629948Z [err]  [2025-12-30 18:59:48 +0000] [1] [INFO] Starting gunicorn 23.0.0
+2025-12-30T18:59:48.959637808Z [err]  [2025-12-30 18:59:48 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+2025-12-30T18:59:48.959643133Z [err]  [2025-12-30 18:59:48 +0000] [1] [INFO] Using worker: uvicorn.workers.UvicornWorker
+2025-12-30T18:59:48.959648650Z [err]  [2025-12-30 18:59:48 +0000] [2] [INFO] Booting worker with pid: 2
+2025-12-30T18:59:49.868760659Z [err]  [2025-12-30 18:59:49 +0000] [2] [ERROR] Exception in worker process
+2025-12-30T18:59:49.868767698Z [err]  Traceback (most recent call last):
+2025-12-30T18:59:49.868773290Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+2025-12-30T18:59:49.868779218Z [err]      worker.init_process()
+2025-12-30T18:59:49.868784446Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:49.868790278Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 135, in init_process
+2025-12-30T18:59:49.868795295Z [err]      self.load_wsgi()
+2025-12-30T18:59:49.868800541Z [err]      ~~~~~~~~~~~~~~^^
+2025-12-30T18:59:49.868805641Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+2025-12-30T18:59:49.868810991Z [err]      self.wsgi = self.app.wsgi()
+2025-12-30T18:59:49.868816643Z [err]                  ~~~~~~~~~~~~~^^
+2025-12-30T18:59:49.868821841Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 66, in wsgi
+2025-12-30T18:59:49.868827281Z [err]      self.callable = self.load()
+2025-12-30T18:59:49.868832482Z [err]                      ~~~~~~~~~^^
+2025-12-30T18:59:49.868837905Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+2025-12-30T18:59:49.868843591Z [err]      return self.load_wsgiapp()
+2025-12-30T18:59:49.868848594Z [err]             ~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:49.868853831Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+2025-12-30T18:59:49.868858974Z [err]      return util.import_app(self.app_uri)
+2025-12-30T18:59:49.868865652Z [err]             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+2025-12-30T18:59:49.868870881Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/util.py", line 370, in import_app
+2025-12-30T18:59:49.869441278Z [err]      mod = importlib.import_module(module)
+2025-12-30T18:59:49.869447176Z [err]    File "/mise/installs/python/3.13.11/lib/python3.13/importlib/__init__.py", line 88, in import_module
+2025-12-30T18:59:49.869452195Z [err]      return _bootstrap._gcd_import(name[level:], package, level)
+2025-12-30T18:59:49.869457086Z [err]             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-12-30T18:59:49.869462017Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:49.869467003Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:49.869472016Z [err]    File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+2025-12-30T18:59:49.869476836Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:49.869482808Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:49.869487829Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:49.869492763Z [err]    File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+2025-12-30T18:59:49.869498405Z [err]    File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+2025-12-30T18:59:49.869503398Z [err]    File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+2025-12-30T18:59:49.869508208Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:49.869513089Z [err]    File "/app/src/__init__.py", line 2, in <module>
+2025-12-30T18:59:49.869517986Z [err]      from src.app import app
+2025-12-30T18:59:49.869524965Z [err]    File "/app/src/app.py", line 20, in <module>
+2025-12-30T18:59:49.869529836Z [err]      from src.services import verify_claim_logic
+2025-12-30T18:59:49.869535708Z [err]    File "/app/src/services/__init__.py", line 3, in <module>
+2025-12-30T18:59:49.869844833Z [err]      from src.services.verification import verify_claim_logic
+2025-12-30T18:59:49.869851883Z [err]    File "/app/src/services/verification.py", line 40
+2025-12-30T18:59:49.869857593Z [err]      token_tracker.reset()
+2025-12-30T18:59:49.869863593Z [err]  IndentationError: unexpected indent
+2025-12-30T18:59:49.869869394Z [err]  [2025-12-30 18:59:49 +0000] [2] [INFO] Worker exiting (pid: 2)
+2025-12-30T18:59:50.054075246Z [err]  [2025-12-30 18:59:50 +0000] [1] [ERROR] Worker (pid:2) exited with code 3
+2025-12-30T18:59:50.054085347Z [err]  [2025-12-30 18:59:50 +0000] [1] [ERROR] Shutting down: Master
+2025-12-30T18:59:50.054092325Z [err]  [2025-12-30 18:59:50 +0000] [1] [ERROR] Reason: Worker failed to boot.
+2025-12-30T18:59:51.209506180Z [err]  [2025-12-30 18:59:51 +0000] [1] [INFO] Starting gunicorn 23.0.0
+2025-12-30T18:59:51.209511385Z [err]  [2025-12-30 18:59:51 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+2025-12-30T18:59:51.209516715Z [err]  [2025-12-30 18:59:51 +0000] [1] [INFO] Using worker: uvicorn.workers.UvicornWorker
+2025-12-30T18:59:51.216251888Z [err]  [2025-12-30 18:59:51 +0000] [2] [INFO] Booting worker with pid: 2
+2025-12-30T18:59:52.230217604Z [err]      self.load_wsgi()
+2025-12-30T18:59:52.230226341Z [err]      ~~~~~~~~~~~~~~^^
+2025-12-30T18:59:52.230233401Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+2025-12-30T18:59:52.230271762Z [err]  [2025-12-30 18:59:52 +0000] [2] [ERROR] Exception in worker process
+2025-12-30T18:59:52.230278293Z [err]  Traceback (most recent call last):
+2025-12-30T18:59:52.230284978Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+2025-12-30T18:59:52.230291929Z [err]      worker.init_process()
+2025-12-30T18:59:52.230298106Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:52.230304486Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 135, in init_process
+2025-12-30T18:59:52.231143092Z [err]      self.wsgi = self.app.wsgi()
+2025-12-30T18:59:52.231151308Z [err]                  ~~~~~~~~~~~~~^^
+2025-12-30T18:59:52.231157989Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 66, in wsgi
+2025-12-30T18:59:52.231165591Z [err]      self.callable = self.load()
+2025-12-30T18:59:52.231171694Z [err]                      ~~~~~~~~~^^
+2025-12-30T18:59:52.231179360Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+2025-12-30T18:59:52.231185333Z [err]      return self.load_wsgiapp()
+2025-12-30T18:59:52.231191117Z [err]             ~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:52.231197720Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+2025-12-30T18:59:52.231233204Z [err]      return util.import_app(self.app_uri)
+2025-12-30T18:59:52.231241788Z [err]             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+2025-12-30T18:59:52.231251326Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/util.py", line 370, in import_app
+2025-12-30T18:59:52.231261308Z [err]      mod = importlib.import_module(module)
+2025-12-30T18:59:52.231267249Z [err]    File "/mise/installs/python/3.13.11/lib/python3.13/importlib/__init__.py", line 88, in import_module
+2025-12-30T18:59:52.231274023Z [err]      return _bootstrap._gcd_import(name[level:], package, level)
+2025-12-30T18:59:52.231281348Z [err]             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-12-30T18:59:52.231490902Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:52.231498466Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:52.231505193Z [err]    File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+2025-12-30T18:59:52.231511401Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:52.231518470Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:52.231524308Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:52.231530390Z [err]    File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+2025-12-30T18:59:52.231537694Z [err]    File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+2025-12-30T18:59:52.231544194Z [err]    File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+2025-12-30T18:59:52.231551324Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:52.231557988Z [err]    File "/app/src/__init__.py", line 2, in <module>
+2025-12-30T18:59:52.231564074Z [err]      from src.app import app
+2025-12-30T18:59:52.231570119Z [err]    File "/app/src/app.py", line 20, in <module>
+2025-12-30T18:59:52.231576178Z [err]      from src.services import verify_claim_logic
+2025-12-30T18:59:52.231582254Z [err]    File "/app/src/services/__init__.py", line 3, in <module>
+2025-12-30T18:59:52.231589916Z [err]      from src.services.verification import verify_claim_logic
+2025-12-30T18:59:52.231596927Z [err]    File "/app/src/services/verification.py", line 40
+2025-12-30T18:59:52.231603477Z [err]      token_tracker.reset()
+2025-12-30T18:59:52.231609818Z [err]  IndentationError: unexpected indent
+2025-12-30T18:59:52.231616246Z [err]  [2025-12-30 18:59:52 +0000] [2] [INFO] Worker exiting (pid: 2)
+2025-12-30T18:59:52.365518580Z [err]  [2025-12-30 18:59:52 +0000] [1] [ERROR] Worker (pid:2) exited with code 3
+2025-12-30T18:59:52.365528153Z [err]  [2025-12-30 18:59:52 +0000] [1] [ERROR] Shutting down: Master
+2025-12-30T18:59:52.365533978Z [err]  [2025-12-30 18:59:52 +0000] [1] [ERROR] Reason: Worker failed to boot.
+2025-12-30T18:59:55.171649424Z [err]  [2025-12-30 18:59:55 +0000] [1] [INFO] Starting gunicorn 23.0.0
+2025-12-30T18:59:55.171655571Z [err]  [2025-12-30 18:59:55 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
+2025-12-30T18:59:55.171661071Z [err]  [2025-12-30 18:59:55 +0000] [1] [INFO] Using worker: uvicorn.workers.UvicornWorker
+2025-12-30T18:59:55.175062209Z [err]  [2025-12-30 18:59:55 +0000] [2] [INFO] Booting worker with pid: 2
+2025-12-30T18:59:56.103719597Z [err]  [2025-12-30 18:59:56 +0000] [2] [ERROR] Exception in worker process
+2025-12-30T18:59:56.103727006Z [err]  Traceback (most recent call last):
+2025-12-30T18:59:56.103732600Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/arbiter.py", line 608, in spawn_worker
+2025-12-30T18:59:56.103737936Z [err]      worker.init_process()
+2025-12-30T18:59:56.103743582Z [err]      ~~~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:56.103749771Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 135, in init_process
+2025-12-30T18:59:56.103754984Z [err]      self.load_wsgi()
+2025-12-30T18:59:56.103760905Z [err]      ~~~~~~~~~~~~~~^^
+2025-12-30T18:59:56.103766278Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/workers/base.py", line 147, in load_wsgi
+2025-12-30T18:59:56.103771682Z [err]      self.wsgi = self.app.wsgi()
+2025-12-30T18:59:56.103777339Z [err]                  ~~~~~~~~~~~~~^^
+2025-12-30T18:59:56.103782601Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/base.py", line 66, in wsgi
+2025-12-30T18:59:56.103788970Z [err]      self.callable = self.load()
+2025-12-30T18:59:56.103794007Z [err]                      ~~~~~~~~~^^
+2025-12-30T18:59:56.103799552Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 57, in load
+2025-12-30T18:59:56.103804919Z [err]      return self.load_wsgiapp()
+2025-12-30T18:59:56.103810006Z [err]             ~~~~~~~~~~~~~~~~~^^
+2025-12-30T18:59:56.103815428Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/app/wsgiapp.py", line 47, in load_wsgiapp
+2025-12-30T18:59:56.103820564Z [err]      return util.import_app(self.app_uri)
+2025-12-30T18:59:56.103825545Z [err]             ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+2025-12-30T18:59:56.103830602Z [err]    File "/app/.venv/lib/python3.13/site-packages/gunicorn/util.py", line 370, in import_app
+2025-12-30T18:59:56.103837664Z [err]      mod = importlib.import_module(module)
+2025-12-30T18:59:56.103842727Z [err]    File "/mise/installs/python/3.13.11/lib/python3.13/importlib/__init__.py", line 88, in import_module
+2025-12-30T18:59:56.103847719Z [err]      return _bootstrap._gcd_import(name[level:], package, level)
+2025-12-30T18:59:56.103853051Z [err]             ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-12-30T18:59:56.103858024Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:56.103863703Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:56.103870246Z [err]    File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+2025-12-30T18:59:56.103875838Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:56.103880965Z [err]    File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+2025-12-30T18:59:56.103885996Z [err]    File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+2025-12-30T18:59:56.103891532Z [err]    File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+2025-12-30T18:59:56.103897647Z [err]    File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+2025-12-30T18:59:56.103902930Z [err]    File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+2025-12-30T18:59:56.103907932Z [err]    File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+2025-12-30T18:59:56.103913674Z [err]    File "/app/src/__init__.py", line 2, in <module>
+2025-12-30T18:59:56.103918590Z [err]      from src.app import app
+2025-12-30T18:59:56.103923642Z [err]    File "/app/src/app.py", line 20, in <module>
+2025-12-30T18:59:56.103928833Z [err]      from src.services import verify_claim_logic
+2025-12-30T18:59:56.103933812Z [err]    File "/app/src/services/__init__.py", line 3, in <module>
+2025-12-30T18:59:56.103938842Z [err]      from src.services.verification import verify_claim_logic
+2025-12-30T18:59:56.103943947Z [err]    File "/app/src/services/verification.py", line 40
+2025-12-30T18:59:56.103949405Z [err]      token_tracker.reset()
+2025-12-30T18:59:56.103954593Z [err]  IndentationError: unexpected indent
+2025-12-30T18:59:56.103959740Z [err]  [2025-12-30 18:59:56 +0000] [2] [INFO] Worker exiting (pid: 2)
+2025-12-30T18:59:56.281876871Z [err]  [2025-12-30 18:59:56 +0000] [1] [ERROR] Worker (pid:2) exited with code 3
+2025-12-30T18:59:56.281882519Z [err]  [2025-12-30 18:59:56 +0000] [1] [ERROR] Shutting down: Master
+2025-12-30T18:59:56.281887655Z [err]  [2025-12-30 18:59:56 +0000] [1] [ERROR] Reason: Worker failed to boot.
