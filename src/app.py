@@ -49,13 +49,22 @@ app.add_middleware(
 # Middleware Registration
 # ============================================================================
 
-# Rate limiting and request logging (applied first)
+# Fix Railway proxy headers (Railway uses HTTP internally but HTTPS externally)
+@app.middleware("http")
+async def fix_proxy_headers(request, call_next):
+    """Ensure x402 detects HTTPS correctly from Railway's proxy headers."""
+    # Railway sets X-Forwarded-Proto to 'https' for external requests
+    if request.headers.get("x-forwarded-proto") == "https":
+        request.scope["scheme"] = "https"
+    return await call_next(request)
+
+# Rate limiting and request logging
 @app.middleware("http")
 async def add_rate_limit_and_log(request, call_next):
     return await rate_limit_and_log(request, call_next)
 
 
-# x402 Payment wall (applied second)
+# x402 Payment wall
 # This tells the internet: 'You must pay 0.05 USDC on Base Sepolia to see the result'
 # x402 expects the price WITHOUT decimals applied - it handles USDC decimals internally
 if HAS_X402:
@@ -64,8 +73,8 @@ if HAS_X402:
             price=X402_PRICE,  # Amount in USDC (x402 handles decimal conversion)
             pay_to_address=MERCHANT_WALLET_ADDRESS,
             network=X402_NETWORK,
-            description=X402_DESCRIPTION,
-            resource=SERVICE_BASE_URL  # Force HTTPS URLs in payment responses
+            description=X402_DESCRIPTION
+            # Let x402 auto-detect resource URL from request (will use HTTPS from proxy headers)
         )
     )
 else:
