@@ -84,6 +84,26 @@ else:
 # Endpoints
 # ============================================================================
 
+@app.get("/")
+async def root():
+    """Root endpoint - returns service info and x402 manifest."""
+    return {
+        "service": "VerifAI agent-x402",
+        "version": "1.0.1",
+        "description": "Multi-agent AI fact-checking with x402 payment",
+        "endpoints": {
+            "verify": "/verify?claim={your_claim}",
+            "health": "/health",
+            "metrics": "/metrics/economics",
+            "manifest": "/.well-known/x402.json"
+        },
+        "payment": {
+            "price": "0.05 USDC",
+            "network": "base-sepolia"
+        }
+    }
+
+
 @app.get("/verify")
 async def verify(claim: str):
     """
