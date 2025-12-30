@@ -17,7 +17,7 @@ except ImportError:
         return middleware
 
 from config.settings import (
-    X402_PRICE, X402_NETWORK, X402_DESCRIPTION,
+    X402_PRICE, X402_NETWORK, X402_DESCRIPTION, X402_MIME_TYPE, X402_OUTPUT_SCHEMA,
     MERCHANT_WALLET_ADDRESS, SERVICE_BASE_URL
 )
 from src.middleware import setup_logging, rate_limit_and_log
@@ -79,7 +79,9 @@ if HAS_X402:
             price=X402_PRICE,
             pay_to_address=MERCHANT_WALLET_ADDRESS,
             network=X402_NETWORK,
-            description=X402_DESCRIPTION
+            description=X402_DESCRIPTION,
+            mime_type=X402_MIME_TYPE,  # Tell machines we return JSON
+            output_schema=X402_OUTPUT_SCHEMA  # Tell machines the JSON structure
             # No resource parameter - let x402 auto-detect full URL with query params
         )
     )

@@ -22,6 +22,36 @@ MERCHANT_WALLET_ADDRESS = os.getenv("MERCHANT_WALLET_ADDRESS")
 X402_PRICE = "0.05"  # USDC per verification
 X402_NETWORK = "base-sepolia"
 X402_DESCRIPTION = "VerifAI agent-x402 Verification Check"
+X402_MIME_TYPE = "application/json"  # Response format
+
+# Output schema - tells machines what JSON structure to expect
+X402_OUTPUT_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "claim": {"type": "string", "description": "The claim that was verified"},
+        "verdict": {"type": "string", "enum": ["True", "False", "Inconclusive"], "description": "Final verdict from the judge"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1, "description": "Confidence score (0-1)"},
+        "reasoning": {"type": "string", "description": "Judge's reasoning for the verdict"},
+        "prover_argument": {"type": "string", "description": "Arguments supporting the claim"},
+        "debunker_argument": {"type": "string", "description": "Arguments contradicting the claim"},
+        "sources": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "title": {"type": "string"},
+                    "url": {"type": "string"},
+                    "snippet": {"type": "string"}
+                }
+            },
+            "description": "Web sources used in verification"
+        },
+        "execution_time_seconds": {"type": "number"},
+        "total_cost_usd": {"type": "number"}
+    },
+    "required": ["claim", "verdict", "confidence", "reasoning"]
+}
+
 # Base URL for production (Railway uses HTTPS)
 SERVICE_BASE_URL = os.getenv("SERVICE_BASE_URL", "https://verifai-production.up.railway.app")
 
