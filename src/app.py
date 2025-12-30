@@ -5,6 +5,7 @@ import os
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from starlette.middleware.trustedhost import ProxyHeadersMiddleware
 try:
     from x402.fastapi.middleware import require_payment
     HAS_X402 = True
@@ -47,26 +48,18 @@ app.add_middleware(
 )
 
 # ============================================================================
+# Proxy Headers Middleware (for Railway HTTPS detection)
+# ============================================================================
+# Railway uses X-Forwarded-Proto to indicate HTTPS
+# This middleware must be added BEFORE x402 to ensure correct URL generation
+app.add_middleware(
+    ProxyHeadersMiddleware,
+    trusted_hosts=["*"]  # Trust all hosts since Railway doesn't have fixed IPs
+)
+
+# ============================================================================
 # Middleware Registration
 # ============================================================================
-
-# Fix Railway proxy headers - Register FIRST so it executes BEFORE x402
-@app.middleware("http")
-async def fix_https_scheme(request, call_next):
-    """
-    Fix HTTPS scheme detection for Railway.
-    Railway uses X-Forwarded-Proto, but FastAPI doesn't automatically trust it.
-    This MUST run before x402 to ensure correct URL generation.
-    """
-    # Check proxy headers
-    forwarded_proto = request.headers.get("x-forwarded-proto", "").lower()
-    
-    # Force HTTPS if coming through Railway's HTTPS proxy
-    if forwarded_proto == "https":
-        request.scope["scheme"] = "https"
-    
-    return await call_next(request)
-
 
 # Rate limiting and request logging
 @app.middleware("http")
