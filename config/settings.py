@@ -22,6 +22,8 @@ MERCHANT_WALLET_ADDRESS = os.getenv("MERCHANT_WALLET_ADDRESS")
 X402_PRICE = "0.05"  # USDC per verification
 X402_NETWORK = "base-sepolia"
 X402_DESCRIPTION = "VerifAI agent-x402 Verification Check"
+# Base URL for production (Railway uses HTTPS)
+SERVICE_BASE_URL = os.getenv("SERVICE_BASE_URL", "https://verifai-production.up.railway.app")
 
 # ============================================================================
 # Rate Limiting Configuration

@@ -17,7 +17,7 @@ except ImportError:
 
 from config.settings import (
     X402_PRICE, X402_NETWORK, X402_DESCRIPTION,
-    MERCHANT_WALLET_ADDRESS
+    MERCHANT_WALLET_ADDRESS, SERVICE_BASE_URL
 )
 from src.middleware import setup_logging, rate_limit_and_log
 from src.services import verify_claim_logic
@@ -64,7 +64,8 @@ if HAS_X402:
             price=X402_PRICE,  # Amount in USDC (x402 handles decimal conversion)
             pay_to_address=MERCHANT_WALLET_ADDRESS,
             network=X402_NETWORK,
-            description=X402_DESCRIPTION
+            description=X402_DESCRIPTION,
+            base_url=SERVICE_BASE_URL  # Force HTTPS URLs in payment responses
         )
     )
 else:
