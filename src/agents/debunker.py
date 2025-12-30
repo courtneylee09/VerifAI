@@ -71,12 +71,12 @@ Return 2-3 sentences arguing AGAINST the claim or noting weaknesses in the evide
             max_tokens=DEBUNKER_MAX_TOKENS
         )
 
-            # Track token usage
-            token_tracker.set_debunker_tokens(
-                model=DEBUNKER_MODEL,
-                input_tokens=response.usage.prompt_tokens,
-                output_tokens=response.usage.completion_tokens
-            )
+        # Track token usage
+        token_tracker.set_debunker_tokens(
+            model=DEBUNKER_MODEL,
+            input_tokens=response.usage.prompt_tokens,
+            output_tokens=response.usage.completion_tokens
+        )
 
         return response.choices[0].message.content.strip()
     except Exception as e:
@@ -90,12 +90,12 @@ Return 2-3 sentences arguing AGAINST the claim or noting weaknesses in the evide
                 config=types.GenerateContentConfig(temperature=DEBUNKER_TEMPERATURE)
             )
 
-                # Track Gemini usage (no cost, but track for analytics)
-                token_tracker.set_debunker_tokens(
-                    model=GEMINI_FALLBACK_MODEL,
-                    input_tokens=response.usage_metadata.prompt_token_count if hasattr(response, 'usage_metadata') else 0,
-                    output_tokens=response.usage_metadata.candidates_token_count if hasattr(response, 'usage_metadata') else 0
-                )
+            # Track Gemini usage (no cost, but track for analytics)
+            token_tracker.set_debunker_tokens(
+                model=GEMINI_FALLBACK_MODEL,
+                input_tokens=response.usage_metadata.prompt_token_count if hasattr(response, 'usage_metadata') else 0,
+                output_tokens=response.usage_metadata.candidates_token_count if hasattr(response, 'usage_metadata') else 0
+            )
 
             return response.text.strip()
         except Exception as gemini_error:

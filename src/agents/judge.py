@@ -100,12 +100,12 @@ Respond in JSON format with these exact fields:
             ]
         )
 
-            # Track token usage
-            token_tracker.set_judge_tokens(
-                model=JUDGE_MODEL,
-                input_tokens=response.usage.input_tokens,
-                output_tokens=response.usage.output_tokens
-            )
+        # Track token usage
+        token_tracker.set_judge_tokens(
+            model=JUDGE_MODEL,
+            input_tokens=response.usage.input_tokens,
+            output_tokens=response.usage.output_tokens
+        )
 
         response_text = response.content[0].text
         try:
