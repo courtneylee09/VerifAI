@@ -65,8 +65,7 @@ if HAS_X402:
             pay_to_address=MERCHANT_WALLET_ADDRESS,
             network=X402_NETWORK,
             description=X402_DESCRIPTION,
-            resource=f"{SERVICE_BASE_URL}/verify",  # Force HTTPS URL
-            exclude_paths=["/", "/health"]  # Don't require payment for root/health
+            resource=f"{SERVICE_BASE_URL}/verify"  # Force HTTPS URL
         )
     )
 else:
