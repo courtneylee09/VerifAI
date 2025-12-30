@@ -16,6 +16,8 @@ class TokenTracker:
         self.prover_tokens: Optional[Dict] = None
         self.debunker_tokens: Optional[Dict] = None
         self.judge_tokens: Optional[Dict] = None
+        self.verdict_type: Optional[str] = None  # Track verdict for cost analysis
+        self.is_inconclusive: bool = False  # Flag for discount analysis
     
     def set_prover_tokens(self, model: str, input_tokens: int, output_tokens: int):
         """Record prover agent token usage."""
@@ -41,12 +43,26 @@ class TokenTracker:
             "output": output_tokens
         }
     
+    def set_verdict(self, verdict: str):
+        """
+        Record the final verdict for cost analysis.
+        Flags inconclusive results for potential discount consideration.
+        
+        Args:
+            verdict: "True"/"False"/"Inconclusive" (or "Likely"/"Unlikely"/"Uncertain" for predictions)
+        """
+        self.verdict_type = verdict
+        # Flag inconclusive/uncertain verdicts for discount analysis
+        self.is_inconclusive = verdict.lower() in ["inconclusive", "uncertain"]
+    
     def get_all(self) -> Dict:
-        """Get all tracked token data."""
+        """Get all tracked token data including verdict info."""
         return {
             "prover": self.prover_tokens,
             "debunker": self.debunker_tokens,
-            "judge": self.judge_tokens
+            "judge": self.judge_tokens,
+            "verdict_type": self.verdict_type,
+            "is_inconclusive": self.is_inconclusive
         }
 
 

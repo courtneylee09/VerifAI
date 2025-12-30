@@ -148,11 +148,15 @@ class PerformanceLogger:
         profit = revenue - total_cost
         margin = (profit / revenue * 100) if revenue > 0 else 0
         
+        # Check if this was an inconclusive verdict (for discount analysis)
+        is_inconclusive = verdict.lower() in ["inconclusive", "uncertain"]
+        
         log_entry = {
             "timestamp": datetime.utcnow().isoformat(),
             "claim": claim[:100],  # Truncate for readability
             "verdict": verdict,
             "confidence_score": confidence_score,
+            "is_inconclusive": is_inconclusive,  # Flag for discount consideration
             "tokens": {
                 "total_input": total_tokens["input"],
                 "total_output": total_tokens["output"],
@@ -170,7 +174,8 @@ class PerformanceLogger:
                 "revenue_usdc": revenue,
                 "total_cost_usd": round(total_cost, 6),
                 "profit_usd": round(profit, 6),
-                "profit_margin_pct": round(margin, 2)
+                "profit_margin_pct": round(margin, 2),
+                "inconclusive_penalty": is_inconclusive  # Track for discount decisions
             },
             "metadata": {
                 "search_count": search_count,
@@ -209,7 +214,13 @@ class PerformanceLogger:
                 "total_cost": 0.0,
                 "total_profit": 0.0,
                 "avg_profit_per_request": 0.0,
-                "avg_margin_pct": 0.0
+                "avg_margin_pct": 0.0,
+                "inconclusive_stats": {
+                    "count": 0,
+                    "total_cost": 0.0,
+                    "avg_cost": 0.0,
+                    "pct_of_requests": 0.0
+                }
             }
         
         total_revenue = sum(log["economics"]["revenue_usdc"] for log in logs)
@@ -218,6 +229,13 @@ class PerformanceLogger:
         
         avg_profit = total_profit / len(logs)
         avg_margin = (total_profit / total_revenue * 100) if total_revenue > 0 else 0
+        
+        # Calculate inconclusive-specific stats for discount analysis
+        inconclusive_logs = [log for log in logs if log.get("is_inconclusive", False)]
+        inconclusive_count = len(inconclusive_logs)
+        inconclusive_total_cost = sum(log["economics"]["total_cost_usd"] for log in inconclusive_logs)
+        inconclusive_avg_cost = inconclusive_total_cost / inconclusive_count if inconclusive_count > 0 else 0.0
+        inconclusive_pct = (inconclusive_count / len(logs) * 100) if len(logs) > 0 else 0.0
         
         total_tokens_input = sum(log["tokens"]["total_input"] for log in logs)
         total_tokens_output = sum(log["tokens"]["total_output"] for log in logs)
@@ -229,6 +247,16 @@ class PerformanceLogger:
             "total_profit_usd": round(total_profit, 4),
             "avg_profit_per_request": round(avg_profit, 6),
             "avg_margin_pct": round(avg_margin, 2),
+            "inconclusive_stats": {
+                "count": inconclusive_count,
+                "total_cost_usd": round(inconclusive_total_cost, 4),
+                "avg_cost_usd": round(inconclusive_avg_cost, 6),
+                "pct_of_requests": round(inconclusive_pct, 2),
+                "discount_recommendation": (
+                    f"Consider 50% discount (${round(USDC_REVENUE_PER_REQUEST * 0.5, 2)} instead of ${USDC_REVENUE_PER_REQUEST}) "
+                    f"to cover ${round(inconclusive_avg_cost, 4)} avg cost + small margin"
+                ) if inconclusive_count > 0 else "No inconclusive verdicts yet"
+            },
             "total_tokens": {
                 "input": total_tokens_input,
                 "output": total_tokens_output,
@@ -257,6 +285,17 @@ class PerformanceLogger:
         print(f"   Profit Margin:         {summary['avg_margin_pct']:.2f}%")
         print(f"\n📈 PER REQUEST:")
         print(f"   Avg Profit:            ${summary['avg_profit_per_request']:.6f}")
+        
+        # Inconclusive verdict analysis
+        inc_stats = summary.get('inconclusive_stats', {})
+        if inc_stats.get('count', 0) > 0:
+            print(f"\n⚠️  INCONCLUSIVE VERDICTS (Discount Analysis):")
+            print(f"   Count:                 {inc_stats['count']} ({inc_stats['pct_of_requests']:.1f}% of requests)")
+            print(f"   Total Cost:            ${inc_stats['total_cost_usd']:.4f}")
+            print(f"   Avg Cost per Inconc:   ${inc_stats['avg_cost_usd']:.6f}")
+            print(f"\n   💡 Discount Recommendation:")
+            print(f"   {inc_stats['discount_recommendation']}")
+        
         print(f"\n🔢 TOKEN USAGE:")
         print(f"   Total Input:           {summary['total_tokens']['input']:,}")
         print(f"   Total Output:          {summary['total_tokens']['output']:,}")

@@ -122,6 +122,9 @@ async def verify_claim_logic(claim: str) -> dict:
             manual_review = True
             verdict = "Inconclusive" if not is_prediction else "Uncertain"
 
+        # Track verdict for cost analysis (especially for inconclusive results)
+        token_tracker.set_verdict(verdict)
+
         duration_ms = (time.perf_counter() - start_time) * 1000
         logger.info(
             "verify.done verdict=%s confidence=%.2f ms=%.1f manual_review=%s",
