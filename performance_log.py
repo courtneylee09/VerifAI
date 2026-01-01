@@ -249,13 +249,45 @@ class PerformanceLogger:
         total_tokens_input = sum(log["tokens"]["total_input"] for log in logs)
         total_tokens_output = sum(log["tokens"]["total_output"] for log in logs)
         
+        # Calculate agent-specific metrics for analytics
+        total_prover_cost = sum(log["costs"].get("prover_cost", 0.0) for log in logs)
+        total_debunker_cost = sum(log["costs"].get("debunker_cost", 0.0) for log in logs)
+        total_judge_cost = sum(log["costs"].get("judge_cost", 0.0) for log in logs)
+        
+        # Average tokens per agent
+        prover_input_tokens = [log["tokens"]["prover"].get("input", 0) for log in logs if log["tokens"].get("prover")]
+        prover_output_tokens = [log["tokens"]["prover"].get("output", 0) for log in logs if log["tokens"].get("prover")]
+        debunker_input_tokens = [log["tokens"]["debunker"].get("input", 0) for log in logs if log["tokens"].get("debunker")]
+        debunker_output_tokens = [log["tokens"]["debunker"].get("output", 0) for log in logs if log["tokens"].get("debunker")]
+        judge_input_tokens = [log["tokens"]["judge"].get("input", 0) for log in logs if log["tokens"].get("judge")]
+        judge_output_tokens = [log["tokens"]["judge"].get("output", 0) for log in logs if log["tokens"].get("judge")]
+        
+        avg_exec_time = sum(log["metadata"].get("execution_time_sec", 0.0) for log in logs) / len(logs)
+        avg_cost_per_request = total_cost / len(logs)
+        
         return {
             "total_requests": len(logs),
             "total_revenue_usd": round(total_revenue, 4),
             "total_cost_usd": round(total_cost, 4),
             "total_profit_usd": round(total_profit, 4),
             "avg_profit_per_request": round(avg_profit, 6),
-            "avg_margin_pct": round(avg_margin, 2),
+            "avg_profit_margin_pct": round(avg_margin, 2),
+            "avg_cost_per_request": round(avg_cost_per_request, 6),
+            "avg_execution_time": round(avg_exec_time, 2),
+            # Agent-specific costs
+            "total_prover_cost": round(total_prover_cost, 4),
+            "total_debunker_cost": round(total_debunker_cost, 4),
+            "total_judge_cost": round(total_judge_cost, 4),
+            "avg_prover_cost": round(total_prover_cost / len(logs), 6),
+            "avg_debunker_cost": round(total_debunker_cost / len(logs), 6),
+            "avg_judge_cost": round(total_judge_cost / len(logs), 6),
+            # Agent-specific tokens
+            "avg_prover_input_tokens": round(sum(prover_input_tokens) / len(prover_input_tokens)) if prover_input_tokens else 0,
+            "avg_prover_output_tokens": round(sum(prover_output_tokens) / len(prover_output_tokens)) if prover_output_tokens else 0,
+            "avg_debunker_input_tokens": round(sum(debunker_input_tokens) / len(debunker_input_tokens)) if debunker_input_tokens else 0,
+            "avg_debunker_output_tokens": round(sum(debunker_output_tokens) / len(debunker_output_tokens)) if debunker_output_tokens else 0,
+            "avg_judge_input_tokens": round(sum(judge_input_tokens) / len(judge_input_tokens)) if judge_input_tokens else 0,
+            "avg_judge_output_tokens": round(sum(judge_output_tokens) / len(judge_output_tokens)) if judge_output_tokens else 0,
             "refund_stats": {
                 "count": refund_count,
                 "refund_rate_pct": round(refund_rate, 2),
@@ -273,11 +305,7 @@ class PerformanceLogger:
                     f"to cover ${round(inconclusive_avg_cost, 4)} avg cost + small margin"
                 ) if inconclusive_count > 0 else "No inconclusive verdicts yet"
             },
-            "total_tokens": {
-                "input": total_tokens_input,
-                "output": total_tokens_output,
-                "total": total_tokens_input + total_tokens_output
-            },
+            "total_tokens": total_tokens_input + total_tokens_output,
             "avg_tokens_per_request": {
                 "input": round(total_tokens_input / len(logs)),
                 "output": round(total_tokens_output / len(logs))
@@ -298,7 +326,7 @@ class PerformanceLogger:
         print(f"   Costs (LLM tokens):    ${summary['total_cost_usd']:.4f}")
         print(f"   ─────────────────────────────────")
         print(f"   Net Profit:            ${summary['total_profit_usd']:.4f}")
-        print(f"   Profit Margin:         {summary['avg_margin_pct']:.2f}%")
+        print(f"   Profit Margin:         {summary['avg_profit_margin_pct']:.2f}%")
         print(f"\n📈 PER REQUEST:")
         print(f"   Avg Profit:            ${summary['avg_profit_per_request']:.6f}")
         

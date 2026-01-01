@@ -1,10 +1,12 @@
 """VerifAI agent-x402 FastAPI application with x402 payment wall.
-Version: 1.0.1 - CORS enabled for wallet compatibility
+Version: 1.0.2 - Dashboard UI with analytics
 """
 import os
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 try:
     from x402.fastapi.middleware import require_payment
     HAS_X402 = True
@@ -31,8 +33,14 @@ logger = setup_logging()
 app = FastAPI(
     title="VerifAI agent-x402",
     description="Paid AI verification service using x402 payment protocol with multi-agent debate",
-    version="1.0.0"
+    version="1.0.2"
 )
+
+# Mount static files (CSS, images, etc.)
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Setup templates for HTML rendering
+templates = Jinja2Templates(directory="templates")
 
 # ============================================================================
 # CORS Configuration (for x402 wallet compatibility)
@@ -73,18 +81,41 @@ async def add_rate_limit_and_log(request, call_next):
 
 # x402 Payment wall - Let x402 auto-detect resource URL (now with HTTPS)
 # This tells the internet: 'You must pay 0.05 USDC on Base Sepolia to see the result'
+# EXCLUDED PATHS: /dashboard, /analytics, /static, /health, /metrics (free access)
 if HAS_X402:
-    app.middleware("http")(
-        require_payment(
-            price=X402_PRICE,
-            pay_to_address=MERCHANT_WALLET_ADDRESS,
-            network=X402_NETWORK,
-            description=X402_DESCRIPTION,
-            mime_type=X402_MIME_TYPE,  # Tell machines we return JSON
-            output_schema=X402_OUTPUT_SCHEMA  # Tell machines the JSON structure
-            # No resource parameter - let x402 auto-detect full URL with query params
-        )
+    payment_middleware = require_payment(
+        price=X402_PRICE,
+        pay_to_address=MERCHANT_WALLET_ADDRESS,
+        network=X402_NETWORK,
+        description=X402_DESCRIPTION,
+        mime_type=X402_MIME_TYPE,
+        output_schema=X402_OUTPUT_SCHEMA
     )
+    
+    @app.middleware("http")
+    async def conditional_payment_wall(request, call_next):
+        """Apply x402 payment only to /verify endpoint, not dashboard/metrics."""
+        path = request.url.path
+        
+        # Exempt these paths from payment
+        exempt_paths = [
+            "/", "/health", "/dashboard", "/analytics", 
+            "/metrics/economics", "/metrics/logs",
+            "/.well-known/x402.json"
+        ]
+        exempt_prefixes = ["/static"]
+        
+        is_exempt = (
+            path in exempt_paths or 
+            any(path.startswith(prefix) for prefix in exempt_prefixes)
+        )
+        
+        if is_exempt:
+            # Skip payment for exempt paths
+            return await call_next(request)
+        else:
+            # Require payment for /verify and other paths
+            return await payment_middleware(request, call_next)
 else:
     logger.warning("x402 module not available - payment middleware disabled")
 
@@ -97,10 +128,12 @@ async def root():
     """Root endpoint - returns service info and x402 manifest."""
     return {
         "service": "VerifAI agent-x402",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "description": "Multi-agent AI fact-checking with x402 payment",
         "endpoints": {
             "verify": "/verify?claim={your_claim}",
+            "dashboard": "/dashboard",
+            "analytics": "/analytics",
             "health": "/health",
             "metrics": "/metrics/economics",
             "manifest": "/.well-known/x402.json"
@@ -309,6 +342,120 @@ async def metrics_logs(limit: int = 10):
             "count": 0,
             "logs": []
         }
+
+
+@app.get("/dashboard")
+async def dashboard(request: Request):
+    """
+    Dashboard page showing verification history.
+    
+    Displays recent verifications with:
+    - Claim, verdict, confidence
+    - Revenue, costs, profit per request
+    - Execution time and status
+    """
+    try:
+        # Get metrics and logs
+        metrics = PerformanceLogger.get_summary()
+        logs = PerformanceLogger.read_logs()
+        
+        # Return HTML dashboard
+        return templates.TemplateResponse(
+            "dashboard.html",
+            {
+                "request": request,
+                "metrics": metrics,
+                "logs": logs[-50:] if len(logs) > 50 else logs  # Show last 50
+            }
+        )
+    except Exception as e:
+        logger.error("dashboard.failed err=%s", e)
+        # Return error page
+        return templates.TemplateResponse(
+            "dashboard.html",
+            {
+                "request": request,
+                "metrics": {
+                    "total_requests": 0,
+                    "total_revenue_usd": 0.0,
+                    "total_cost_usd": 0.0,
+                    "total_profit_usd": 0.0,
+                    "avg_profit_margin_pct": 0.0
+                },
+                "logs": []
+            }
+        )
+
+
+@app.get("/analytics")
+async def analytics(request: Request):
+    """
+    Analytics page with performance metrics and charts.
+    
+    Shows:
+    - Verdict distribution
+    - Economics breakdown (revenue vs costs vs profit)
+    - Token usage by agent
+    - Agent performance table
+    """
+    try:
+        # Get metrics and logs
+        metrics = PerformanceLogger.get_summary()
+        logs = PerformanceLogger.read_logs()
+        
+        # Calculate verdict distribution for chart
+        verdict_counts = {}
+        for log in logs:
+            verdict = log.get("verdict", "Unknown")
+            verdict_counts[verdict] = verdict_counts.get(verdict, 0) + 1
+        
+        verdict_labels = list(verdict_counts.keys())
+        verdict_values = list(verdict_counts.values())
+        
+        # Return HTML analytics page
+        return templates.TemplateResponse(
+            "analytics.html",
+            {
+                "request": request,
+                "metrics": metrics,
+                "verdict_labels": verdict_labels,
+                "verdict_counts": verdict_values
+            }
+        )
+    except Exception as e:
+        logger.error("analytics.failed err=%s", e)
+        # Return error page with defaults
+        return templates.TemplateResponse(
+            "analytics.html",
+            {
+                "request": request,
+                "metrics": {
+                    "total_requests": 0,
+                    "total_revenue_usd": 0.0,
+                    "total_cost_usd": 0.0,
+                    "total_profit_usd": 0.0,
+                    "avg_profit_margin_pct": 0.0,
+                    "avg_cost_per_request": 0.0,
+                    "avg_profit_per_request": 0.0,
+                    "total_tokens": 0,
+                    "avg_execution_time": 0.0,
+                    "avg_prover_cost": 0.0,
+                    "avg_debunker_cost": 0.0,
+                    "avg_judge_cost": 0.0,
+                    "total_prover_cost": 0.0,
+                    "total_debunker_cost": 0.0,
+                    "total_judge_cost": 0.0,
+                    "avg_prover_input_tokens": 0,
+                    "avg_prover_output_tokens": 0,
+                    "avg_debunker_input_tokens": 0,
+                    "avg_debunker_output_tokens": 0,
+                    "avg_judge_input_tokens": 0,
+                    "avg_judge_output_tokens": 0
+                },
+                "verdict_labels": [],
+                "verdict_counts": []
+            }
+        )
 
 
 if __name__ == "__main__":

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VerifAI Dashboard - Verification History</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <img src="/static/images/logo.svg" alt="VerifAI Logo" class="logo">
+                <h1 class="header-title">Dashboard</h1>
+            </div>
+            <nav class="nav">
+                <a href="/dashboard" class="nav-link active">Verifications</a>
+                <a href="/analytics" class="nav-link">Analytics</a>
+                <a href="/" class="nav-link">API</a>
+            </nav>
+        </header>
+
+        <!-- Stats Summary -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Verifications</div>
+                <div class="stat-value" id="total-requests">{{ metrics.total_requests }}</div>
+                <div class="stat-change">All time</div>
+            </div>
+            <div class="stat-card revenue">
+                <div class="stat-label">Revenue (USDC)</div>
+                <div class="stat-value">${{ "%.2f"|format(metrics.total_revenue_usd) }}</div>
+                <div class="stat-change">+$0.05 per verification</div>
+            </div>
+            <div class="stat-card profit">
+                <div class="stat-label">Net Profit</div>
+                <div class="stat-value">${{ "%.2f"|format(metrics.total_profit_usd) }}</div>
+                <div class="stat-change">After LLM costs</div>
+            </div>
+            <div class="stat-card margin">
+                <div class="stat-label">Profit Margin</div>
+                <div class="stat-value">{{ "%.1f"|format(metrics.avg_profit_margin_pct) }}%</div>
+                <div class="stat-change">Industry leading</div>
+            </div>
+        </div>
+
+        <!-- Verification History -->
+        <div class="content">
+            <div class="content-header">
+                <h2 class="content-title">Recent Verifications</h2>
+                <button class="refresh-btn" onclick="location.reload()">
+                    🔄 Refresh
+                </button>
+            </div>
+
+            <div class="table-container">
+                {% if logs|length > 0 %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Claim</th>
+                            <th>Verdict</th>
+                            <th>Confidence</th>
+                            <th>Revenue</th>
+                            <th>Cost</th>
+                            <th>Profit</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for log in logs|reverse %}
+                        <tr>
+                            <td>{{ log.timestamp.split('T')[1].split('.')[0] if 'T' in log.timestamp else log.timestamp }}</td>
+                            <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="{{ log.claim }}">
+                                {{ log.claim }}
+                            </td>
+                            <td>
+                                <span class="badge {{ log.verdict.lower() }}">
+                                    {{ log.verdict }}
+                                </span>
+                            </td>
+                            <td>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <div class="confidence-bar">
+                                        <div class="confidence-fill" style="width: {{ (log.confidence_score * 100)|int }}%"></div>
+                                    </div>
+                                    <span>{{ "%.0f"|format(log.confidence_score * 100) }}%</span>
+                                </div>
+                            </td>
+                            <td style="color: var(--green-600); font-weight: 600;">
+                                ${{ "%.2f"|format(log.economics.revenue_usdc) }}
+                            </td>
+                            <td style="color: var(--red-600);">
+                                ${{ "%.4f"|format(log.costs.total_cost) }}
+                            </td>
+                            <td style="color: var(--purple-600); font-weight: 600;">
+                                ${{ "%.4f"|format(log.economics.profit_usd) }}
+                            </td>
+                            <td>{{ "%.1f"|format(log.execution_time_seconds) }}s</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="empty-state">
+                    <div class="empty-state-icon">📊</div>
+                    <div class="empty-state-text">No verifications yet</div>
+                    <div class="empty-state-subtext">Verification history will appear here once users start making paid requests</div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Footer Info -->
+        <div style="margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 12px; text-align: center; color: var(--gray-600);">
+            <p><strong>VerifAI agent-x402</strong> | Truth Settlement Layer</p>
+            <p style="font-size: 14px; margin-top: 8px;">
+                Production URL: <a href="https://verifai-production.up.railway.app" style="color: var(--blue-600);">verifai-production.up.railway.app</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-refresh every 30 seconds
+        setTimeout(() => location.reload(), 30000);
+    </script>
+</body>
+</html>

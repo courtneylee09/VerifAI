@@ -1,0 +1,30 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- Shield/Badge background -->
+  <defs>
+    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Shield shape -->
+  <path d="M 15 10 L 30 5 L 45 10 L 45 25 Q 45 40 30 45 Q 15 40 15 25 Z" 
+        fill="url(#shieldGradient)" stroke="#1e40af" stroke-width="1.5"/>
+  
+  <!-- Checkmark -->
+  <path d="M 22 25 L 27 32 L 38 18" 
+        stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Text: VerifAI -->
+  <text x="55" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="700" fill="#1e293b">
+    Verif
+  </text>
+  <text x="120" y="28" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="700" fill="#2563eb">
+    AI
+  </text>
+  
+  <!-- Tagline -->
+  <text x="55" y="42" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b" letter-spacing="0.5">
+    Truth Settlement Layer
+  </text>
+</svg>
