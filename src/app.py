@@ -124,8 +124,21 @@ else:
 # ============================================================================
 
 @app.get("/")
-async def root():
-    """Root endpoint - returns service info and x402 manifest."""
+async def root(request: Request):
+    """
+    Root endpoint - serves landing page for browsers, JSON for API clients.
+    
+    Content negotiation:
+    - Browsers (text/html): Landing page
+    - API clients (application/json): Service info
+    """
+    accept_header = request.headers.get("accept", "").lower()
+    
+    # If browser requests HTML, show landing page
+    if "text/html" in accept_header:
+        return templates.TemplateResponse("home.html", {"request": request})
+    
+    # Otherwise return JSON (for API clients, curl, etc.)
     return {
         "service": "VerifAI agent-x402",
         "version": "1.0.2",
