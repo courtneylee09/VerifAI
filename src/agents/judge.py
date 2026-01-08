@@ -53,16 +53,26 @@ TASK:
 1. Weigh both arguments against the raw sources.
 2. Check for consensus or disagreement among forecasts/experts.
 3. Wikipedia sources should be weighted at 0.5x (half weight) compared to other sources at 1.0x.
-4. For predictions, provide a 'verdict': "Likely", "Unlikely", or "Uncertain"
-5. Provide a 'confidence_score' between 0.0 and 1.0 representing prediction confidence (NOT certainty)
-6. Summarize your reasoning in one sentence.
+4. Provide STRUCTURED REASONING with specific evidence points.
 
 Respond in JSON format with these exact fields:
 {{
     "verdict": "Likely|Unlikely|Uncertain",
     "confidence_score": 0.65,
-    "summary": "One sentence summary explaining the prediction assessment"
-}}"""
+    "summary": "One sentence summary explaining the prediction assessment",
+    "evidence_for": [
+        {{"source": "Weather.com", "point": "80% chance of rain", "weight": 1.0}}
+    ],
+    "evidence_against": [
+        {{"source": "Local forecast", "point": "Clear skies predicted", "weight": 1.0}}
+    ],
+    "reasoning": "Detailed explanation of how forecasts/opinions were weighed and prediction likelihood assessed."
+}}
+
+IMPORTANT:
+- List ALL key evidence points from forecasts, expert opinions, and trend data
+- Include source names and their weight
+- If no contradicting forecasts, evidence_against can be empty array []"""
     else:
         prompt = f"""You are a high-accuracy Verification Judge. Two advocates have debated this claim. Weigh both arguments and issue a final ruling.
 
@@ -90,16 +100,29 @@ TASK:
 2. For FACTUAL claims: Weigh both arguments against the raw sources.
 3. Check for contradictions between sources.
 4. Wikipedia sources should be weighted at 0.5x (half weight) compared to other sources at 1.0x.
-5. Provide a 'verdict': "Verified", "Unverified", or "Inconclusive".
-6. Provide a 'confidence_score' between 0.0 and 1.0.
-7. Summarize your reasoning in one sentence.
+5. Provide STRUCTURED REASONING with specific evidence points.
 
 Respond in JSON format with these exact fields:
 {{
     "verdict": "Verified|Unverified|Inconclusive",
     "confidence_score": 0.95,
-    "summary": "One sentence summary explaining the ruling"
-}}"""
+    "summary": "One sentence summary explaining the ruling",
+    "evidence_for": [
+        {{"source": "Wikipedia", "point": "Confirms Bitcoin launched January 2009", "weight": 0.5}},
+        {{"source": "Blockchain.com", "point": "Genesis block mined 2009-01-03", "weight": 1.0}}
+    ],
+    "evidence_against": [
+        {{"source": "TechBlog", "point": "Whitepaper published October 2008", "weight": 1.0}}
+    ],
+    "reasoning": "Detailed explanation of how evidence was weighed and why this verdict was reached. Include any important caveats or nuances."
+}}
+
+IMPORTANT: 
+- List ALL key evidence points from both prover and debunker arguments
+- Include source names and their weight (0.5 for Wikipedia, 1.0 for others)
+- If no contradicting evidence exists, evidence_against can be empty array []
+- Be specific about what each source says, not just "supports claim"
+- In reasoning field, explain the balance of evidence and any important context"""
 
     try:
         # Run synchronous Anthropic call in thread pool to avoid blocking

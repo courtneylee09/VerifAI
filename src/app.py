@@ -212,6 +212,12 @@ async def verify(request: Request, claim: str):
                 .sources {{ list-style: none; padding: 0; }}
                 .sources li {{ margin: 10px 0; }}
                 .sources a {{ color: #2563eb; }}
+                .evidence-list {{ list-style: none; padding: 0; }}
+                .evidence-item {{ margin: 12px 0; padding: 12px; background: white; border-radius: 6px; border-left: 3px solid #2563eb; }}
+                .evidence-for {{ border-left-color: #16a34a; }}
+                .evidence-against {{ border-left-color: #dc2626; }}
+                .evidence-source {{ font-weight: 600; color: #374151; }}
+                .evidence-weight {{ font-size: 0.85em; color: #6b7280; }}
             </style>
         </head>
         <body>
@@ -221,22 +227,22 @@ async def verify(request: Request, claim: str):
             <div class="confidence">Confidence: {result['confidence']:.0%}</div>
             
             <div class="section">
-                <h2>Judge's Reasoning</h2>
-                <p>{result['reasoning']}</p>
+                <h2>⚖️ Judge's Analysis</h2>
+                <p>{result.get('reasoning', result.get('summary', ''))}</p>
             </div>
             
             <div class="section">
-                <h2>Supporting Arguments (Prover)</h2>
-                <p>{result['prover_argument']}</p>
+                <h2>✅ Supporting Evidence (Weight: {sum(e.get('weight', 1.0) for e in result.get('evidence_for', [])):.1f})</h2>
+                {('<ul class="evidence-list">' + ''.join(f'<li class="evidence-item evidence-for"><span class="evidence-source">{e.get("source", "Unknown")}</span> <span class="evidence-weight">(weight: {e.get("weight", 1.0)}x)</span><br>{e.get("point", "")}</li>' for e in result.get('evidence_for', [])) + '</ul>') if result.get('evidence_for') else '<p style="color: #6b7280;">No supporting evidence found</p>'}
             </div>
             
             <div class="section">
-                <h2>Counter-Arguments (Debunker)</h2>
-                <p>{result['debunker_argument']}</p>
+                <h2>❌ Contradicting Evidence (Weight: {sum(e.get('weight', 1.0) for e in result.get('evidence_against', [])):.1f})</h2>
+                {('<ul class="evidence-list">' + ''.join(f'<li class="evidence-item evidence-against"><span class="evidence-source">{e.get("source", "Unknown")}</span> <span class="evidence-weight">(weight: {e.get("weight", 1.0)}x)</span><br>{e.get("point", "")}</li>' for e in result.get('evidence_against', [])) + '</ul>') if result.get('evidence_against') else '<p style="color: #6b7280;">No contradicting evidence found</p>'}
             </div>
             
             <div class="section">
-                <h2>Sources</h2>
+                <h2>📚 Sources Consulted</h2>
                 <ul class="sources">
                     {"".join(f'<li><a href="{s["url"]}" target="_blank">{s["title"]}</a><br><small>{s["snippet"][:200]}...</small></li>' for s in result['sources'])}
                 </ul>
@@ -284,6 +290,104 @@ Cost: ${result['total_cost_usd']:.4f}
             headers={
                 "X-Supported-Formats": "application/json, text/html, text/plain"
             }
+        )
+
+
+@app.post("/verify/batch")
+async def verify_batch(request: Request):
+    """
+    Batch verification endpoint - verify multiple claims in one request.
+    
+    Requires x402 payment for the batch (price = 0.05 * number of claims).
+    All claims are processed in parallel for faster results.
+    
+    Request body:
+    {
+        "claims": ["Claim 1", "Claim 2", "Claim 3"]
+    }
+    
+    Returns:
+    {
+        "total_claims": 3,
+        "total_cost": 0.15,
+        "bulk_discount": 0.00,
+        "results": [...]
+    }
+    """
+    import asyncio
+    from fastapi.responses import JSONResponse
+    
+    logger.info("endpoint.verify_batch.called")
+    
+    try:
+        body = await request.json()
+        claims = body.get("claims", [])
+        
+        if not claims:
+            return JSONResponse(
+                status_code=400,
+                content={"error": "No claims provided. Include 'claims' array in request body."}
+            )
+        
+        if len(claims) > 100:
+            return JSONResponse(
+                status_code=400,
+                content={"error": "Maximum 100 claims per batch. Please reduce batch size."}
+            )
+        
+        logger.info("batch.processing count=%d", len(claims))
+        
+        # Process all claims in parallel
+        tasks = [verify_claim_logic(claim) for claim in claims]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        
+        # Convert exceptions to error results
+        processed_results = []
+        for i, result in enumerate(results):
+            if isinstance(result, Exception):
+                processed_results.append({
+                    "claim": claims[i],
+                    "verdict": "Error",
+                    "confidence_score": 0.0,
+                    "summary": f"Processing error: {str(result)}",
+                    "payment_status": "refunded_due_to_system_error"
+                })
+            else:
+                # Add original claim to result
+                result["claim"] = claims[i]
+                processed_results.append(result)
+        
+        # Calculate totals
+        base_cost = len(claims) * 0.05
+        refunded_count = sum(1 for r in processed_results if r.get("payment_status", "").startswith("refunded"))
+        successful_count = len(claims) - refunded_count
+        
+        # Bulk discount: 10% off for 5+ claims, 15% off for 10+ claims
+        discount_percent = 0
+        if len(claims) >= 10:
+            discount_percent = 15
+        elif len(claims) >= 5:
+            discount_percent = 10
+        
+        discount_amount = (successful_count * 0.05 * discount_percent / 100)
+        final_cost = (successful_count * 0.05) - discount_amount
+        
+        return {
+            "total_claims": len(claims),
+            "successful_claims": successful_count,
+            "refunded_claims": refunded_count,
+            "base_cost_usd": base_cost,
+            "bulk_discount_percent": discount_percent,
+            "bulk_discount_usd": round(discount_amount, 4),
+            "final_cost_usd": round(final_cost, 4),
+            "results": processed_results
+        }
+        
+    except Exception as e:
+        logger.error("batch.failed err=%s", e)
+        return JSONResponse(
+            status_code=500,
+            content={"error": f"Batch processing failed: {str(e)}"}
         )
 
 

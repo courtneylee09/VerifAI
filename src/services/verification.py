@@ -192,6 +192,9 @@ async def verify_claim_logic(claim: str) -> dict:
         return {
             "verdict": verdict,
             "confidence_score": confidence,
+            "reasoning": judge_result.get("reasoning", summary),
+            "evidence_for": judge_result.get("evidence_for", []),
+            "evidence_against": judge_result.get("evidence_against", []),
             "citations": sources,
             "claim_type": "prediction" if is_prediction else "factual",
             "audit_trail": f"Multi-agent debate: Prover ({prover_argument[:80]}...) vs Debunker ({debunker_argument[:80]}...). Judge: {summary}",
