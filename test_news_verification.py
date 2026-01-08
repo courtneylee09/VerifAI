@@ -142,6 +142,13 @@ async def test_news_verification(account: Account):
                     print(f"   Confidence: {result.get('confidence_score', 0):.0%}")
                     print(f"   Claim Type: {result.get('claim_type')}")
                     
+                    # Show error details if Error verdict
+                    if result.get('verdict') == 'Error':
+                        print(f"\n⚠️ ERROR DETAILS:")
+                        print(f"   Reason: {result.get('reason', 'No reason')}")
+                        print(f"   Summary: {result.get('summary', 'No summary')}")
+                        print(f"   Audit: {result.get('audit_trail', 'No audit trail')}")
+                    
                     # News-specific fields
                     if result.get('newest_source_age_hours') is not None:
                         print(f"   🔴 Newest Source: {result['newest_source_age_hours']}h ago")

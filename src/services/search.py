@@ -75,15 +75,16 @@ async def search_news_sources(claim: str, timeout_seconds: int = 20) -> tuple[li
     Raises:
         Exception: If search fails
     """
+    from datetime import datetime as dt, timedelta
+    
     try:
         # Try NewsAPI first (real-time news)
         if NEWSAPI_KEY:
             try:
                 import httpx
-                from datetime import datetime, timedelta
                 
                 # Search last 48 hours for breaking news
-                from_date = (datetime.utcnow() - timedelta(hours=48)).strftime('%Y-%m-%d')
+                from_date = (dt.utcnow() - timedelta(hours=48)).strftime('%Y-%m-%d')
                 
                 async with httpx.AsyncClient(timeout=timeout_seconds) as client:
                     response = await client.get(
@@ -109,7 +110,7 @@ async def search_news_sources(claim: str, timeout_seconds: int = 20) -> tuple[li
                                 for art in articles
                             ]
                             published_dates = [
-                                datetime.fromisoformat(art["publishedAt"].replace("Z", "+00:00")) if art.get("publishedAt") else datetime.utcnow()
+                                dt.fromisoformat(art["publishedAt"].replace("Z", "+00:00")) if art.get("publishedAt") else dt.utcnow()
                                 for art in articles
                             ]
                             
@@ -120,7 +121,7 @@ async def search_news_sources(claim: str, timeout_seconds: int = 20) -> tuple[li
         
         # Fallback to Exa (general web search)
         sources, text_blobs = await search_and_retrieve_sources(claim, timeout_seconds)
-        published_dates = [datetime.utcnow()] * len(sources)  # No dates from Exa
+        published_dates = [dt.utcnow()] * len(sources)  # No dates from Exa
         
         logger.info("exa.sources.retrieved count=%d (no newsapi)", len(sources))
         return sources, text_blobs, published_dates
