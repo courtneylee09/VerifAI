@@ -24,6 +24,7 @@ from config.settings import (
 )
 from src.middleware import setup_logging, rate_limit_and_log
 from src.services import verify_claim_logic
+from src.services.verification import verify_news_claim_logic
 from performance_log import PerformanceLogger
 
 # Setup logging
@@ -295,6 +296,213 @@ Cost: ${result['total_cost_usd']:.4f}
 
 @app.post("/verify/batch")
 async def verify_batch(request: Request):
+    """
+    Batch verification endpoint - verify multiple claims in one request.
+    
+    Supports bulk discounts:
+    - 5-9 claims: 10% discount
+    - 10+ claims: 15% discount
+    
+    Example request:
+    {
+        "claims": ["Earth is round", "Water is wet", "Sky is blue"]
+    }
+    
+    Example response:
+    {
+        "total_claims": 3,
+        "total_cost": 0.15,
+        "bulk_discount": 0.00,
+        "results": [...]
+    }
+    """
+    import asyncio
+    from fastapi.responses import JSONResponse
+    
+    logger.info("endpoint.verify_batch.called")
+    
+    try:
+        body = await request.json()
+        claims = body.get("claims", [])
+        
+        if not claims:
+            return JSONResponse(
+                status_code=400,
+                content={"error": "No claims provided. Include 'claims' array in request body."}
+            )
+        
+        if len(claims) > 100:
+            return JSONResponse(
+                status_code=400,
+                content={"error": "Maximum 100 claims per batch. Please reduce batch size."}
+            )
+        
+        logger.info("batch.processing count=%d", len(claims))
+        
+        # Process all claims in parallel
+        tasks = [verify_claim_logic(claim) for claim in claims]
+        results = await asyncio.gather(*tasks, return_exceptions=True)
+        
+        # Convert exceptions to error results
+        processed_results = []
+        for i, result in enumerate(results):
+            if isinstance(result, Exception):
+                processed_results.append({
+                    "claim": claims[i],
+                    "verdict": "Error",
+                    "confidence_score": 0.0,
+                    "summary": f"Processing error: {str(result)}",
+                    "payment_status": "refunded_due_to_system_error"
+                })
+            else:
+                # Add original claim to result
+                result["claim"] = claims[i]
+                processed_results.append(result)
+        
+        # Calculate totals
+        base_cost = len(claims) * 0.05
+        refunded_count = sum(1 for r in processed_results if r.get("payment_status", "").startswith("refunded"))
+        successful_count = len(claims) - refunded_count
+        
+        # Bulk discount: 10% off for 5+ claims, 15% off for 10+ claims
+        discount_percent = 0
+        if len(claims) >= 10:
+            discount_percent = 15
+        elif len(claims) >= 5:
+            discount_percent = 10
+        
+        discount_amount = (successful_count * 0.05) * (discount_percent / 100)
+        final_cost = (successful_count * 0.05) - discount_amount
+        
+        logger.info(
+            "batch.done total=%d successful=%d cost=%.4f discount=%.4f",
+            len(claims), successful_count, final_cost, discount_amount
+        )
+        
+        return {
+            "total_claims": len(claims),
+            "successful_verifications": successful_count,
+            "base_cost": base_cost,
+            "discount_percent": discount_percent,
+            "discount_amount": discount_amount,
+            "final_cost": final_cost,
+            "results": processed_results
+        }
+    except Exception as e:
+        logger.error("batch.failed err=%s", e)
+        return JSONResponse(
+            status_code=500,
+            content={"error": f"Batch processing failed: {str(e)}"}
+        )
+
+
+@app.get("/verify/news")
+async def verify_news(request: Request, claim: str):
+    """
+    Real-time news verification endpoint optimized for breaking news and current events.
+    
+    Features:
+    - Searches NewsAPI for last 48 hours
+    - Weights recent sources higher (24h = 1.5x, 7d = 1.2x)
+    - Returns publication timestamps for each source
+    - Shows age of newest source
+    
+    Example:
+    GET /verify/news?claim=Elon Musk bought Twitter
+    
+    Response includes:
+    - Standard verification result (verdict, confidence, evidence)
+    - sources: Array with publication dates and age in hours
+    - newest_source_age_hours: Age of most recent source
+    """
+    logger.info("endpoint.verify_news.called claim=%s", claim)
+    
+    # Get verification result with news-specific search
+    result = await verify_news_claim_logic(claim)
+    
+    # Content negotiation (same as /verify)
+    accept_header = request.headers.get("accept", "application/json").lower()
+    
+    if not accept_header or accept_header == "*/*" or "application/json" in accept_header:
+        return result
+    
+    elif "text/html" in accept_header:
+        from fastapi.responses import HTMLResponse
+        
+        # Format source timestamps
+        sources_html = ""
+        if result.get("sources"):
+            for s in result["sources"]:
+                age_str = f"{s['age_hours']}h ago" if s.get('age_hours') is not None else "Unknown age"
+                weight_str = f"weight: {s.get('weight', 1.0):.1f}x"
+                sources_html += f'<li><a href="{s["url"]}" target="_blank">{s["url"]}</a><br><small>Published: {age_str} | {weight_str}</small></li>'
+        
+        html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>VerifAI News Result: {claim}</title>
+            <style>
+                body {{ font-family: system-ui, -apple-system, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }}
+                .verdict {{ font-size: 2em; font-weight: bold; margin: 20px 0; }}
+                .verified {{ color: #16a34a; }}
+                .unverified {{ color: #dc2626; }}
+                .inconclusive {{ color: #ea580c; }}
+                .confidence {{ font-size: 1.2em; color: #6b7280; }}
+                .section {{ margin: 30px 0; padding: 20px; background: #f9fafb; border-radius: 8px; }}
+                .news-badge {{ display: inline-block; background: #3b82f6; color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.9em; margin-bottom: 10px; }}
+                .freshness {{ color: #16a34a; font-weight: 600; }}
+                .sources {{ list-style: none; padding: 0; }}
+                .sources li {{ margin: 10px 0; }}
+                .sources a {{ color: #2563eb; }}
+                .evidence-list {{ list-style: none; padding: 0; }}
+                .evidence-item {{ margin: 12px 0; padding: 12px; background: white; border-radius: 6px; border-left: 3px solid #2563eb; }}
+                .evidence-for {{ border-left-color: #16a34a; }}
+                .evidence-against {{ border-left-color: #dc2626; }}
+                .evidence-source {{ font-weight: 600; color: #374151; }}
+                .evidence-weight {{ font-size: 0.85em; color: #6b7280; }}
+            </style>
+        </head>
+        <body>
+            <h1>VerifAI News Verification</h1>
+            <span class="news-badge">🔴 LIVE NEWS</span>
+            <p><strong>Claim:</strong> {claim}</p>
+            <div class="verdict {result['verdict'].lower()}">{result['verdict']}</div>
+            <div class="confidence">Confidence: {result['confidence_score']:.0%}</div>
+            {f'<p class="freshness">⚡ Newest source: {result.get("newest_source_age_hours")}h ago</p>' if result.get('newest_source_age_hours') else ''}
+            
+            <div class="section">
+                <h2>⚖️ Judge's Analysis</h2>
+                <p>{result.get('reasoning', result.get('summary', ''))}</p>
+            </div>
+            
+            <div class="section">
+                <h2>✅ Supporting Evidence (Weight: {sum(e.get('weight', 1.0) for e in result.get('evidence_for', [])):.1f})</h2>
+                {('<ul class="evidence-list">' + ''.join(f'<li class="evidence-item evidence-for"><span class="evidence-source">{e.get("source", "Unknown")}</span> <span class="evidence-weight">(weight: {e.get("weight", 1.0)}x)</span><br>{e.get("point", "")}</li>' for e in result.get('evidence_for', [])) + '</ul>') if result.get('evidence_for') else '<p style="color: #6b7280;">No supporting evidence found</p>'}
+            </div>
+            
+            <div class="section">
+                <h2>❌ Contradicting Evidence (Weight: {sum(e.get('weight', 1.0) for e in result.get('evidence_against', [])):.1f})</h2>
+                {('<ul class="evidence-list">' + ''.join(f'<li class="evidence-item evidence-against"><span class="evidence-source">{e.get("source", "Unknown")}</span> <span class="evidence-weight">(weight: {e.get("weight", 1.0)}x)</span><br>{e.get("point", "")}</li>' for e in result.get('evidence_against', [])) + '</ul>') if result.get('evidence_against') else '<p style="color: #6b7280;">No contradicting evidence found</p>'}
+            </div>
+            
+            <div class="section">
+                <h2>📰 News Sources</h2>
+                <ul class="sources">
+                    {sources_html}
+                </ul>
+            </div>
+        </body>
+        </html>
+        """
+        return HTMLResponse(content=html_content)
+    
+    else:
+        return result
+
+
+@app.post("/verify/batch")
+async def verify_batch_old(request: Request):
     """
     Batch verification endpoint - verify multiple claims in one request.
     

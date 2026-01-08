@@ -2,13 +2,14 @@
 import asyncio
 import logging
 import time
+from datetime import datetime
 
 from config.settings import (
     EXA_SEARCH_TIMEOUT_SECONDS, DEBATE_TIMEOUT_SECONDS,
     PREDICTION_KEYWORDS, CONFIDENCE_THRESHOLD_FOR_MANUAL_REVIEW,
     CONFIDENCE_FLOOR_FOR_REFUND
 )
-from src.services.search import search_and_retrieve_sources, calculate_source_weights
+from src.services.search import search_and_retrieve_sources, search_news_sources, calculate_source_weights
 from src.agents.prover import run_prover_agent
 from src.agents.debunker import run_debunker_agent
 from src.agents.judge import run_judge_agent
@@ -219,3 +220,186 @@ async def verify_claim_logic(claim: str) -> dict:
             "manual_review": True,
             "payment_status": "refunded_due_to_system_error"
         }
+
+
+async def verify_news_claim_logic(claim: str) -> dict:
+    """
+    Specialized news verification using real-time sources with recency weighting.
+    
+    Optimized for breaking news and current events by:
+    - Searching NewsAPI for last 48 hours
+    - Weighting recent sources higher (24h = 1.5x, 7d = 1.2x)
+    - Including publication timestamps in response
+    
+    Args:
+        claim: The news claim to verify
+        
+    Returns:
+        Dictionary with verification result plus source publication dates
+    """
+    start_time = time.perf_counter()
+    logger.info("verify.news.start claim=%s", claim)
+
+    token_tracker.reset()
+    manual_review = False
+
+    try:
+        # Pre-filter philosophical claims
+        is_philosophical, filter_reason = is_philosophical_claim(claim)
+        if is_philosophical:
+            logger.info("verify.news.pre_filtered reason=%s", filter_reason)
+            return get_philosophical_response(claim, filter_reason)
+        
+        # News claims are typically factual, not predictions
+        is_prediction = False
+        logger.info("claim.type=news")
+
+        # 1. Get real-time news sources with publication dates
+        try:
+            sources, text_blobs, published_dates = await search_news_sources(
+                claim,
+                timeout_seconds=EXA_SEARCH_TIMEOUT_SECONDS
+            )
+        except Exception as news_error:
+            logger.error("news.sources.fetch.failed err=%s", news_error)
+            return {
+                "verdict": "Error",
+                "confidence_score": 0.0,
+                "reason": "News source retrieval failed",
+                "summary": "Unable to verify news claim because sources could not be retrieved.",
+                "audit_trail": f"News fetch error: {news_error}",
+                "claim_type": "news",
+                "manual_review": True
+            }
+
+        # Calculate weights with recency boost
+        weights = calculate_source_weights(sources, published_dates)
+
+        # 2. Run multi-agent debate
+        logger.info("news.debate.start")
+        prover_task = run_prover_agent(claim, text_blobs, is_prediction)
+        debunker_task = run_debunker_agent(claim, text_blobs, is_prediction)
+
+        try:
+            prover_argument, debunker_argument = await asyncio.wait_for(
+                asyncio.gather(prover_task, debunker_task, return_exceptions=True),
+                timeout=DEBATE_TIMEOUT_SECONDS,
+            )
+        except asyncio.TimeoutError:
+            logger.error("news.debate.timeout")
+            return {
+                "verdict": "Error",
+                "confidence_score": 0.0,
+                "summary": "News verification timed out",
+                "claim_type": "news",
+                "manual_review": True
+            }
+
+        if isinstance(prover_argument, Exception):
+            logger.warning("news.prover.failed err=%s", prover_argument)
+            prover_argument = "Unable to generate supporting argument."
+            manual_review = True
+
+        if isinstance(debunker_argument, Exception):
+            logger.warning("news.debunker.failed err=%s", debunker_argument)
+            debunker_argument = "Unable to generate contradicting argument."
+            manual_review = True
+
+        logger.info(
+            "news.debate.done prover_len=%d debunker_len=%d",
+            len(prover_argument),
+            len(debunker_argument),
+        )
+
+        # 3. Judge evaluation
+        result = await run_judge_agent(
+            claim,
+            text_blobs,
+            weights,
+            prover_argument,
+            debunker_argument,
+            is_prediction,
+        )
+
+        verdict = result.get("verdict", "Error")
+        confidence = result.get("confidence_score", 0.0)
+        summary = result.get("summary", "News analysis complete")
+
+        should_refund = confidence < CONFIDENCE_FLOOR_FOR_REFUND
+        
+        if confidence < CONFIDENCE_THRESHOLD_FOR_MANUAL_REVIEW:
+            manual_review = True
+            if should_refund:
+                verdict = "Inconclusive"
+
+        token_tracker.set_verdict(verdict)
+
+        duration_ms = (time.perf_counter() - start_time) * 1000
+        logger.info(
+            "verify.news.done verdict=%s confidence=%.2f ms=%.1f manual_review=%s",
+            verdict,
+            confidence,
+            duration_ms,
+            manual_review,
+        )
+
+        # Log performance
+        execution_time = time.perf_counter() - start_time
+        try:
+            tokens = token_tracker.get_all()
+            PerformanceLogger.log_request(
+                claim=claim,
+                verdict=verdict,
+                confidence_score=confidence,
+                prover_tokens=tokens['prover'],
+                debunker_tokens=tokens['debunker'],
+                judge_tokens=tokens['judge'],
+                search_count=len(sources),
+                execution_time=execution_time,
+                was_refunded=should_refund
+            )
+        except Exception as log_error:
+            logger.warning("performance_log.failed err=%s", log_error)
+
+        # Format sources with timestamps
+        sources_with_dates = [
+            {
+                "url": sources[i],
+                "published": published_dates[i].isoformat() if i < len(published_dates) else None,
+                "age_hours": int((datetime.utcnow() - published_dates[i]).total_seconds() / 3600) if i < len(published_dates) else None,
+                "weight": weights[i] if i < len(weights) else 1.0
+            }
+            for i in range(len(sources))
+        ]
+
+        return {
+            "verdict": verdict,
+            "confidence_score": confidence,
+            "reasoning": result.get("reasoning", summary),
+            "evidence_for": result.get("evidence_for", []),
+            "evidence_against": result.get("evidence_against", []),
+            "sources": sources_with_dates,  # Enhanced with timestamps
+            "claim_type": "news",
+            "newest_source_age_hours": min((s["age_hours"] for s in sources_with_dates if s["age_hours"] is not None), default=None),
+            "audit_trail": f"News verification: {len(sources)} sources (newest: {min((s['age_hours'] for s in sources_with_dates if s['age_hours'] is not None), default='N/A')}h old)",
+            "summary": summary,
+            "debate": {
+                "prover": prover_argument,
+                "debunker": debunker_argument
+            },
+            "manual_review": manual_review,
+            "payment_status": "refunded_due_to_uncertainty" if should_refund else "settled"
+        }
+    except Exception as e:
+        logger.exception("verify.news.failed err=%s", e)
+        return {
+            "verdict": "Error",
+            "confidence_score": 0.0,
+            "reason": f"News verification error: {str(e)}",
+            "summary": "Unable to verify news claim due to service error.",
+            "audit_trail": f"Error: {str(e)}",
+            "claim_type": "news",
+            "manual_review": True,
+            "payment_status": "refunded_due_to_system_error"
+        }
+

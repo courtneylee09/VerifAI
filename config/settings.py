@@ -11,6 +11,7 @@ load_dotenv()
 # API Keys and Credentials
 # ============================================================================
 EXA_API_KEY = os.getenv("EXA_API_KEY")
+NEWSAPI_KEY = os.getenv("NEWSAPI_KEY")  # For real-time news verification
 DEEPINFRA_API_KEY = os.getenv("DEEPINFRA_API_KEY")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
