@@ -1,0 +1,190 @@
+"""
+DEPLOYMENT COMPLETE: Automatic Refund System + Philosophical Claim Detection
+
+Commit: aaf6505
+Branch: main
+Status: DEPLOYED TO RAILWAY (https://verifai-production.up.railway.app)
+
+================================================================================
+WHAT WAS DEPLOYED
+================================================================================
+
+1. AUTOMATIC REFUND SYSTEM (config/settings.py + src/services/verification.py)
+   - CONFIDENCE_FLOOR_FOR_REFUND = 0.40
+   - MAX_ACCEPTABLE_REFUND_RATE = 0.15 (15% threshold alert)
+   - Decision Matrix:
+     * < 0.40: Full refund (Inconclusive)
+     * 0.40-0.65: Standard settlement (Low confidence)
+     * > 0.65: Standard settlement (High confidence)
+     * System error: Automatic refund
+   
+   - Response includes: "payment_status": "refunded_due_to_uncertainty" | "settled"
+
+2. PHILOSOPHICAL CLAIM DETECTION (src/agents/judge.py)
+   - Judge now detects normative/value judgment language:
+     * "inherently evil", "morally wrong", "should/shouldn't"
+     * "good/bad", "right/wrong", "beautiful", "best"
+     * Philosophical constructs: "justice", "freedom", "evil"
+   
+   - Behavior when detected:
+     * Sets verdict to "Inconclusive"
+     * Sets confidence < 0.40 (triggers automatic refund)
+     * Summary explains: "involves normative philosophical language that 
+       cannot be empirically verified"
+
+3. REFUND TRACKING (performance_log.py)
+   - New parameter: was_refunded
+   - Refund rate calculation with 15% alert threshold
+   - Revenue = $0.00 for refunded requests
+   - Margin = -100% for refunded requests (absorbed cost)
+   - Summary shows:
+     * Total refunds
+     * Refund rate percentage
+     * Alert if > 15%
+
+4. STRESS TEST ENHANCEMENTS (stress_test_verifai.py)
+   - Philosophical claim bucket analysis
+   - Tracks avg confidence for philosophical claims
+   - Validates auto-refund rate (should be 100% for philosophical)
+   - Model drift detection: PASS/FAIL status
+
+================================================================================
+TEST RESULTS - LOCAL VALIDATION
+================================================================================
+
+Claim: "Is capitalism inherently evil?"
+
+RESULT:
+  Verdict: Inconclusive
+  Confidence: 0.35 (< 0.40 threshold)
+  payment_status: "refunded_due_to_uncertainty"
+  Summary: "The claim 'Is capitalism inherently evil?' involves normative 
+           philosophical language that cannot be empirically verified, making 
+           it unsuitable for objective fact-checking."
+
+VALIDATION:
+  [PASS] Verdict = Inconclusive
+  [PASS] Confidence < 0.40 (triggers refund)
+  [PASS] payment_status = refunded_due_to_uncertainty
+  [PASS] Customer NOT charged
+
+BUSINESS IMPACT:
+  - Customer NOT charged $0.05 for philosophical debate
+  - Brand integrity protected (not taking sides on moral questions)
+  - LLM cost absorbed (~$0.004) as insurance for trust
+  - Customer Lifetime Value preserved
+
+DEBATE QUALITY:
+  Prover (605 chars): "capitalism has been linked to poverty...can perpetuate 
+                      economic inequality...exploitation and uneven distribution"
+  
+  Debunker (598 chars): "claim is challenged...capitalism has both positive and 
+                         negative aspects...effects are context-dependent rather 
+                         than universally negative"
+  
+  Judge correctly recognized BOTH arguments are valid, proving it's subjective.
+
+================================================================================
+NEXT STEPS - RECOMMENDED TESTING
+================================================================================
+
+1. TEST GEMINI FALLBACK (Model Drift Detection)
+   File: test_gemini_fallback_philosophical.py
+   
+   Purpose: Verify Gemini 2.0 Flash (fallback model) also detects philosophical
+            claims and triggers refunds. If Gemini says "Verified" or 
+            "Unverified", you have Model Drift that creates inconsistent 
+            economics during outages.
+   
+   Command: python test_gemini_fallback_philosophical.py
+
+2. RUN FULL STRESS TEST (1000 requests)
+   File: stress_test_verifai.py
+   
+   Features:
+   - Batching: 1000 claims in batches of 10
+   - Double-Spend Check: Every 20th request replays signature
+   - Bucket Segmentation: Slang/Ambiguous/Adversarial/Technical
+   - Failover Simulation: Technical bucket forces Gemini fallback
+   - Philosophical Analysis: Auto-detects and validates refund rate
+   
+   Command: python stress_test_verifai.py --requests 1000 --batch-size 10
+   Quick Test: python stress_test_verifai.py --quick-test  # 100 requests
+
+3. PRODUCTION TEST WITH PAYMENT
+   - Use Coinbase Wallet to submit philosophical claim with EIP-712 signature
+   - Expected: payment_status = "refunded_due_to_uncertainty"
+   - Verify: USDC stays in wallet (signature not settled on-chain)
+
+================================================================================
+BUSINESS STRATEGY - WHY THIS MATTERS
+================================================================================
+
+POSITIONING: VerifAI is a "Truth Settlement Layer" for FACTUAL claims
+  - Philosophical/moral debates lack empirical consensus
+  - Charging customers for subjective opinions damages brand trust
+  - Automatic refunds maintain institutional credibility
+
+ECONOMICS: 92.7% margin means refunds are cheap insurance
+  - Avg refund cost: ~$0.004 (LLM tokens only)
+  - Customer Lifetime Value >> single refund cost
+  - 15% refund rate threshold protects profitability
+
+PHASE 1 GOAL: Collect 1,000+ "dirty" requests
+  - Trust is critical for data collection
+  - Refunds prevent "one bad result" from losing customer forever
+  - Automated dispute handling (Phase 5 feature achieved early)
+
+MODEL DRIFT RISK:
+  - Claude 3.5 Haiku: Correctly identifies philosophical claims
+  - Gemini 2.0 Flash: MUST BE TESTED for consistency
+  - If Gemini has different behavior, 99.9% SLA goal is at risk
+
+================================================================================
+FILES MODIFIED
+================================================================================
+
+config/settings.py:
+  + CONFIDENCE_FLOOR_FOR_REFUND = 0.40
+  + MAX_ACCEPTABLE_REFUND_RATE = 0.15
+
+src/agents/judge.py:
+  + Philosophical claim detection in prompt
+  + Instructions to set confidence < 0.40 for normative language
+
+src/services/verification.py:
+  + should_refund = confidence < CONFIDENCE_FLOOR_FOR_REFUND
+  + payment_status field in response
+  + was_refunded tracking in performance log
+
+performance_log.py:
+  + was_refunded parameter in log_request()
+  + refund_stats in summary
+  + Alert if refund_rate > 15%
+
+stress_test_verifai.py:
+  + Philosophical claim bucket analysis
+  + Auto-refund validation
+  + Model drift detection
+
+NEW FILES:
+  + test_philosophical_claim.py
+  + test_gemini_fallback_philosophical.py
+  + test_production_philosophical.py
+
+================================================================================
+PRODUCTION STATUS
+================================================================================
+
+Service: https://verifai-production.up.railway.app
+Status: LIVE (Status 402 = payment wall active)
+Deployment: Commit aaf6505 pushed to main
+Railway: Auto-deployed from GitHub
+
+Ready for:
+  - Paid testing with Coinbase Wallet
+  - Model drift validation
+  - Full 1000-request stress test
+  - Phase 1 data collection
+
+================================================================================

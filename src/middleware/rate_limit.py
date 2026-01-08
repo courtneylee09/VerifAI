@@ -1,6 +1,7 @@
 """Rate limiting middleware: Per-IP rate limit enforcement."""
 import time
 import logging
+from typing import Dict, List
 from fastapi.responses import JSONResponse
 
 from config.settings import RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_SECONDS
@@ -8,7 +9,7 @@ from config.settings import RATE_LIMIT_MAX, RATE_LIMIT_WINDOW_SECONDS
 logger = logging.getLogger(__name__)
 
 # In-memory state for rate limiting
-_rate_limit_state: dict[str, list[float]] = {}
+_rate_limit_state: Dict[str, List[float]] = {}
 
 
 async def rate_limit_and_log(request, call_next):

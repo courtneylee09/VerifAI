@@ -1,0 +1,977 @@
+2025-12-30 15:53:21,490 | INFO | verify.start claim=Is 'rizz' actually a real word or just internet slang?
+2025-12-30 15:53:21,495 | INFO | claim.type=factual
+2025-12-30 15:53:22,441 | INFO | sources.retrieved count=5
+2025-12-30 15:53:22,444 | INFO | debate.start
+2025-12-30 15:53:25,345 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:53:29,464 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:53:29,469 | INFO | debate.done prover_len=659 debunker_len=406
+2025-12-30 15:53:36,558 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:53:36,582 | INFO | verify.done verdict=Unverified confidence=0.55 ms=15092.1 manual_review=True
+2025-12-30 15:53:36,786 | INFO | verify.start claim=Does pineapple belong on pizza?
+2025-12-30 15:53:36,787 | INFO | verify.pre_filtered reason=Normative pattern detected: 'belong on'
+2025-12-30 15:53:36,991 | INFO | verify.start claim=Does religion cause more harm than good?
+2025-12-30 15:53:36,992 | INFO | verify.pre_filtered reason=Normative pattern detected: 'cause more harm than good'
+2025-12-30 15:53:37,196 | INFO | verify.start claim=Will AGI be achieved before 2030?
+2025-12-30 15:53:37,197 | INFO | claim.type=prediction
+2025-12-30 15:53:38,349 | INFO | sources.retrieved count=5
+2025-12-30 15:53:38,350 | INFO | debate.start
+2025-12-30 15:53:38,352 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:53:38,352 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:53:39,371 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:53:39,382 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:53:39,383 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:53:40,658 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:53:40,663 | INFO | debate.done prover_len=381 debunker_len=533
+2025-12-30 15:53:46,922 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:53:46,927 | INFO | verify.done verdict=Uncertain confidence=0.42 ms=9730.8 manual_review=True
+2025-12-30 15:53:47,131 | INFO | verify.start claim=Is 'bussin' a valid replacement for 'delicious'?
+2025-12-30 15:53:47,132 | INFO | claim.type=factual
+2025-12-30 15:53:48,359 | INFO | sources.retrieved count=5
+2025-12-30 15:53:48,360 | INFO | debate.start
+2025-12-30 15:53:50,875 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:53:57,077 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:53:57,080 | INFO | debate.done prover_len=615 debunker_len=529
+2025-12-30 15:54:04,485 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:54:04,488 | INFO | verify.done verdict=Unverified confidence=0.65 ms=17357.2 manual_review=False
+2025-12-30 15:54:04,693 | INFO | verify.start claim=Does free will exist?
+2025-12-30 15:54:04,694 | INFO | claim.type=prediction
+2025-12-30 15:54:06,217 | INFO | sources.retrieved count=5
+2025-12-30 15:54:06,218 | INFO | debate.start
+2025-12-30 15:54:06,223 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:54:06,224 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:54:07,354 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:54:07,364 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:54:07,365 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:54:08,664 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:54:08,670 | INFO | debate.done prover_len=476 debunker_len=449
+2025-12-30 15:54:14,572 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:54:14,575 | INFO | verify.done verdict=Uncertain confidence=0.55 ms=9881.9 manual_review=True
+2025-12-30 15:54:14,779 | INFO | verify.start claim=Does the government control the weather?
+2025-12-30 15:54:14,780 | INFO | claim.type=factual
+2025-12-30 15:54:17,251 | INFO | sources.retrieved count=5
+2025-12-30 15:54:17,252 | INFO | debate.start
+2025-12-30 15:54:20,423 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:54:23,418 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:54:23,421 | INFO | debate.done prover_len=844 debunker_len=569
+2025-12-30 15:54:29,253 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:54:29,257 | INFO | verify.done verdict=Unverified confidence=0.75 ms=14478.0 manual_review=False
+2025-12-30 15:54:29,461 | INFO | verify.start claim=Is cold fusion scientifically achievable?
+2025-12-30 15:54:29,461 | INFO | claim.type=factual
+2025-12-30 15:54:30,819 | INFO | sources.retrieved count=5
+2025-12-30 15:54:30,820 | INFO | debate.start
+2025-12-30 15:54:30,822 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:54:30,822 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:54:31,787 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:54:31,793 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:54:31,794 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:54:33,035 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:54:33,039 | INFO | debate.done prover_len=456 debunker_len=624
+2025-12-30 15:54:39,404 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:54:39,407 | INFO | verify.done verdict=Inconclusive confidence=0.35 ms=9946.1 manual_review=True
+2025-12-30 15:54:39,611 | INFO | verify.start claim=Is calling someone a 'CEO' actually a compliment?
+2025-12-30 15:54:39,612 | INFO | claim.type=factual
+2025-12-30 15:54:41,296 | INFO | sources.retrieved count=5
+2025-12-30 15:54:41,297 | INFO | debate.start
+2025-12-30 15:54:43,648 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:54:44,574 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:54:44,576 | INFO | debate.done prover_len=542 debunker_len=583
+2025-12-30 15:54:52,532 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:54:52,535 | INFO | verify.done verdict=Unverified confidence=0.75 ms=12923.1 manual_review=False
+2025-12-30 15:54:52,740 | INFO | verify.start claim=Does art need to have meaning?
+2025-12-30 15:54:52,741 | INFO | claim.type=factual
+2025-12-30 15:54:53,914 | INFO | sources.retrieved count=5
+2025-12-30 15:54:53,915 | INFO | debate.start
+2025-12-30 15:54:53,919 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:54:53,920 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:54:55,161 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:54:55,165 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:54:55,165 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:54:56,093 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:54:56,094 | INFO | debate.done prover_len=603 debunker_len=427
+2025-12-30 15:55:02,563 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:55:02,566 | INFO | verify.done verdict=Verified confidence=0.85 ms=9826.4 manual_review=False
+2025-12-30 15:55:02,771 | INFO | verify.start claim=Are all politicians corrupt?
+2025-12-30 15:55:02,773 | INFO | claim.type=factual
+2025-12-30 15:55:03,876 | INFO | sources.retrieved count=5
+2025-12-30 15:55:03,876 | INFO | debate.start
+2025-12-30 15:55:07,301 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:55:08,789 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:55:08,792 | INFO | debate.done prover_len=561 debunker_len=568
+2025-12-30 15:55:14,836 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:55:14,839 | INFO | verify.done verdict=Unverified confidence=0.65 ms=12067.7 manual_review=False
+2025-12-30 15:55:15,043 | INFO | verify.start claim=Is P = NP likely to be proven true?
+2025-12-30 15:55:15,044 | INFO | claim.type=prediction
+2025-12-30 15:55:16,651 | INFO | sources.retrieved count=5
+2025-12-30 15:55:16,652 | INFO | debate.start
+2025-12-30 15:55:16,656 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:55:16,657 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:55:17,683 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:55:17,689 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:55:17,690 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:55:18,831 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:55:18,833 | INFO | debate.done prover_len=386 debunker_len=546
+2025-12-30 15:55:25,526 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:55:25,529 | INFO | verify.done verdict=Unlikely confidence=0.85 ms=10486.1 manual_review=False
+2025-12-30 15:55:25,734 | INFO | verify.start claim=Is 'cap' the same as 'no cap' or are they opposites?
+2025-12-30 15:55:25,735 | INFO | claim.type=factual
+2025-12-30 15:55:27,165 | INFO | sources.retrieved count=5
+2025-12-30 15:55:27,166 | INFO | debate.start
+2025-12-30 15:55:30,697 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:55:31,344 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:55:31,346 | INFO | debate.done prover_len=478 debunker_len=585
+2025-12-30 15:55:37,218 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:55:37,221 | INFO | verify.done verdict=Verified confidence=0.95 ms=11487.1 manual_review=False
+2025-12-30 15:55:37,425 | INFO | verify.start claim=Does money buy happiness?
+2025-12-30 15:55:37,426 | INFO | claim.type=factual
+2025-12-30 15:55:38,947 | INFO | sources.retrieved count=5
+2025-12-30 15:55:38,948 | INFO | debate.start
+2025-12-30 15:55:38,952 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:55:38,953 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:55:39,949 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:55:39,952 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:55:39,952 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:55:41,136 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:55:41,139 | INFO | debate.done prover_len=416 debunker_len=452
+2025-12-30 15:55:48,477 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:55:48,480 | INFO | verify.done verdict=Verified confidence=0.75 ms=11054.3 manual_review=False
+2025-12-30 15:55:48,684 | INFO | verify.start claim=Are vaccines more dangerous than the diseases they prevent?
+2025-12-30 15:55:48,685 | INFO | claim.type=factual
+2025-12-30 15:55:49,826 | INFO | sources.retrieved count=5
+2025-12-30 15:55:49,827 | INFO | debate.start
+2025-12-30 15:55:53,910 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:55:54,650 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:55:54,652 | INFO | debate.done prover_len=753 debunker_len=766
+2025-12-30 15:56:01,468 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:56:01,472 | INFO | verify.done verdict=Unverified confidence=0.95 ms=12788.1 manual_review=False
+2025-12-30 15:56:01,677 | INFO | verify.start claim=Does SHA-256 have known collision vulnerabilities?
+2025-12-30 15:56:01,678 | INFO | claim.type=factual
+2025-12-30 15:56:02,925 | INFO | sources.retrieved count=5
+2025-12-30 15:56:02,926 | INFO | debate.start
+2025-12-30 15:56:02,931 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:56:02,932 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:56:03,870 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:56:03,876 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:56:03,877 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:56:05,088 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:56:05,091 | INFO | debate.done prover_len=294 debunker_len=493
+2025-12-30 15:56:12,271 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:56:12,274 | INFO | verify.done verdict=Verified confidence=0.85 ms=10597.5 manual_review=False
+2025-12-30 15:56:12,479 | INFO | verify.start claim=Is 'slay' still cool or is it cringe now?
+2025-12-30 15:56:12,480 | INFO | claim.type=factual
+2025-12-30 15:56:13,618 | INFO | sources.retrieved count=5
+2025-12-30 15:56:13,619 | INFO | debate.start
+2025-12-30 15:56:17,668 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:56:19,760 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:56:19,761 | INFO | debate.done prover_len=469 debunker_len=534
+2025-12-30 15:56:27,319 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:56:27,321 | INFO | verify.done verdict=Inconclusive confidence=0.45 ms=14841.7 manual_review=True
+2025-12-30 15:56:27,523 | INFO | verify.start claim=Does light have mass?
+2025-12-30 15:56:27,523 | INFO | claim.type=factual
+2025-12-30 15:56:28,651 | INFO | sources.retrieved count=5
+2025-12-30 15:56:28,652 | INFO | debate.start
+2025-12-30 15:56:28,654 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:56:28,655 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:56:29,508 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:56:29,516 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:56:29,517 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:56:30,407 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:56:30,410 | INFO | debate.done prover_len=387 debunker_len=409
+2025-12-30 15:56:37,459 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:56:37,461 | INFO | verify.done verdict=Unverified confidence=0.75 ms=9937.5 manual_review=False
+2025-12-30 15:56:37,664 | INFO | verify.start claim=Is democracy a failed system?
+2025-12-30 15:56:37,665 | INFO | verify.pre_filtered reason=Normative pattern detected: 'failed system'
+2025-12-30 15:56:37,868 | INFO | verify.start claim=Will CRISPR eliminate genetic diseases by 2035?
+2025-12-30 15:56:37,869 | INFO | claim.type=prediction
+2025-12-30 15:56:39,121 | INFO | sources.retrieved count=5
+2025-12-30 15:56:39,121 | INFO | debate.start
+2025-12-30 15:56:42,940 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:56:43,085 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:56:43,087 | INFO | debate.done prover_len=629 debunker_len=689
+2025-12-30 15:56:49,673 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:56:49,676 | INFO | verify.done verdict=Uncertain confidence=0.45 ms=11807.5 manual_review=True
+2025-12-30 15:56:49,881 | INFO | verify.start claim=Is 'rizz' actually a real word or just internet slang?
+2025-12-30 15:56:49,882 | INFO | claim.type=factual
+2025-12-30 15:56:50,815 | INFO | sources.retrieved count=5
+2025-12-30 15:56:50,816 | INFO | debate.start
+2025-12-30 15:56:50,822 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:56:50,823 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:56:51,773 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:56:51,779 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:56:51,780 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:56:52,985 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:56:52,987 | INFO | debate.done prover_len=366 debunker_len=504
+2025-12-30 15:57:00,066 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:57:00,068 | INFO | verify.done verdict=Verified confidence=0.92 ms=10186.4 manual_review=False
+2025-12-30 15:57:00,271 | INFO | verify.start claim=Does pineapple belong on pizza?
+2025-12-30 15:57:00,272 | INFO | verify.pre_filtered reason=Normative pattern detected: 'belong on'
+2025-12-30 15:57:00,476 | INFO | verify.start claim=Does religion cause more harm than good?
+2025-12-30 15:57:00,477 | INFO | verify.pre_filtered reason=Normative pattern detected: 'cause more harm than good'
+2025-12-30 15:57:00,682 | INFO | verify.start claim=Will AGI be achieved before 2030?
+2025-12-30 15:57:00,683 | INFO | claim.type=prediction
+2025-12-30 15:57:02,030 | INFO | sources.retrieved count=5
+2025-12-30 15:57:02,031 | INFO | debate.start
+2025-12-30 15:57:06,119 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:57:06,452 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:57:06,454 | INFO | debate.done prover_len=616 debunker_len=570
+2025-12-30 15:57:11,990 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:57:11,992 | INFO | verify.done verdict=Uncertain confidence=0.45 ms=11310.0 manual_review=True
+2025-12-30 15:57:12,195 | INFO | verify.start claim=Is 'bussin' a valid replacement for 'delicious'?
+2025-12-30 15:57:12,196 | INFO | claim.type=factual
+2025-12-30 15:57:13,238 | INFO | sources.retrieved count=5
+2025-12-30 15:57:13,239 | INFO | debate.start
+2025-12-30 15:57:13,241 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:57:13,241 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:57:14,176 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:57:14,179 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:57:14,180 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:57:15,138 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:57:15,141 | INFO | debate.done prover_len=326 debunker_len=381
+2025-12-30 15:57:22,051 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:57:22,054 | INFO | verify.done verdict=Verified confidence=0.85 ms=9859.6 manual_review=False
+2025-12-30 15:57:22,259 | INFO | verify.start claim=Does free will exist?
+2025-12-30 15:57:22,260 | INFO | claim.type=prediction
+2025-12-30 15:57:23,373 | INFO | sources.retrieved count=5
+2025-12-30 15:57:23,374 | INFO | debate.start
+2025-12-30 15:57:26,365 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:57:28,150 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:57:28,153 | INFO | debate.done prover_len=645 debunker_len=529
+2025-12-30 15:57:33,612 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:57:33,614 | INFO | verify.done verdict=Uncertain confidence=0.45 ms=11354.4 manual_review=True
+2025-12-30 15:57:33,818 | INFO | verify.start claim=Does the government control the weather?
+2025-12-30 15:57:33,819 | INFO | claim.type=factual
+2025-12-30 15:57:35,367 | INFO | sources.retrieved count=5
+2025-12-30 15:57:35,367 | INFO | debate.start
+2025-12-30 15:57:35,369 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:57:35,370 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:57:36,198 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:57:36,201 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:57:36,202 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:57:37,140 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:57:37,142 | INFO | debate.done prover_len=429 debunker_len=467
+2025-12-30 15:57:44,239 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:57:44,242 | INFO | verify.done verdict=Unverified confidence=0.92 ms=10424.1 manual_review=False
+2025-12-30 15:57:44,445 | INFO | verify.start claim=Is cold fusion scientifically achievable?
+2025-12-30 15:57:44,446 | INFO | claim.type=factual
+2025-12-30 15:57:45,755 | INFO | sources.retrieved count=5
+2025-12-30 15:57:45,757 | INFO | debate.start
+2025-12-30 15:57:49,085 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:57:51,121 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:57:51,124 | INFO | debate.done prover_len=649 debunker_len=685
+2025-12-30 15:57:58,146 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:57:58,149 | INFO | verify.done verdict=Unverified confidence=0.45 ms=13703.2 manual_review=True
+2025-12-30 15:57:58,353 | INFO | verify.start claim=Is calling someone a 'CEO' actually a compliment?
+2025-12-30 15:57:58,355 | INFO | claim.type=factual
+2025-12-30 15:57:59,931 | INFO | sources.retrieved count=5
+2025-12-30 15:57:59,932 | INFO | debate.start
+2025-12-30 15:57:59,936 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:57:59,937 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:58:01,048 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:58:01,054 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:58:01,055 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:58:01,964 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:58:01,966 | INFO | debate.done prover_len=486 debunker_len=432
+2025-12-30 15:58:08,766 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:58:08,771 | INFO | verify.done verdict=Inconclusive confidence=0.15 ms=10417.4 manual_review=True
+2025-12-30 15:58:08,975 | INFO | verify.start claim=Does art need to have meaning?
+2025-12-30 15:58:08,977 | INFO | claim.type=factual
+2025-12-30 15:58:10,427 | INFO | sources.retrieved count=5
+2025-12-30 15:58:10,429 | INFO | debate.start
+2025-12-30 15:58:13,359 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:58:14,338 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:58:14,340 | INFO | debate.done prover_len=516 debunker_len=631
+2025-12-30 15:58:20,838 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:58:20,841 | INFO | verify.done verdict=Inconclusive confidence=0.40 ms=11865.5 manual_review=True
+2025-12-30 15:58:21,046 | INFO | verify.start claim=Are all politicians corrupt?
+2025-12-30 15:58:21,047 | INFO | claim.type=factual
+2025-12-30 15:58:22,265 | INFO | sources.retrieved count=5
+2025-12-30 15:58:22,266 | INFO | debate.start
+2025-12-30 15:58:22,270 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:58:22,271 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:58:23,525 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:58:23,529 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:58:23,530 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:58:24,448 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:58:24,450 | INFO | debate.done prover_len=598 debunker_len=441
+2025-12-30 15:58:30,447 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:58:30,450 | INFO | verify.done verdict=Unverified confidence=0.72 ms=9403.4 manual_review=False
+2025-12-30 15:58:30,654 | INFO | verify.start claim=Is P = NP likely to be proven true?
+2025-12-30 15:58:30,655 | INFO | claim.type=prediction
+2025-12-30 15:58:32,290 | INFO | sources.retrieved count=5
+2025-12-30 15:58:32,290 | INFO | debate.start
+2025-12-30 15:58:35,342 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:58:39,897 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:58:39,898 | INFO | debate.done prover_len=581 debunker_len=690
+2025-12-30 15:58:47,092 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:58:47,095 | INFO | verify.done verdict=Unlikely confidence=0.82 ms=16440.8 manual_review=False
+2025-12-30 15:58:47,300 | INFO | verify.start claim=Is 'cap' the same as 'no cap' or are they opposites?
+2025-12-30 15:58:47,301 | INFO | claim.type=factual
+2025-12-30 15:58:48,410 | INFO | sources.retrieved count=5
+2025-12-30 15:58:48,411 | INFO | debate.start
+2025-12-30 15:58:48,415 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:58:48,415 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:58:49,294 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:58:49,300 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:58:49,301 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:58:50,277 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:58:50,281 | INFO | debate.done prover_len=327 debunker_len=403
+2025-12-30 15:58:57,211 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:58:57,214 | INFO | verify.done verdict=Verified confidence=0.90 ms=9913.9 manual_review=False
+2025-12-30 15:58:57,418 | INFO | verify.start claim=Does money buy happiness?
+2025-12-30 15:58:57,419 | INFO | claim.type=factual
+2025-12-30 15:58:58,326 | INFO | sources.retrieved count=5
+2025-12-30 15:58:58,326 | INFO | debate.start
+2025-12-30 15:59:00,581 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:59:04,413 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:59:04,415 | INFO | debate.done prover_len=642 debunker_len=644
+2025-12-30 15:59:10,879 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:59:10,882 | INFO | verify.done verdict=Verified confidence=0.75 ms=13464.2 manual_review=False
+2025-12-30 15:59:11,087 | INFO | verify.start claim=Are vaccines more dangerous than the diseases they prevent?
+2025-12-30 15:59:11,088 | INFO | claim.type=factual
+2025-12-30 15:59:12,177 | INFO | sources.retrieved count=5
+2025-12-30 15:59:12,178 | INFO | debate.start
+2025-12-30 15:59:12,182 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:59:12,182 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:59:13,072 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:59:13,077 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:59:13,078 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:59:14,257 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:59:14,260 | INFO | debate.done prover_len=430 debunker_len=649
+2025-12-30 15:59:21,379 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:59:21,382 | INFO | verify.done verdict=Verified confidence=0.95 ms=10294.1 manual_review=False
+2025-12-30 15:59:21,586 | INFO | verify.start claim=Does SHA-256 have known collision vulnerabilities?
+2025-12-30 15:59:21,588 | INFO | claim.type=factual
+2025-12-30 15:59:22,625 | INFO | sources.retrieved count=5
+2025-12-30 15:59:22,626 | INFO | debate.start
+2025-12-30 15:59:26,541 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:59:33,313 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:59:33,316 | INFO | debate.done prover_len=728 debunker_len=590
+2025-12-30 15:59:41,118 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:59:41,122 | INFO | verify.done verdict=Unverified confidence=0.65 ms=19535.6 manual_review=False
+2025-12-30 15:59:41,327 | INFO | verify.start claim=Is 'slay' still cool or is it cringe now?
+2025-12-30 15:59:41,328 | INFO | claim.type=factual
+2025-12-30 15:59:42,511 | INFO | sources.retrieved count=5
+2025-12-30 15:59:42,512 | INFO | debate.start
+2025-12-30 15:59:42,516 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 15:59:42,517 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:59:43,378 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:59:43,383 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 15:59:43,384 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 15:59:44,466 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 15:59:44,467 | INFO | debate.done prover_len=323 debunker_len=438
+2025-12-30 15:59:51,742 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 15:59:51,746 | INFO | verify.done verdict=Verified confidence=0.75 ms=10419.2 manual_review=False
+2025-12-30 15:59:51,951 | INFO | verify.start claim=Does light have mass?
+2025-12-30 15:59:51,952 | INFO | claim.type=factual
+2025-12-30 15:59:53,175 | INFO | sources.retrieved count=5
+2025-12-30 15:59:53,176 | INFO | debate.start
+2025-12-30 15:59:55,835 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:59:56,407 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 15:59:56,409 | INFO | debate.done prover_len=571 debunker_len=519
+2025-12-30 16:00:02,901 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:00:02,902 | INFO | verify.done verdict=Unverified confidence=0.75 ms=10951.1 manual_review=False
+2025-12-30 16:00:03,106 | INFO | verify.start claim=Is democracy a failed system?
+2025-12-30 16:00:03,107 | INFO | verify.pre_filtered reason=Normative pattern detected: 'failed system'
+2025-12-30 16:00:03,311 | INFO | verify.start claim=Will CRISPR eliminate genetic diseases by 2035?
+2025-12-30 16:00:03,312 | INFO | claim.type=prediction
+2025-12-30 16:00:04,790 | INFO | sources.retrieved count=5
+2025-12-30 16:00:04,791 | INFO | debate.start
+2025-12-30 16:00:04,793 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:00:04,794 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:00:05,923 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:00:05,925 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:00:05,926 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:00:07,012 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:00:07,015 | INFO | debate.done prover_len=496 debunker_len=455
+2025-12-30 16:00:14,252 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:00:14,255 | INFO | verify.done verdict=Uncertain confidence=0.45 ms=10944.0 manual_review=True
+2025-12-30 16:00:14,460 | INFO | verify.start claim=Is 'rizz' actually a real word or just internet slang?
+2025-12-30 16:00:14,461 | INFO | claim.type=factual
+2025-12-30 16:00:15,708 | INFO | sources.retrieved count=5
+2025-12-30 16:00:15,709 | INFO | debate.start
+2025-12-30 16:00:19,883 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:00:20,057 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:00:20,060 | INFO | debate.done prover_len=575 debunker_len=556
+2025-12-30 16:00:25,716 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:00:25,719 | INFO | verify.done verdict=Verified confidence=0.85 ms=11259.9 manual_review=False
+2025-12-30 16:00:25,925 | INFO | verify.start claim=Does pineapple belong on pizza?
+2025-12-30 16:00:25,926 | INFO | verify.pre_filtered reason=Normative pattern detected: 'belong on'
+2025-12-30 16:00:26,130 | INFO | verify.start claim=Does religion cause more harm than good?
+2025-12-30 16:00:26,132 | INFO | verify.pre_filtered reason=Normative pattern detected: 'cause more harm than good'
+2025-12-30 16:00:26,336 | INFO | verify.start claim=Will AGI be achieved before 2030?
+2025-12-30 16:00:26,337 | INFO | claim.type=prediction
+2025-12-30 16:00:27,561 | INFO | sources.retrieved count=5
+2025-12-30 16:00:27,562 | INFO | debate.start
+2025-12-30 16:00:27,565 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:00:27,566 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:00:28,498 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:00:28,504 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:00:28,505 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:00:29,871 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:00:29,874 | INFO | debate.done prover_len=304 debunker_len=606
+2025-12-30 16:00:36,599 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:00:36,601 | INFO | verify.done verdict=Uncertain confidence=0.45 ms=10264.6 manual_review=True
+2025-12-30 16:00:36,803 | INFO | verify.start claim=Is 'bussin' a valid replacement for 'delicious'?
+2025-12-30 16:00:36,804 | INFO | claim.type=factual
+2025-12-30 16:00:37,943 | INFO | sources.retrieved count=5
+2025-12-30 16:00:37,944 | INFO | debate.start
+2025-12-30 16:00:40,523 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:00:43,563 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:00:43,566 | INFO | debate.done prover_len=554 debunker_len=560
+2025-12-30 16:00:50,371 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:00:50,374 | INFO | verify.done verdict=Verified confidence=0.85 ms=13571.0 manual_review=False
+2025-12-30 16:00:50,579 | INFO | verify.start claim=Does free will exist?
+2025-12-30 16:00:50,580 | INFO | claim.type=prediction
+2025-12-30 16:00:52,024 | INFO | sources.retrieved count=5
+2025-12-30 16:00:52,025 | INFO | debate.start
+2025-12-30 16:00:52,029 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:00:52,030 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:00:52,867 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:00:52,873 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:00:52,874 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:00:53,973 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:00:53,976 | INFO | debate.done prover_len=321 debunker_len=433
+2025-12-30 16:01:00,887 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:01:00,888 | INFO | verify.done verdict=Uncertain confidence=0.55 ms=10309.6 manual_review=True
+2025-12-30 16:01:01,090 | INFO | verify.start claim=Does the government control the weather?
+2025-12-30 16:01:01,091 | INFO | claim.type=factual
+2025-12-30 16:01:02,680 | INFO | sources.retrieved count=5
+2025-12-30 16:01:02,681 | INFO | debate.start
+2025-12-30 16:01:05,330 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:01:10,069 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:01:10,070 | INFO | debate.done prover_len=775 debunker_len=597
+2025-12-30 16:01:16,698 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:01:16,701 | INFO | verify.done verdict=Unverified confidence=0.92 ms=15610.3 manual_review=False
+2025-12-30 16:01:16,905 | INFO | verify.start claim=Is cold fusion scientifically achievable?
+2025-12-30 16:01:16,905 | INFO | claim.type=factual
+2025-12-30 16:01:18,241 | INFO | sources.retrieved count=5
+2025-12-30 16:01:18,241 | INFO | debate.start
+2025-12-30 16:01:18,243 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:01:18,243 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:01:19,533 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:01:19,538 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:01:19,539 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:01:20,693 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:01:20,696 | INFO | debate.done prover_len=644 debunker_len=508
+2025-12-30 16:01:27,771 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:01:27,774 | INFO | verify.done verdict=Inconclusive confidence=0.45 ms=10869.0 manual_review=True
+2025-12-30 16:01:27,979 | INFO | verify.start claim=Is calling someone a 'CEO' actually a compliment?
+2025-12-30 16:01:27,981 | INFO | claim.type=factual
+2025-12-30 16:01:29,893 | INFO | sources.retrieved count=5
+2025-12-30 16:01:29,894 | INFO | debate.start
+2025-12-30 16:01:31,956 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:01:35,008 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:01:35,011 | INFO | debate.done prover_len=589 debunker_len=514
+2025-12-30 16:01:42,198 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:01:42,201 | INFO | verify.done verdict=Unverified confidence=0.45 ms=14221.4 manual_review=True
+2025-12-30 16:01:42,405 | INFO | verify.start claim=Does art need to have meaning?
+2025-12-30 16:01:42,407 | INFO | claim.type=factual
+2025-12-30 16:01:43,684 | INFO | sources.retrieved count=5
+2025-12-30 16:01:43,685 | INFO | debate.start
+2025-12-30 16:01:43,689 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:01:43,690 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:01:44,832 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:01:44,838 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:01:44,838 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:01:45,917 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:01:45,921 | INFO | debate.done prover_len=545 debunker_len=504
+2025-12-30 16:01:53,120 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:01:53,124 | INFO | verify.done verdict=Inconclusive confidence=0.40 ms=10717.9 manual_review=True
+2025-12-30 16:01:53,331 | INFO | verify.start claim=Are all politicians corrupt?
+2025-12-30 16:01:53,332 | INFO | claim.type=factual
+2025-12-30 16:01:54,305 | INFO | sources.retrieved count=5
+2025-12-30 16:01:54,306 | INFO | debate.start
+2025-12-30 16:01:56,976 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:01:57,101 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:01:57,103 | INFO | debate.done prover_len=542 debunker_len=579
+2025-12-30 16:02:03,549 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:02:03,552 | INFO | verify.done verdict=Unverified confidence=0.65 ms=10222.2 manual_review=False
+2025-12-30 16:02:03,757 | INFO | verify.start claim=Is P = NP likely to be proven true?
+2025-12-30 16:02:03,757 | INFO | claim.type=prediction
+2025-12-30 16:02:04,969 | INFO | sources.retrieved count=5
+2025-12-30 16:02:04,970 | INFO | debate.start
+2025-12-30 16:02:04,974 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:02:04,974 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:02:06,071 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:02:06,076 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:02:06,077 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:02:07,162 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:02:07,164 | INFO | debate.done prover_len=548 debunker_len=508
+2025-12-30 16:02:12,765 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:02:12,768 | INFO | verify.done verdict=Unlikely confidence=0.85 ms=9012.0 manual_review=False
+2025-12-30 16:02:12,974 | INFO | verify.start claim=Is 'cap' the same as 'no cap' or are they opposites?
+2025-12-30 16:02:12,975 | INFO | claim.type=factual
+2025-12-30 16:02:14,257 | INFO | sources.retrieved count=5
+2025-12-30 16:02:14,258 | INFO | debate.start
+2025-12-30 16:02:18,259 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:02:20,217 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:02:20,219 | INFO | debate.done prover_len=613 debunker_len=543
+2025-12-30 16:02:26,399 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:02:26,402 | INFO | verify.done verdict=Unverified confidence=0.65 ms=13428.8 manual_review=False
+2025-12-30 16:02:26,607 | INFO | verify.start claim=Does money buy happiness?
+2025-12-30 16:02:26,608 | INFO | claim.type=factual
+2025-12-30 16:02:27,688 | INFO | sources.retrieved count=5
+2025-12-30 16:02:27,689 | INFO | debate.start
+2025-12-30 16:02:27,693 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:02:27,693 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:02:28,547 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:02:28,553 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:02:28,554 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:02:29,504 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:02:29,506 | INFO | debate.done prover_len=309 debunker_len=409
+2025-12-30 16:02:36,478 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:02:36,481 | INFO | verify.done verdict=Verified confidence=0.75 ms=9874.3 manual_review=False
+2025-12-30 16:02:36,689 | INFO | verify.start claim=Are vaccines more dangerous than the diseases they prevent?
+2025-12-30 16:02:36,690 | INFO | claim.type=factual
+2025-12-30 16:02:37,853 | INFO | sources.retrieved count=5
+2025-12-30 16:02:37,854 | INFO | debate.start
+2025-12-30 16:02:40,880 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:02:41,204 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:02:41,206 | INFO | debate.done prover_len=448 debunker_len=693
+2025-12-30 16:02:46,450 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:02:46,453 | INFO | verify.done verdict=Unverified confidence=0.85 ms=9762.7 manual_review=False
+2025-12-30 16:02:46,658 | INFO | verify.start claim=Does SHA-256 have known collision vulnerabilities?
+2025-12-30 16:02:46,660 | INFO | claim.type=factual
+2025-12-30 16:02:48,033 | INFO | sources.retrieved count=5
+2025-12-30 16:02:48,034 | INFO | debate.start
+2025-12-30 16:02:48,040 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:02:48,041 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:02:49,018 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:02:49,026 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:02:49,027 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:02:50,025 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:02:50,028 | INFO | debate.done prover_len=373 debunker_len=394
+2025-12-30 16:02:57,889 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:02:57,892 | INFO | verify.done verdict=Verified confidence=0.85 ms=11233.4 manual_review=False
+2025-12-30 16:02:58,096 | INFO | verify.start claim=Is 'slay' still cool or is it cringe now?
+2025-12-30 16:02:58,097 | INFO | claim.type=factual
+2025-12-30 16:02:59,415 | INFO | sources.retrieved count=5
+2025-12-30 16:02:59,416 | INFO | debate.start
+2025-12-30 16:03:04,002 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:03:04,760 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:03:04,762 | INFO | debate.done prover_len=557 debunker_len=591
+2025-12-30 16:03:11,374 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:03:11,378 | INFO | verify.done verdict=Inconclusive confidence=0.45 ms=13281.0 manual_review=True
+2025-12-30 16:03:11,581 | INFO | verify.start claim=Does light have mass?
+2025-12-30 16:03:11,582 | INFO | claim.type=factual
+2025-12-30 16:03:12,777 | INFO | sources.retrieved count=5
+2025-12-30 16:03:12,778 | INFO | debate.start
+2025-12-30 16:03:12,782 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:03:12,783 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:03:13,742 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:03:13,748 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:03:13,750 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:03:14,936 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:03:14,940 | INFO | debate.done prover_len=417 debunker_len=386
+2025-12-30 16:03:20,462 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:03:20,464 | INFO | verify.done verdict=Unverified confidence=0.85 ms=8883.7 manual_review=False
+2025-12-30 16:03:20,669 | INFO | verify.start claim=Is democracy a failed system?
+2025-12-30 16:03:20,670 | INFO | verify.pre_filtered reason=Normative pattern detected: 'failed system'
+2025-12-30 16:03:20,874 | INFO | verify.start claim=Will CRISPR eliminate genetic diseases by 2035?
+2025-12-30 16:03:20,875 | INFO | claim.type=prediction
+2025-12-30 16:03:22,207 | INFO | sources.retrieved count=5
+2025-12-30 16:03:22,208 | INFO | debate.start
+2025-12-30 16:03:26,672 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:03:33,626 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:03:33,629 | INFO | debate.done prover_len=825 debunker_len=753
+2025-12-30 16:03:39,997 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:03:39,998 | INFO | verify.done verdict=Uncertain confidence=0.45 ms=19124.1 manual_review=True
+2025-12-30 16:03:40,201 | INFO | verify.start claim=Is 'rizz' actually a real word or just internet slang?
+2025-12-30 16:03:40,202 | INFO | claim.type=factual
+2025-12-30 16:03:41,402 | INFO | sources.retrieved count=5
+2025-12-30 16:03:41,403 | INFO | debate.start
+2025-12-30 16:03:41,407 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:03:41,408 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:03:42,388 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:03:42,391 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:03:42,392 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:03:43,413 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:03:43,416 | INFO | debate.done prover_len=396 debunker_len=382
+2025-12-30 16:03:49,942 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:03:49,944 | INFO | verify.done verdict=Verified confidence=0.85 ms=9743.7 manual_review=False
+2025-12-30 16:03:50,148 | INFO | verify.start claim=Does pineapple belong on pizza?
+2025-12-30 16:03:50,150 | INFO | verify.pre_filtered reason=Normative pattern detected: 'belong on'
+2025-12-30 16:03:50,354 | INFO | verify.start claim=Does religion cause more harm than good?
+2025-12-30 16:03:50,355 | INFO | verify.pre_filtered reason=Normative pattern detected: 'cause more harm than good'
+2025-12-30 16:03:50,560 | INFO | verify.start claim=Will AGI be achieved before 2030?
+2025-12-30 16:03:50,561 | INFO | claim.type=prediction
+2025-12-30 16:03:52,080 | INFO | sources.retrieved count=5
+2025-12-30 16:03:52,081 | INFO | debate.start
+2025-12-30 16:03:55,112 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:04:03,602 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:04:03,603 | INFO | debate.done prover_len=599 debunker_len=574
+2025-12-30 16:04:11,252 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:04:11,254 | INFO | verify.done verdict=Uncertain confidence=0.45 ms=20694.3 manual_review=True
+2025-12-30 16:04:11,458 | INFO | verify.start claim=Is 'bussin' a valid replacement for 'delicious'?
+2025-12-30 16:04:11,459 | INFO | claim.type=factual
+2025-12-30 16:04:12,697 | INFO | sources.retrieved count=5
+2025-12-30 16:04:12,698 | INFO | debate.start
+2025-12-30 16:04:12,702 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:04:12,703 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:04:13,922 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:04:13,927 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:04:13,928 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:04:15,034 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:04:15,038 | INFO | debate.done prover_len=491 debunker_len=391
+2025-12-30 16:04:21,857 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:04:21,859 | INFO | verify.done verdict=Verified confidence=0.85 ms=10401.0 manual_review=False
+2025-12-30 16:04:22,063 | INFO | verify.start claim=Does free will exist?
+2025-12-30 16:04:22,064 | INFO | claim.type=prediction
+2025-12-30 16:04:23,074 | INFO | sources.retrieved count=5
+2025-12-30 16:04:23,074 | INFO | debate.start
+2025-12-30 16:04:26,638 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:04:34,087 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:04:34,089 | INFO | debate.done prover_len=619 debunker_len=714
+2025-12-30 16:04:38,561 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:04:38,564 | INFO | verify.done verdict=Uncertain confidence=0.55 ms=16500.5 manual_review=True
+2025-12-30 16:04:38,769 | INFO | verify.start claim=Does the government control the weather?
+2025-12-30 16:04:38,770 | INFO | claim.type=factual
+2025-12-30 16:04:39,900 | INFO | sources.retrieved count=5
+2025-12-30 16:04:39,901 | INFO | debate.start
+2025-12-30 16:04:39,905 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:04:39,905 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:04:40,784 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:04:40,790 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:04:40,790 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:04:41,729 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:04:41,733 | INFO | debate.done prover_len=383 debunker_len=491
+2025-12-30 16:04:47,417 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:04:47,421 | INFO | verify.done verdict=Unverified confidence=0.65 ms=8652.2 manual_review=False
+2025-12-30 16:04:47,623 | INFO | verify.start claim=Is cold fusion scientifically achievable?
+2025-12-30 16:04:47,624 | INFO | claim.type=factual
+2025-12-30 16:04:48,998 | INFO | sources.retrieved count=5
+2025-12-30 16:04:48,999 | INFO | debate.start
+2025-12-30 16:04:53,028 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:04:54,532 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:04:54,534 | INFO | debate.done prover_len=660 debunker_len=658
+2025-12-30 16:05:01,996 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:05:01,999 | INFO | verify.done verdict=Unverified confidence=0.45 ms=14375.6 manual_review=True
+2025-12-30 16:05:02,204 | INFO | verify.start claim=Is calling someone a 'CEO' actually a compliment?
+2025-12-30 16:05:02,204 | INFO | claim.type=factual
+2025-12-30 16:05:03,694 | INFO | sources.retrieved count=5
+2025-12-30 16:05:03,694 | INFO | debate.start
+2025-12-30 16:05:03,697 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:05:03,697 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:05:04,618 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:05:04,626 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:05:04,627 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:05:05,662 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:05:05,664 | INFO | debate.done prover_len=318 debunker_len=411
+2025-12-30 16:05:12,775 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:05:12,778 | INFO | verify.done verdict=Verified confidence=0.75 ms=10574.4 manual_review=False
+2025-12-30 16:05:12,983 | INFO | verify.start claim=Does art need to have meaning?
+2025-12-30 16:05:12,983 | INFO | claim.type=factual
+2025-12-30 16:05:14,302 | INFO | sources.retrieved count=5
+2025-12-30 16:05:14,303 | INFO | debate.start
+2025-12-30 16:05:17,590 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:05:44,313 | ERROR | debate.timeout
+2025-12-30 16:05:44,516 | INFO | verify.start claim=Are all politicians corrupt?
+2025-12-30 16:05:44,517 | INFO | claim.type=factual
+2025-12-30 16:05:46,417 | INFO | sources.retrieved count=5
+2025-12-30 16:05:46,417 | INFO | debate.start
+2025-12-30 16:05:46,424 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:05:46,425 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:05:47,381 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:06:16,415 | ERROR | debate.timeout
+2025-12-30 16:06:16,619 | INFO | verify.start claim=Is P = NP likely to be proven true?
+2025-12-30 16:06:16,620 | INFO | claim.type=prediction
+2025-12-30 16:06:20,446 | INFO | sources.retrieved count=5
+2025-12-30 16:06:20,447 | INFO | debate.start
+2025-12-30 16:06:20,719 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-12-30 16:06:20,720 | WARNING | prover.deepinfra.failed err=Error code: 429 - {'error': {'message': 'Model busy, retry later'}}
+2025-12-30 16:06:20,720 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:06:22,050 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:06:24,218 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:06:24,220 | INFO | debate.done prover_len=517 debunker_len=581
+2025-12-30 16:06:31,603 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:06:31,607 | INFO | verify.done verdict=Unlikely confidence=0.75 ms=14988.1 manual_review=False
+2025-12-30 16:06:31,811 | INFO | verify.start claim=Is 'cap' the same as 'no cap' or are they opposites?
+2025-12-30 16:06:31,813 | INFO | claim.type=factual
+2025-12-30 16:06:32,801 | INFO | sources.retrieved count=5
+2025-12-30 16:06:32,802 | INFO | debate.start
+2025-12-30 16:06:32,806 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:06:32,807 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:06:33,791 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:06:33,798 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:06:33,799 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:06:34,841 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:06:34,844 | INFO | debate.done prover_len=357 debunker_len=357
+2025-12-30 16:06:41,635 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:06:41,667 | INFO | verify.done verdict=Verified confidence=0.85 ms=9855.9 manual_review=False
+2025-12-30 16:06:41,873 | INFO | verify.start claim=Does money buy happiness?
+2025-12-30 16:06:41,874 | INFO | claim.type=factual
+2025-12-30 16:06:43,171 | INFO | sources.retrieved count=5
+2025-12-30 16:06:43,172 | INFO | debate.start
+2025-12-30 16:06:45,739 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:07:07,947 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:07:07,950 | INFO | debate.done prover_len=549 debunker_len=615
+2025-12-30 16:07:16,071 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:07:16,074 | INFO | verify.done verdict=Verified confidence=0.75 ms=34202.1 manual_review=False
+2025-12-30 16:07:16,279 | INFO | verify.start claim=Are vaccines more dangerous than the diseases they prevent?
+2025-12-30 16:07:16,280 | INFO | claim.type=factual
+2025-12-30 16:07:17,271 | INFO | sources.retrieved count=5
+2025-12-30 16:07:17,271 | INFO | debate.start
+2025-12-30 16:07:17,273 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:07:17,274 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:07:18,172 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:07:18,175 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:07:18,175 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:07:19,284 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:07:19,287 | INFO | debate.done prover_len=461 debunker_len=503
+2025-12-30 16:07:26,887 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:07:26,889 | INFO | verify.done verdict=Verified confidence=0.90 ms=10609.6 manual_review=False
+2025-12-30 16:07:27,094 | INFO | verify.start claim=Does SHA-256 have known collision vulnerabilities?
+2025-12-30 16:07:27,094 | INFO | claim.type=factual
+2025-12-30 16:07:28,292 | INFO | sources.retrieved count=5
+2025-12-30 16:07:28,292 | INFO | debate.start
+2025-12-30 16:07:31,238 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:07:55,641 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:07:55,644 | INFO | debate.done prover_len=508 debunker_len=595
+2025-12-30 16:08:02,450 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:08:02,454 | INFO | verify.done verdict=Unverified confidence=0.85 ms=35360.0 manual_review=False
+2025-12-30 16:08:02,659 | INFO | verify.start claim=Is 'slay' still cool or is it cringe now?
+2025-12-30 16:08:02,660 | INFO | claim.type=factual
+2025-12-30 16:08:03,804 | INFO | sources.retrieved count=5
+2025-12-30 16:08:03,804 | INFO | debate.start
+2025-12-30 16:08:03,806 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:08:03,806 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:08:04,828 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:08:04,835 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:08:04,836 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:08:06,054 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:08:06,055 | INFO | debate.done prover_len=470 debunker_len=456
+2025-12-30 16:08:10,907 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:08:10,910 | INFO | verify.done verdict=Unverified confidence=0.65 ms=8251.9 manual_review=False
+2025-12-30 16:08:11,115 | INFO | verify.start claim=Does light have mass?
+2025-12-30 16:08:11,116 | INFO | claim.type=factual
+2025-12-30 16:08:12,241 | INFO | sources.retrieved count=5
+2025-12-30 16:08:12,242 | INFO | debate.start
+2025-12-30 16:08:12,495 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-12-30 16:08:12,496 | WARNING | prover.deepinfra.failed err=Error code: 429 - {'error': {'message': 'Model busy, retry later'}}
+2025-12-30 16:08:12,497 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:08:13,451 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:08:14,626 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:08:14,629 | INFO | debate.done prover_len=446 debunker_len=550
+2025-12-30 16:08:20,308 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:08:20,320 | INFO | verify.done verdict=Unverified confidence=0.85 ms=9205.9 manual_review=False
+2025-12-30 16:08:20,525 | INFO | verify.start claim=Is democracy a failed system?
+2025-12-30 16:08:20,526 | INFO | verify.pre_filtered reason=Normative pattern detected: 'failed system'
+2025-12-30 16:08:20,730 | INFO | verify.start claim=Will CRISPR eliminate genetic diseases by 2035?
+2025-12-30 16:08:20,731 | INFO | claim.type=prediction
+2025-12-30 16:08:21,935 | INFO | sources.retrieved count=5
+2025-12-30 16:08:21,936 | INFO | debate.start
+2025-12-30 16:08:21,940 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:08:21,941 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:08:23,155 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:08:23,161 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:08:23,163 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:08:24,312 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:08:24,315 | INFO | debate.done prover_len=575 debunker_len=505
+2025-12-30 16:08:30,838 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:08:30,841 | INFO | verify.done verdict=Uncertain confidence=0.62 ms=10110.7 manual_review=True
+2025-12-30 16:08:31,045 | INFO | verify.start claim=Is 'rizz' actually a real word or just internet slang?
+2025-12-30 16:08:31,046 | INFO | claim.type=factual
+2025-12-30 16:08:32,075 | INFO | sources.retrieved count=5
+2025-12-30 16:08:32,076 | INFO | debate.start
+2025-12-30 16:08:32,319 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-12-30 16:08:32,321 | WARNING | prover.deepinfra.failed err=Error code: 429 - {'error': {'message': 'Model busy, retry later'}}
+2025-12-30 16:08:32,321 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:08:33,231 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:08:35,113 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:08:35,115 | INFO | debate.done prover_len=338 debunker_len=588
+2025-12-30 16:08:42,129 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:08:42,131 | INFO | verify.done verdict=Inconclusive confidence=0.25 ms=11086.7 manual_review=True
+2025-12-30 16:08:42,336 | INFO | verify.start claim=Does pineapple belong on pizza?
+2025-12-30 16:08:42,336 | INFO | verify.pre_filtered reason=Normative pattern detected: 'belong on'
+2025-12-30 16:08:42,540 | INFO | verify.start claim=Does religion cause more harm than good?
+2025-12-30 16:08:42,541 | INFO | verify.pre_filtered reason=Normative pattern detected: 'cause more harm than good'
+2025-12-30 16:08:42,746 | INFO | verify.start claim=Will AGI be achieved before 2030?
+2025-12-30 16:08:42,747 | INFO | claim.type=prediction
+2025-12-30 16:08:43,765 | INFO | sources.retrieved count=5
+2025-12-30 16:08:43,767 | INFO | debate.start
+2025-12-30 16:08:43,771 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:08:43,772 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:08:44,770 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:08:44,775 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:08:44,776 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:08:46,051 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:08:46,052 | INFO | debate.done prover_len=458 debunker_len=346
+2025-12-30 16:08:51,499 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:08:51,621 | INFO | verify.done verdict=Uncertain confidence=0.45 ms=8875.0 manual_review=True
+2025-12-30 16:08:51,826 | INFO | verify.start claim=Is 'bussin' a valid replacement for 'delicious'?
+2025-12-30 16:08:51,827 | INFO | claim.type=factual
+2025-12-30 16:08:52,827 | INFO | sources.retrieved count=5
+2025-12-30 16:08:52,828 | INFO | debate.start
+2025-12-30 16:08:53,071 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-12-30 16:08:53,072 | WARNING | prover.deepinfra.failed err=Error code: 429 - {'error': {'message': 'Model busy, retry later'}}
+2025-12-30 16:08:53,072 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:08:54,341 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:08:56,238 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:08:56,241 | INFO | debate.done prover_len=552 debunker_len=526
+2025-12-30 16:09:02,916 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:09:02,919 | INFO | verify.done verdict=Verified confidence=0.75 ms=11092.6 manual_review=False
+2025-12-30 16:09:03,123 | INFO | verify.start claim=Does free will exist?
+2025-12-30 16:09:03,123 | INFO | claim.type=prediction
+2025-12-30 16:09:08,047 | INFO | sources.retrieved count=5
+2025-12-30 16:09:08,049 | INFO | debate.start
+2025-12-30 16:09:08,053 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:09:08,054 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:09:09,216 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:09:09,220 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:09:09,220 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:09:10,185 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:09:10,188 | INFO | debate.done prover_len=405 debunker_len=431
+2025-12-30 16:09:16,247 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:09:16,250 | INFO | verify.done verdict=Uncertain confidence=0.55 ms=13127.5 manual_review=True
+2025-12-30 16:09:16,455 | INFO | verify.start claim=Does the government control the weather?
+2025-12-30 16:09:16,456 | INFO | claim.type=factual
+2025-12-30 16:09:17,901 | INFO | sources.retrieved count=5
+2025-12-30 16:09:17,902 | INFO | debate.start
+2025-12-30 16:09:18,134 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-12-30 16:09:18,136 | WARNING | prover.deepinfra.failed err=Error code: 429 - {'error': {'message': 'Model busy, retry later'}}
+2025-12-30 16:09:18,137 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:09:19,017 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:09:21,482 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:09:21,484 | INFO | debate.done prover_len=423 debunker_len=622
+2025-12-30 16:09:27,821 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:09:27,824 | INFO | verify.done verdict=Unverified confidence=0.85 ms=11369.4 manual_review=False
+2025-12-30 16:09:28,029 | INFO | verify.start claim=Is cold fusion scientifically achievable?
+2025-12-30 16:09:28,029 | INFO | claim.type=factual
+2025-12-30 16:09:29,166 | INFO | sources.retrieved count=5
+2025-12-30 16:09:29,167 | INFO | debate.start
+2025-12-30 16:09:29,169 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:09:29,169 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:09:30,242 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:09:30,246 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:09:30,246 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:09:31,259 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:09:31,263 | INFO | debate.done prover_len=437 debunker_len=463
+2025-12-30 16:09:37,900 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:09:37,903 | INFO | verify.done verdict=Unverified confidence=0.75 ms=9874.3 manual_review=False
+2025-12-30 16:09:38,108 | INFO | verify.start claim=Is calling someone a 'CEO' actually a compliment?
+2025-12-30 16:09:38,108 | INFO | claim.type=factual
+2025-12-30 16:09:39,343 | INFO | sources.retrieved count=5
+2025-12-30 16:09:39,344 | INFO | debate.start
+2025-12-30 16:09:42,622 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:10:09,048 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:10:09,050 | INFO | debate.done prover_len=509 debunker_len=611
+2025-12-30 16:10:15,423 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:10:15,425 | INFO | verify.done verdict=Unverified confidence=0.65 ms=37317.1 manual_review=False
+2025-12-30 16:10:15,628 | INFO | verify.start claim=Does art need to have meaning?
+2025-12-30 16:10:15,629 | INFO | claim.type=factual
+2025-12-30 16:10:16,843 | INFO | sources.retrieved count=5
+2025-12-30 16:10:16,844 | INFO | debate.start
+2025-12-30 16:10:16,847 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:10:16,848 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:10:18,282 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:10:18,288 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:10:18,289 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:10:19,258 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:10:19,261 | INFO | debate.done prover_len=682 debunker_len=496
+2025-12-30 16:10:26,524 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:10:26,528 | INFO | verify.done verdict=Inconclusive confidence=0.35 ms=10899.5 manual_review=True
+2025-12-30 16:10:26,732 | INFO | verify.start claim=Are all politicians corrupt?
+2025-12-30 16:10:26,732 | INFO | claim.type=factual
+2025-12-30 16:10:27,679 | INFO | sources.retrieved count=5
+2025-12-30 16:10:27,680 | INFO | debate.start
+2025-12-30 16:10:27,949 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-12-30 16:10:27,951 | WARNING | prover.deepinfra.failed err=Error code: 429 - {'error': {'message': 'Model busy, retry later'}}
+2025-12-30 16:10:27,952 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:10:29,114 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:10:31,786 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:10:31,789 | INFO | debate.done prover_len=572 debunker_len=593
+2025-12-30 16:10:37,701 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:10:37,704 | INFO | verify.done verdict=Unverified confidence=0.75 ms=10971.7 manual_review=False
+2025-12-30 16:10:37,909 | INFO | verify.start claim=Is P = NP likely to be proven true?
+2025-12-30 16:10:37,910 | INFO | claim.type=prediction
+2025-12-30 16:10:39,118 | INFO | sources.retrieved count=5
+2025-12-30 16:10:39,119 | INFO | debate.start
+2025-12-30 16:10:39,123 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:10:39,124 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:10:40,032 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:10:40,038 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:10:40,039 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:10:41,140 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:10:41,141 | INFO | debate.done prover_len=374 debunker_len=522
+2025-12-30 16:10:46,859 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:10:46,861 | INFO | verify.done verdict=Uncertain confidence=0.25 ms=8952.8 manual_review=True
+2025-12-30 16:10:47,066 | INFO | verify.start claim=Is 'cap' the same as 'no cap' or are they opposites?
+2025-12-30 16:10:47,067 | INFO | claim.type=factual
+2025-12-30 16:10:48,098 | INFO | sources.retrieved count=5
+2025-12-30 16:10:48,099 | INFO | debate.start
+2025-12-30 16:10:51,773 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:11:15,473 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:11:15,476 | INFO | debate.done prover_len=541 debunker_len=586
+2025-12-30 16:11:22,594 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:11:22,597 | INFO | verify.done verdict=Verified confidence=0.85 ms=35530.8 manual_review=False
+2025-12-30 16:11:22,801 | INFO | verify.start claim=Does money buy happiness?
+2025-12-30 16:11:22,802 | INFO | claim.type=factual
+2025-12-30 16:11:23,986 | INFO | sources.retrieved count=5
+2025-12-30 16:11:23,987 | INFO | debate.start
+2025-12-30 16:11:23,989 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:11:23,989 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:11:24,913 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:11:24,919 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:11:24,920 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:11:26,121 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:11:26,124 | INFO | debate.done prover_len=437 debunker_len=534
+2025-12-30 16:11:31,947 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:11:31,950 | INFO | verify.done verdict=Verified confidence=0.75 ms=9148.5 manual_review=False
+2025-12-30 16:11:32,154 | INFO | verify.start claim=Are vaccines more dangerous than the diseases they prevent?
+2025-12-30 16:11:32,155 | INFO | claim.type=factual
+2025-12-30 16:11:33,318 | INFO | sources.retrieved count=5
+2025-12-30 16:11:33,318 | INFO | debate.start
+2025-12-30 16:11:33,547 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-12-30 16:11:33,549 | WARNING | prover.deepinfra.failed err=Error code: 429 - {'error': {'message': 'Model busy, retry later'}}
+2025-12-30 16:11:33,549 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:11:34,514 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:11:36,713 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:11:36,716 | INFO | debate.done prover_len=429 debunker_len=588
+2025-12-30 16:11:42,635 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:11:42,638 | INFO | verify.done verdict=Verified confidence=0.95 ms=10484.1 manual_review=False
+2025-12-30 16:11:42,842 | INFO | verify.start claim=Does SHA-256 have known collision vulnerabilities?
+2025-12-30 16:11:42,843 | INFO | claim.type=factual
+2025-12-30 16:11:44,337 | INFO | sources.retrieved count=5
+2025-12-30 16:11:44,338 | INFO | debate.start
+2025-12-30 16:11:44,342 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:11:44,342 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:11:45,315 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:11:45,321 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:11:45,322 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:11:46,439 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:11:46,442 | INFO | debate.done prover_len=399 debunker_len=490
+2025-12-30 16:11:52,736 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:11:52,739 | INFO | verify.done verdict=Unverified confidence=0.65 ms=9896.8 manual_review=False
+2025-12-30 16:11:52,943 | INFO | verify.start claim=Is 'slay' still cool or is it cringe now?
+2025-12-30 16:11:52,944 | INFO | claim.type=factual
+2025-12-30 16:11:54,073 | INFO | sources.retrieved count=5
+2025-12-30 16:11:54,074 | INFO | debate.start
+2025-12-30 16:11:57,083 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:12:24,072 | ERROR | debate.timeout
+2025-12-30 16:12:24,275 | INFO | verify.start claim=Does light have mass?
+2025-12-30 16:12:24,276 | INFO | claim.type=factual
+2025-12-30 16:12:25,373 | INFO | sources.retrieved count=5
+2025-12-30 16:12:25,374 | INFO | debate.start
+2025-12-30 16:12:25,378 | WARNING | debunker.deepinfra.failed err=Connection error.
+2025-12-30 16:12:25,379 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:12:26,571 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:12:26,793 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 429 Too Many Requests"
+2025-12-30 16:12:26,795 | WARNING | prover.deepinfra.failed err=Error code: 429 - {'error': {'message': 'Model busy, retry later'}}
+2025-12-30 16:12:26,795 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:12:27,827 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:12:27,828 | INFO | debate.done prover_len=349 debunker_len=536
+2025-12-30 16:12:34,280 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:12:34,283 | ERROR | judge.failed err=Expecting ',' delimiter: line 6 column 5 (char 296)
+2025-12-30 16:12:34,283 | INFO | verify.done verdict=Inconclusive confidence=0.50 ms=10008.7 manual_review=True
+2025-12-30 16:12:34,488 | INFO | verify.start claim=Is democracy a failed system?
+2025-12-30 16:12:34,488 | INFO | verify.pre_filtered reason=Normative pattern detected: 'failed system'
+2025-12-30 16:12:34,693 | INFO | verify.start claim=Will CRISPR eliminate genetic diseases by 2035?
+2025-12-30 16:12:34,694 | INFO | claim.type=prediction
+2025-12-30 16:12:35,974 | INFO | sources.retrieved count=5
+2025-12-30 16:12:35,976 | INFO | debate.start
+2025-12-30 16:12:35,979 | WARNING | prover.deepinfra.failed err=Connection error.
+2025-12-30 16:12:35,980 | INFO | AFC is enabled with max remote calls: 10.
+2025-12-30 16:12:37,215 | INFO | HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent "HTTP/1.1 200 OK"
+2025-12-30 16:12:39,132 | INFO | HTTP Request: POST https://api.deepinfra.com/v1/openai/chat/completions "HTTP/1.1 200 OK"
+2025-12-30 16:12:39,134 | INFO | debate.done prover_len=569 debunker_len=581
+2025-12-30 16:12:45,877 | INFO | HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2025-12-30 16:12:45,880 | INFO | verify.done verdict=Uncertain confidence=0.45 ms=11187.3 manual_review=True

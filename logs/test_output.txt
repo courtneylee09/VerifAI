@@ -1,0 +1,200 @@
+
+================================================================================
+SYNCHRONOUS 1000-REQUEST STRESS TEST
+================================================================================
+
+Total Requests: 100
+Batch Size: 25
+Exa Balance: $9.00
+Max Spend: $8.5
+Strategy: One-at-a-time, 200ms delays (5 req/sec)
+
+================================================================================
+
+[1/100]  CHARGE | Unverified @ 0.55 | 18.5s | Exa: $0.0155 | Total: $0.02
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[2/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $0.02
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[3/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $0.02
+[4/100]  CHARGE | Uncertain @ 0.42 | 9.7s | Exa: $0.0155 | Total: $0.03
+[5/100]  CHARGE | Unverified @ 0.65 | 17.4s | Exa: $0.0155 | Total: $0.05
+[6/100]  CHARGE | Uncertain @ 0.55 | 9.9s | Exa: $0.0155 | Total: $0.06
+[7/100]  CHARGE | Unverified @ 0.75 | 14.5s | Exa: $0.0155 | Total: $0.08
+[8/100]  REFUND | Inconclusive @ 0.35 | 9.9s | Exa: $0.0155 | Total: $0.09
+[9/100]  CHARGE | Unverified @ 0.75 | 12.9s | Exa: $0.0155 | Total: $0.11
+[10/100]  CHARGE | Verified @ 0.85 | 9.8s | Exa: $0.0155 | Total: $0.12
+[11/100]  CHARGE | Unverified @ 0.65 | 12.1s | Exa: $0.0155 | Total: $0.14
+[12/100]  CHARGE | Unlikely @ 0.85 | 10.5s | Exa: $0.0155 | Total: $0.16
+[13/100]  CHARGE | Verified @ 0.95 | 11.5s | Exa: $0.0155 | Total: $0.17
+[14/100]  CHARGE | Verified @ 0.75 | 11.1s | Exa: $0.0155 | Total: $0.19
+[15/100]  CHARGE | Unverified @ 0.95 | 12.8s | Exa: $0.0155 | Total: $0.20
+[16/100]  CHARGE | Verified @ 0.85 | 10.6s | Exa: $0.0155 | Total: $0.22
+[17/100]  CHARGE | Inconclusive @ 0.45 | 14.8s | Exa: $0.0155 | Total: $0.23
+[18/100]  CHARGE | Unverified @ 0.75 | 9.9s | Exa: $0.0155 | Total: $0.25
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[19/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $0.25
+[20/100]  CHARGE | Uncertain @ 0.45 | 11.8s | Exa: $0.0155 | Total: $0.26
+[21/100]  CHARGE | Verified @ 0.92 | 10.2s | Exa: $0.0155 | Total: $0.28
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[22/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $0.28
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[23/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $0.28
+[24/100]  CHARGE | Uncertain @ 0.45 | 11.3s | Exa: $0.0155 | Total: $0.29
+[25/100]  CHARGE | Verified @ 0.85 | 9.9s | Exa: $0.0155 | Total: $0.31
+
+*** CHECKPOINT: 25 requests | Exa: $0.31 | Pre-filtered: 5 ***
+
+[26/100]  CHARGE | Uncertain @ 0.45 | 11.4s | Exa: $0.0155 | Total: $0.33
+[27/100]  CHARGE | Unverified @ 0.92 | 10.4s | Exa: $0.0155 | Total: $0.34
+[28/100]  CHARGE | Unverified @ 0.45 | 13.7s | Exa: $0.0155 | Total: $0.36
+[29/100]  REFUND | Inconclusive @ 0.15 | 10.4s | Exa: $0.0155 | Total: $0.37
+[30/100]  CHARGE | Inconclusive @ 0.40 | 11.9s | Exa: $0.0155 | Total: $0.39
+[31/100]  CHARGE | Unverified @ 0.72 | 9.4s | Exa: $0.0155 | Total: $0.40
+[32/100]  CHARGE | Unlikely @ 0.82 | 16.4s | Exa: $0.0155 | Total: $0.42
+[33/100]  CHARGE | Verified @ 0.90 | 9.9s | Exa: $0.0155 | Total: $0.43
+[34/100]  CHARGE | Verified @ 0.75 | 13.5s | Exa: $0.0155 | Total: $0.45
+[35/100]  CHARGE | Verified @ 0.95 | 10.3s | Exa: $0.0155 | Total: $0.47
+[36/100]  CHARGE | Unverified @ 0.65 | 19.5s | Exa: $0.0155 | Total: $0.48
+[37/100]  CHARGE | Verified @ 0.75 | 10.4s | Exa: $0.0155 | Total: $0.50
+[38/100]  CHARGE | Unverified @ 0.75 | 11.0s | Exa: $0.0155 | Total: $0.51
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[39/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $0.51
+[40/100]  CHARGE | Uncertain @ 0.45 | 10.9s | Exa: $0.0155 | Total: $0.53
+[41/100]  CHARGE | Verified @ 0.85 | 11.3s | Exa: $0.0155 | Total: $0.54
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[42/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $0.54
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[43/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $0.54
+[44/100]  CHARGE | Uncertain @ 0.45 | 10.3s | Exa: $0.0155 | Total: $0.56
+[45/100]  CHARGE | Verified @ 0.85 | 13.6s | Exa: $0.0155 | Total: $0.57
+[46/100]  CHARGE | Uncertain @ 0.55 | 10.3s | Exa: $0.0155 | Total: $0.59
+[47/100]  CHARGE | Unverified @ 0.92 | 15.6s | Exa: $0.0155 | Total: $0.60
+[48/100]  CHARGE | Inconclusive @ 0.45 | 10.9s | Exa: $0.0155 | Total: $0.62
+[49/100]  CHARGE | Unverified @ 0.45 | 14.2s | Exa: $0.0155 | Total: $0.64
+[50/100]  CHARGE | Inconclusive @ 0.40 | 10.7s | Exa: $0.0155 | Total: $0.65
+
+*** CHECKPOINT: 50 requests | Exa: $0.65 | Pre-filtered: 8 ***
+
+[51/100]  CHARGE | Unverified @ 0.65 | 10.2s | Exa: $0.0155 | Total: $0.67
+[52/100]  CHARGE | Unlikely @ 0.85 | 9.0s | Exa: $0.0155 | Total: $0.68
+[53/100]  CHARGE | Unverified @ 0.65 | 13.4s | Exa: $0.0155 | Total: $0.70
+[54/100]  CHARGE | Verified @ 0.75 | 9.9s | Exa: $0.0155 | Total: $0.71
+[55/100]  CHARGE | Unverified @ 0.85 | 9.8s | Exa: $0.0155 | Total: $0.73
+[56/100]  CHARGE | Verified @ 0.85 | 11.2s | Exa: $0.0155 | Total: $0.74
+[57/100]  CHARGE | Inconclusive @ 0.45 | 13.3s | Exa: $0.0155 | Total: $0.76
+[58/100]  CHARGE | Unverified @ 0.85 | 8.9s | Exa: $0.0155 | Total: $0.77
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[59/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $0.77
+[60/100]  CHARGE | Uncertain @ 0.45 | 19.1s | Exa: $0.0155 | Total: $0.79
+[61/100]  CHARGE | Verified @ 0.85 | 9.7s | Exa: $0.0155 | Total: $0.81
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[62/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $0.81
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[63/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $0.81
+[64/100]  CHARGE | Uncertain @ 0.45 | 20.7s | Exa: $0.0155 | Total: $0.82
+[65/100]  CHARGE | Verified @ 0.85 | 10.4s | Exa: $0.0155 | Total: $0.84
+[66/100]  CHARGE | Uncertain @ 0.55 | 16.5s | Exa: $0.0155 | Total: $0.85
+[67/100]  CHARGE | Unverified @ 0.65 | 8.7s | Exa: $0.0155 | Total: $0.87
+[68/100]  CHARGE | Unverified @ 0.45 | 14.4s | Exa: $0.0155 | Total: $0.88
+[69/100]  CHARGE | Verified @ 0.75 | 10.6s | Exa: $0.0155 | Total: $0.90
+[70/100]  CHARGE | Error @ 0.00 | 31.3s | Exa: $0.0155 | Total: $0.91
+[71/100]  CHARGE | Error @ 0.00 | 31.9s | Exa: $0.0155 | Total: $0.93
+[72/100]  CHARGE | Unlikely @ 0.75 | 15.0s | Exa: $0.0155 | Total: $0.95
+[73/100]  CHARGE | Verified @ 0.85 | 9.9s | Exa: $0.0155 | Total: $0.96
+[74/100]  CHARGE | Verified @ 0.75 | 34.2s | Exa: $0.0155 | Total: $0.98
+[75/100]  CHARGE | Verified @ 0.90 | 10.6s | Exa: $0.0155 | Total: $0.99
+
+*** CHECKPOINT: 75 requests | Exa: $0.99 | Pre-filtered: 11 ***
+
+[76/100]  CHARGE | Unverified @ 0.85 | 35.4s | Exa: $0.0155 | Total: $1.01
+[77/100]  CHARGE | Unverified @ 0.65 | 8.3s | Exa: $0.0155 | Total: $1.02
+[78/100]  CHARGE | Unverified @ 0.85 | 9.2s | Exa: $0.0155 | Total: $1.04
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[79/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $1.04
+[80/100]  CHARGE | Uncertain @ 0.62 | 10.1s | Exa: $0.0155 | Total: $1.05
+[81/100]  REFUND | Inconclusive @ 0.25 | 11.1s | Exa: $0.0155 | Total: $1.07
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[82/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $1.07
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[83/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $1.07
+[84/100]  CHARGE | Uncertain @ 0.45 | 8.9s | Exa: $0.0155 | Total: $1.08
+[85/100]  CHARGE | Verified @ 0.75 | 11.1s | Exa: $0.0155 | Total: $1.10
+[86/100]  CHARGE | Uncertain @ 0.55 | 13.1s | Exa: $0.0155 | Total: $1.12
+[87/100]  CHARGE | Unverified @ 0.85 | 11.4s | Exa: $0.0155 | Total: $1.13
+[88/100]  CHARGE | Unverified @ 0.75 | 9.9s | Exa: $0.0155 | Total: $1.15
+[89/100]  CHARGE | Unverified @ 0.65 | 37.3s | Exa: $0.0155 | Total: $1.16
+[90/100]  REFUND | Inconclusive @ 0.35 | 10.9s | Exa: $0.0155 | Total: $1.18
+[91/100]  CHARGE | Unverified @ 0.75 | 11.0s | Exa: $0.0155 | Total: $1.19
+[92/100]  REFUND | Uncertain @ 0.25 | 9.0s | Exa: $0.0155 | Total: $1.21
+[93/100]  CHARGE | Verified @ 0.85 | 35.5s | Exa: $0.0155 | Total: $1.22
+[94/100]  CHARGE | Verified @ 0.75 | 9.2s | Exa: $0.0155 | Total: $1.24
+[95/100]  CHARGE | Verified @ 0.95 | 10.5s | Exa: $0.0155 | Total: $1.26
+[96/100]  CHARGE | Unverified @ 0.65 | 9.9s | Exa: $0.0155 | Total: $1.27
+[97/100]  CHARGE | Error @ 0.00 | 31.1s | Exa: $0.0155 | Total: $1.29
+[98/100]  CHARGE | Inconclusive @ 0.50 | 10.0s | Exa: $0.0155 | Total: $1.30
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+Warning: Unknown model pricing for N/A
+[99/100] [PRE-FILTER] REFUND | Inconclusive @ 0.30 | 0.0s | Exa: $0.0000 | Total: $1.30
+[100/100]  CHARGE | Uncertain @ 0.45 | 11.2s | Exa: $0.0155 | Total: $1.32
+
+*** CHECKPOINT: 100 requests | Exa: $1.32 | Pre-filtered: 15 ***
+
+
+================================================================================
+SUMMARY
+================================================================================
+
+Completed: 100 requests
+Duration: 19.5 minutes (1168s)
+Throughput: 0.09 req/sec
+
+>> EXA COSTS:
+   Total Cost: $1.32
+   Remaining Balance: $7.68
+   Pre-Filtered (zero cost): 15 (15.0%)
+
+>> REFUNDS:
+   Refunded: 20 (20.0%)
+   Charged: 80
+
+>> VERDICTS:
+   Unverified: 28 (28.0%)
+   Inconclusive: 25 (25.0%)
+   Verified: 24 (24.0%)
+   Uncertain: 16 (16.0%)
+   Unlikely: 4 (4.0%)
+   Error: 3 (3.0%)
+
+================================================================================
+
+
+Final CSV: logs\sync_stress_final_20251230_161246.csv

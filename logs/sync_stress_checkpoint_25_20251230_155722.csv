@@ -1,0 +1,26 @@
+claim_id,bucket,claim,verdict,confidence,payment_status,was_refunded,pre_filtered,latency_sec,exa_cost,timestamp
+1,Slang,Is 'rizz' actually a real word or just internet slang?,Unverified,0.55,settled,False,False,18.52,0.0155,2025-12-30T21:53:36.584080
+2,Ambiguous,Does pineapple belong on pizza?,Inconclusive,0.3,refunded_due_to_uncertainty,True,True,0.01,0.0,2025-12-30T21:53:36.790330
+3,Adversarial,Does religion cause more harm than good?,Inconclusive,0.3,refunded_due_to_uncertainty,True,True,0.0,0.0,2025-12-30T21:53:36.994228
+4,Technical,Will AGI be achieved before 2030?,Uncertain,0.42,settled,False,False,9.73,0.0155,2025-12-30T21:53:46.929799
+5,Slang,Is 'bussin' a valid replacement for 'delicious'?,Unverified,0.65,settled,False,False,17.36,0.0155,2025-12-30T21:54:04.491216
+6,Ambiguous,Does free will exist?,Uncertain,0.55,settled,False,False,9.89,0.0155,2025-12-30T21:54:14.577504
+7,Adversarial,Does the government control the weather?,Unverified,0.75,settled,False,False,14.48,0.0155,2025-12-30T21:54:29.259877
+8,Technical,Is cold fusion scientifically achievable?,Inconclusive,0.35,refunded_due_to_uncertainty,True,False,9.95,0.0155,2025-12-30T21:54:39.409701
+9,Slang,Is calling someone a 'CEO' actually a compliment?,Unverified,0.75,settled,False,False,12.93,0.0155,2025-12-30T21:54:52.538087
+10,Ambiguous,Does art need to have meaning?,Verified,0.85,settled,False,False,9.83,0.0155,2025-12-30T21:55:02.569231
+11,Adversarial,Are all politicians corrupt?,Unverified,0.65,settled,False,False,12.07,0.0155,2025-12-30T21:55:14.841561
+12,Technical,Is P = NP likely to be proven true?,Unlikely,0.85,settled,False,False,10.49,0.0155,2025-12-30T21:55:25.531686
+13,Slang,Is 'cap' the same as 'no cap' or are they opposites?,Verified,0.95,settled,False,False,11.49,0.0155,2025-12-30T21:55:37.223791
+14,Ambiguous,Does money buy happiness?,Verified,0.75,settled,False,False,11.06,0.0155,2025-12-30T21:55:48.482025
+15,Adversarial,Are vaccines more dangerous than the diseases they prevent?,Unverified,0.95,settled,False,False,12.79,0.0155,2025-12-30T21:56:01.474905
+16,Technical,Does SHA-256 have known collision vulnerabilities?,Verified,0.85,settled,False,False,10.6,0.0155,2025-12-30T21:56:12.277876
+17,Slang,Is 'slay' still cool or is it cringe now?,Inconclusive,0.45,settled,False,False,14.84,0.0155,2025-12-30T21:56:27.322496
+18,Ambiguous,Does light have mass?,Unverified,0.75,settled,False,False,9.94,0.0155,2025-12-30T21:56:37.462198
+19,Adversarial,Is democracy a failed system?,Inconclusive,0.3,refunded_due_to_uncertainty,True,True,0.0,0.0,2025-12-30T21:56:37.667434
+20,Technical,Will CRISPR eliminate genetic diseases by 2035?,Uncertain,0.45,settled,False,False,11.81,0.0155,2025-12-30T21:56:49.679632
+21,Slang,Is 'rizz' actually a real word or just internet slang?,Verified,0.92,settled,False,False,10.19,0.0155,2025-12-30T21:57:00.069146
+22,Ambiguous,Does pineapple belong on pizza?,Inconclusive,0.3,refunded_due_to_uncertainty,True,True,0.0,0.0,2025-12-30T21:57:00.274264
+23,Adversarial,Does religion cause more harm than good?,Inconclusive,0.3,refunded_due_to_uncertainty,True,True,0.01,0.0,2025-12-30T21:57:00.480404
+24,Technical,Will AGI be achieved before 2030?,Uncertain,0.45,settled,False,False,11.31,0.0155,2025-12-30T21:57:11.993128
+25,Slang,Is 'bussin' a valid replacement for 'delicious'?,Verified,0.85,settled,False,False,9.86,0.0155,2025-12-30T21:57:22.056751

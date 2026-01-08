@@ -1,0 +1,31 @@
+{
+  "test_summary": {
+    "total_requests": 20,
+    "duration_seconds": 53.61368179321289,
+    "timestamp": "2025-12-30T21:28:25.279625"
+  },
+  "double_spend_analysis": {
+    "total_replay_attempts": 0,
+    "successfully_blocked": 0,
+    "double_spend_success_rate": 0,
+    "security_status": "\u2705 SECURE",
+    "attempts": []
+  },
+  "model_failover_analysis": {
+    "normal_avg_confidence": 0.6493,
+    "fallback_avg_confidence": 0.704,
+    "confidence_drift": 0.0547,
+    "fallback_rate": 25.0,
+    "margin_impact": "Profit margin INCREASES (Gemini free) but confidence may drop"
+  },
+  "refund_economics": {
+    "total_refunds": 0,
+    "refund_rate_pct": 0.0,
+    "refunds_by_bucket": {
+      "Slang": 0,
+      "Ambiguous": 0,
+      "Adversarial": 0,
+      "Technical": 0
+    }
+  }
+}
