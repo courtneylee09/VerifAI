@@ -789,10 +789,9 @@ async def health_check():
     Health check endpoint for monitoring and load balancers.
     Returns service status and basic metrics.
     """
-    import psutil
     import time
     
-    return {
+    response = {
         "status": "healthy",
         "timestamp": time.time(),
         "service": "VerifAI agent-x402",
@@ -801,13 +800,21 @@ async def health_check():
             "enabled": HAS_X402,
             "network": X402_NETWORK,
             "price": X402_PRICE
-        },
-        "system": {
+        }
+    }
+    
+    # Add system metrics if psutil is available
+    try:
+        import psutil
+        response["system"] = {
             "cpu_percent": psutil.cpu_percent(interval=0.1),
             "memory_percent": psutil.virtual_memory().percent,
             "disk_percent": psutil.disk_usage('/').percent
         }
-    }
+    except ImportError:
+        pass  # psutil not installed, skip system metrics
+    
+    return response
 
 
 @app.post("/feedback")
@@ -874,7 +881,18 @@ async def metrics_summary():
         logs = PerformanceLogger.read_logs()
         
         # Calculate uptime metrics
-        recent_logs = [log for log in logs if time.time() - log.get("timestamp", 0) < 3600]  # Last hour
+        current_time = time.time()
+        recent_logs = []
+        for log in logs:
+            ts = log.get("timestamp", 0)
+            # Handle both string and float timestamps
+            if isinstance(ts, str):
+                try:
+                    ts = float(ts)
+                except (ValueError, TypeError):
+                    continue
+            if current_time - ts < 3600:
+                recent_logs.append(log)
         
         # Calculate error rate
         total_recent = len(recent_logs)
