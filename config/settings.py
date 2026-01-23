@@ -21,8 +21,10 @@ MERCHANT_WALLET_ADDRESS = os.getenv("MERCHANT_WALLET_ADDRESS")
 # ============================================================================
 # x402 Payment Configuration
 # ============================================================================
-X402_PRICE = "0.05"  # USDC per verification
-X402_NETWORK = "base-sepolia"
+# Network options: "base-sepolia" (testnet) or "base" (mainnet)
+# Change X402_NETWORK to "base" for mainnet deployment
+X402_NETWORK = os.getenv("X402_NETWORK", "base-sepolia")  # Default to testnet, override with env var
+X402_PRICE = "0.05"  # USDC per verification (adjust for mainnet if needed)
 X402_DESCRIPTION = "VerifAI agent-x402 Verification Check"
 
 # Default MIME type (clients can override with Accept header)
