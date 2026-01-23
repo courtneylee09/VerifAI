@@ -17,6 +17,7 @@ exa-py>=1.0.0
 # Utilities
 aiohttp>=3.9.0
 requests>=2.31.0
+psutil>=5.9.0
 
 # Optional: Testing & Development
 pytest>=7.4.0

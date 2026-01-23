@@ -783,6 +783,134 @@ async def analytics(request: Request):
         )
 
 
+@app.get("/health")
+async def health_check():
+    """
+    Health check endpoint for monitoring and load balancers.
+    Returns service status and basic metrics.
+    """
+    import psutil
+    import time
+    
+    return {
+        "status": "healthy",
+        "timestamp": time.time(),
+        "service": "VerifAI agent-x402",
+        "version": "1.0.2",
+        "payment": {
+            "enabled": HAS_X402,
+            "network": X402_NETWORK,
+            "price": X402_PRICE
+        },
+        "system": {
+            "cpu_percent": psutil.cpu_percent(interval=0.1),
+            "memory_percent": psutil.virtual_memory().percent,
+            "disk_percent": psutil.disk_usage('/').percent
+        }
+    }
+
+
+@app.post("/feedback")
+async def submit_feedback(request: Request):
+    """
+    Collect user feedback about verification quality.
+    
+    Request body:
+    {
+        "claim": "The claim that was verified",
+        "rating": 1-5,
+        "comment": "Optional feedback text",
+        "verdict_received": "True/False/Inconclusive",
+        "helpful": true/false
+    }
+    """
+    import json
+    import time
+    from pathlib import Path
+    
+    try:
+        feedback_data = await request.json()
+        
+        # Add timestamp and metadata
+        feedback_entry = {
+            "timestamp": time.time(),
+            "user_ip": request.client.host if request.client else "unknown",
+            **feedback_data
+        }
+        
+        # Append to feedback log file
+        feedback_file = Path("logs/feedback.jsonl")
+        feedback_file.parent.mkdir(exist_ok=True)
+        
+        with open(feedback_file, "a") as f:
+            f.write(json.dumps(feedback_entry) + "\n")
+        
+        logger.info("feedback.submitted rating=%s", feedback_data.get("rating"))
+        
+        return {
+            "status": "success",
+            "message": "Thank you for your feedback!"
+        }
+    
+    except Exception as e:
+        logger.error("feedback.failed err=%s", e)
+        return {
+            "status": "error",
+            "message": str(e)
+        }
+
+
+@app.get("/metrics")
+async def metrics_summary():
+    """
+    Prometheus-style metrics endpoint for monitoring systems.
+    Returns key performance indicators in a structured format.
+    """
+    import time
+    
+    try:
+        # Get performance metrics
+        perf_metrics = PerformanceLogger.get_summary()
+        logs = PerformanceLogger.read_logs()
+        
+        # Calculate uptime metrics
+        recent_logs = [log for log in logs if time.time() - log.get("timestamp", 0) < 3600]  # Last hour
+        
+        # Calculate error rate
+        total_recent = len(recent_logs)
+        failed_recent = sum(1 for log in recent_logs if log.get("error"))
+        error_rate = (failed_recent / total_recent * 100) if total_recent > 0 else 0
+        
+        return {
+            "timestamp": time.time(),
+            "performance": {
+                "total_requests": perf_metrics.get("total_requests", 0),
+                "requests_last_hour": total_recent,
+                "error_rate_percent": round(error_rate, 2),
+                "avg_execution_time_seconds": perf_metrics.get("avg_execution_time", 0)
+            },
+            "economics": {
+                "total_revenue_usd": perf_metrics.get("total_revenue_usd", 0),
+                "total_cost_usd": perf_metrics.get("total_cost_usd", 0),
+                "total_profit_usd": perf_metrics.get("total_profit_usd", 0),
+                "profit_margin_percent": perf_metrics.get("avg_profit_margin_pct", 0)
+            },
+            "verdicts": {
+                "true_count": sum(1 for log in logs if log.get("verdict") == "True"),
+                "false_count": sum(1 for log in logs if log.get("verdict") == "False"),
+                "inconclusive_count": sum(1 for log in logs if log.get("verdict") == "Inconclusive")
+            }
+        }
+    
+    except Exception as e:
+        logger.error("metrics.failed err=%s", e)
+        return {
+            "timestamp": time.time(),
+            "error": str(e),
+            "status": "unavailable"
+        }
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8001)

@@ -1,0 +1,24 @@
+{
+  "timestamp": "2026-01-22T20:22:31.205518",
+  "mode": "quick",
+  "duration_minutes": 0.04846738974253337,
+  "tests_run": 2,
+  "passed": 0,
+  "failed": 2,
+  "results": [
+    {
+      "test_id": "concurrent_5",
+      "name": "Concurrent Load (5 workers, 20 claims each)",
+      "status": "FAILED",
+      "returncode": 1,
+      "timestamp": "2026-01-22T20:22:29.811230"
+    },
+    {
+      "test_id": "payment_20",
+      "name": "Payment Validation (20 concurrent, 60s)",
+      "status": "FAILED",
+      "returncode": 1,
+      "timestamp": "2026-01-22T20:22:31.203020"
+    }
+  ]
+}

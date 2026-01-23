@@ -1,0 +1,38 @@
+{
+  "timestamp": "2026-01-22T20:20:11.177779",
+  "mode": "full",
+  "duration_minutes": 1.3105028549830118,
+  "tests_run": 4,
+  "passed": 0,
+  "failed": 4,
+  "results": [
+    {
+      "test_id": "concurrent_5",
+      "name": "Concurrent Load (5 workers, 20 claims each)",
+      "status": "FAILED",
+      "returncode": 1,
+      "timestamp": "2026-01-22T20:19:18.368871"
+    },
+    {
+      "test_id": "concurrent_10",
+      "name": "Concurrent Load (10 workers, 15 claims each)",
+      "status": "FAILED",
+      "returncode": 1,
+      "timestamp": "2026-01-22T20:19:36.221110"
+    },
+    {
+      "test_id": "payment_20",
+      "name": "Payment Validation (20 concurrent, 60s)",
+      "status": "FAILED",
+      "returncode": 1,
+      "timestamp": "2026-01-22T20:19:53.551669"
+    },
+    {
+      "test_id": "payment_50",
+      "name": "Payment Validation (50 concurrent, 60s)",
+      "status": "FAILED",
+      "returncode": 1,
+      "timestamp": "2026-01-22T20:20:11.175776"
+    }
+  ]
+}

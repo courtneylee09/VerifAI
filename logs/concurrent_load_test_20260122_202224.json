@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-01-22T20:22:24.273875",
+  "configuration": {
+    "workers": 2,
+    "duration": 300,
+    "claims_per_worker": 2
+  },
+  "results": {
+    "total_requests": 4,
+    "successful": 0,
+    "failed": 4,
+    "success_rate": 0.0,
+    "latency": {
+      "min": 0.2982512999988103,
+      "max": 0.941975800000364,
+      "mean": 0.5879831500005821,
+      "p50": 0.8058783000014955,
+      "p95": 0.941975800000364,
+      "p99": 0.941975800000364
+    },
+    "errors": {
+      "timeout": 0,
+      "payment": 4,
+      "validation": 0,
+      "other": 0
+    }
+  }
+}
